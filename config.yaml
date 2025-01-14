@@ -1,0 +1,115 @@
+# Dotfiles Configuration
+
+# User Information
+user:
+  name: 'Shane Holloman'
+  email: 'shaneholloman@gmail.com'
+
+# Paths and Locations
+paths:
+  dotfiles: '$HOME/.dotfiles'
+  oh_my_posh_theme: '$HOME/Dropbox/shane/conf/warpdeck.omp.json'
+
+# Git Configuration
+git:
+  editor: 'vim'
+  default_branch: 'main'
+  pull_rebase: true
+  color_ui: true
+
+# Shell Configuration
+shell:
+  default: 'zsh'
+  theme:
+    type: 'oh-my-posh'
+    path: '$HOME/Dropbox/shane/conf/warpdeck.omp.json'
+  env_vars:
+    AWS_CONFIG_FILE: '$HOME/.aws/config'
+    AWS_SHARED_CREDENTIALS_FILE: '$HOME/.aws/credentials'
+    KUBECONFIG: '$HOME/.kube/config'
+    TERRAFORM_CONFIG: '$HOME/.terraform.d/config.tfrc'
+
+# Tools to Install
+tools:
+  cli:
+    - bash # Modern bash via Homebrew
+    - awscli
+    - docker
+    - gh
+    - go
+    - helm
+    - jq
+    - kubernetes-cli
+    - oh-my-posh
+    - terraform
+    - volta
+    - yq
+  cask:
+    - carbon-copy-cloner
+    - claude
+    - dropbox
+    - firefox
+    - font-hack-nerd-font
+    - powershell
+    - visual-studio-code@insiders
+
+# Aliases
+aliases:
+  d: 'docker'
+  dc: 'docker-compose'
+  g: 'git'
+  gcb: 'git checkout -b'
+  gco: 'git checkout'
+  gp: 'git pull'
+  gs: 'git status'
+  k: 'kubectl'
+  ll: 'ls -la'
+  tf: 'terraform'
+
+# Directory Structure
+directories:
+  - bin
+  - config/git
+  - config/zsh
+  - config/vim
+  - config/aws
+  - config/terraform
+  - config/k8s
+  - scripts
+
+# Vim Configuration
+vim:
+  options:
+    - 'syntax on'
+    - 'set number'
+    - 'set ruler'
+    - 'set expandtab'
+    - 'set tabstop=2'
+    - 'set shiftwidth=2'
+    - 'set autoindent'
+    - 'set smartindent'
+    - 'set paste'
+    - 'set hlsearch'
+    - 'set incsearch'
+    - 'set cursorline'
+  filetypes:
+    yaml: 'setlocal ts=2 sts=2 sw=2 expandtab'
+    terraform: 'setlocal ts=2 sts=2 sw=2 expandtab'
+    json: 'setlocal ts=2 sts=2 sw=2 expandtab'
+
+# File Associations Configuration
+file_associations:
+  editor:
+    bundle_id: 'com.microsoft.VSCodeInsiders'
+  extensions:
+    - 'py' # Python
+    - 'js' # JavaScript
+    - 'ts' # TypeScript
+    - 'html' # HTML
+    - 'css' # CSS
+    - 'json' # JSON
+    - 'md' # Markdown
+    - 'xml' # XML
+    - 'yaml' # YAML
+    - 'yml' # YAML
+    - 'sh' # Shell scripts
