@@ -1,9 +1,7 @@
 # DevOps Environment Dotfiles
 
-> [!CAUTION]
-> UNTESTED DONT USE- SERIOUSLY!
->
-> I only committed for version control!
+> [!IMPORTANT]
+> These are now work rather well. Just note there are some opinionated choices in the setup. Also these are jsut the beginning of the setup. There are many more things that can/will be added to this setup. See my [blueprint](./dev/dotfiles-blueprint.md)
 
 A comprehensive dotfiles management system for setting up and maintaining a consistent development environment across machines. This project automates the installation and configuration of development tools, shell preferences, and application settings through a centralized YAML configuration.
 

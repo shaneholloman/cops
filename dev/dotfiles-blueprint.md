@@ -1,5 +1,7 @@
 # Dotfiles-macOS Project Blueprint
 
+Back to [README.md](../README.md)
+
 > Living document for planning improvements to dotfiles-macos project
 
 ## Core Principles
@@ -13,6 +15,7 @@
 ## Tier One: Improve Current Modules
 
 ### 1. preferences.sh Improvements
+
 - Add structured error handling
 - Add backup functionality before changes
 - Add rollback capabilities
@@ -21,6 +24,7 @@
 - Add logging for all operations
 
 ### 2. config.sh Improvements
+
 - Add configuration validation
 - Add schema verification
 - Add environment variable validation
@@ -29,6 +33,7 @@
 - Add configuration documentation generation
 
 ### 3. checks.sh Improvements
+
 - Add system compatibility checks
 - Add dependency version checks
 - Add disk space checks
@@ -37,8 +42,9 @@
 - Add system state validation
 
 ### 4. install.sh Improvements
+
 - Add installation queuing
-- Add parallel installation capabilities 
+- Add parallel installation capabilities
 - Add retry logic
 - Add better error reporting
 - Add installation logging
@@ -47,6 +53,7 @@
 ## Tier Two: New Modules
 
 ### 1. macos_defaults.sh
+
 - System settings management
 - Sub-modules:
   - ui_settings.sh (UI/UX preferences)
@@ -55,6 +62,7 @@
   - network_settings.sh (Network configurations)
 
 ### 2. security.sh
+
 - SSH configuration management
 - GPG setup and configuration
 - Keychain management
@@ -62,6 +70,7 @@
 - Security policy enforcement
 
 ### 3. dev_environment.sh
+
 - Editor configurations
 - Language environments setup
 - Build tools installation
@@ -69,6 +78,7 @@
 - Development tool defaults
 
 ### 4. app_configs.sh
+
 - Terminal emulator settings
 - Browser configurations
 - Development tool settings
@@ -78,6 +88,7 @@
 ## Module Requirements
 
 Each module must include:
+
 1. Master switch in config.yaml
 2. Independent toggle capability
 3. Input validation
@@ -112,9 +123,10 @@ Each module must include:
 
 ## Notes
 
-[Discussion notes and decisions will be added here as we progress]
+> Discussion notes and decisions will be added here as we progress
 
 ### 2024-01-15 Initial Planning
+
 - Identified core principles and module requirements
 - Created enhanced config.yaml with new master switches
 - Established two-tiered approach to improvements
