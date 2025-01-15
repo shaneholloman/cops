@@ -5,6 +5,10 @@
 set -e
 set -u
 
+# Source our output functions
+# shellcheck source=lib/output.sh
+source "lib/output.sh"
+
 # Global arrays to store tools that need installation
 declare -a CLI_TOOLS_TO_INSTALL
 declare -a CASK_APPS_TO_INSTALL
@@ -60,19 +64,19 @@ show_master_switches() {
   vim_status=$(is_feature_enabled "vim")
   file_assoc_status=$(is_feature_enabled "file_assoc")
 
-  printf "System Preferences: %s\n" "$([[ "$preferences_status" = "true" ]] && printf "ENABLED" || printf "DISABLED")"
+  printf "System Preferences: %s\n" "$([[ "$preferences_status" = "true" ]] && printf "\033[1;32mENABLED\033[0m" || printf "\033[1;31mDISABLED\033[0m")"
   printf "  - Controls system settings including keyboard and terminal preferences\n"
   printf "\n"
-  printf "Tool Installation: %s\n" "$([[ "$tools_status" = "true" ]] && printf "ENABLED" || printf "DISABLED")"
+  printf "Tool Installation: %s\n" "$([[ "$tools_status" = "true" ]] && printf "\033[1;32mENABLED\033[0m" || printf "\033[1;31mDISABLED\033[0m")"
   printf "  - Controls installation of CLI tools and applications\n"
   printf "\n"
-  printf "Shell Aliases: %s\n" "$([[ "$aliases_status" = "true" ]] && printf "ENABLED" || printf "DISABLED")"
+  printf "Shell Aliases: %s\n" "$([[ "$aliases_status" = "true" ]] && printf "\033[1;32mENABLED\033[0m" || printf "\033[1;31mDISABLED\033[0m")"
   printf "  - Controls setup of shell aliases and shortcuts\n"
   printf "\n"
-  printf "Vim Configuration: %s\n" "$([[ "$vim_status" = "true" ]] && printf "ENABLED" || printf "DISABLED")"
+  printf "Vim Configuration: %s\n" "$([[ "$vim_status" = "true" ]] && printf "\033[1;32mENABLED\033[0m" || printf "\033[1;31mDISABLED\033[0m")"
   printf "  - Controls Vim editor settings and configuration\n"
   printf "\n"
-  printf "File Associations: %s\n" "$([[ "$file_assoc_status" = "true" ]] && printf "ENABLED" || printf "DISABLED")"
+  printf "File Associations: %s\n" "$([[ "$file_assoc_status" = "true" ]] && printf "\033[1;32mENABLED\033[0m" || printf "\033[1;31mDISABLED\033[0m")"
   printf "  - Controls default application associations for file types\n"
   printf "\n"
 
