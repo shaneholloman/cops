@@ -59,6 +59,7 @@ tools:
     - iterm2
     - dropbox
     - firefox
+    - spotify
     - font-hack-nerd-font # used for terminal and vscode
     - powershell # yet to add oh-my-posh as we already have for zsh
     - visual-studio-code # intent is to add plugins/setting via another module
