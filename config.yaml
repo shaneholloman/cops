@@ -22,7 +22,7 @@ shell:
   default: 'zsh'
   theme:
     type: 'oh-my-posh'
-    path: '$HOME/Dropbox/shane/conf/warpdeck.omp.json'
+    path: '~/Dropbox/shane/conf/warpdeck.omp.json'
   env_vars:
     AWS_CONFIG_FILE: '$HOME/.aws/config'
     AWS_SHARED_CREDENTIALS_FILE: '$HOME/.aws/credentials'
@@ -106,7 +106,6 @@ file_associations:
     - 'py' # Python
     - 'js' # JavaScript
     - 'ts' # TypeScript
-    - 'html' # HTML
     - 'css' # CSS
     - 'json' # JSON
     - 'md' # Markdown

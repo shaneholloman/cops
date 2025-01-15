@@ -97,15 +97,16 @@ setup_file_associations() {
     brew install duti
   fi
 
-  # Get VS Code Insiders bundle ID
-  local bundle_id
-  bundle_id=$(get_config '.file_associations.editor.bundle_id')
+  # Get editor bundle ID
+  local editor_bundle_id
+  editor_bundle_id=$(get_config '.file_associations.editor.bundle_id')
 
-  # Set up file associations
+  # Set up editor associations
+  print_header "Setting up editor file associations"
   while IFS= read -r ext; do
-    print_warning "Setting up association for .$ext files..."
-    if ! duti -s "$bundle_id" ".$ext" all; then
-      print_error "Failed to set association for .$ext"
+    print_warning "Setting up editor association for .$ext files..."
+    if ! duti -s "$editor_bundle_id" ".$ext" all; then
+      print_error "Failed to set editor association for .$ext"
     else
       print_success "Successfully associated .$ext with VS Code Insiders"
     fi

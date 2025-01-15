@@ -26,8 +26,15 @@ check_tools() {
 
   # Check CLI tools
   while IFS= read -r tool; do
-    if command -v "$tool" >/dev/null 2>&1; then
-      version="$("$tool" --version 2>/dev/null | head -n1)"
+    # Map package names to their actual commands
+    local cmd="$tool"
+    case "$tool" in
+    "awscli") cmd="aws" ;;
+    "kubernetes-cli") cmd="kubectl" ;;
+    esac
+
+    if command -v "$cmd" >/dev/null 2>&1; then
+      version="$("$cmd" --version 2>/dev/null | head -n1)"
       print_success "$tool is installed ($version)"
     else
       print_warning "$tool will be installed"
@@ -86,6 +93,8 @@ check_file_associations() {
     return
   fi
 
+  # Check editor associations
+  print_header "Checking editor file associations"
   while IFS= read -r ext; do
     local current_handler
     current_handler=$(duti -x "$ext" 2>/dev/null | head -n1 || echo "none")
