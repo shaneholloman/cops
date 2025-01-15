@@ -79,6 +79,14 @@ directories:
   - config/k8s
   - scripts
 
+# User Preferences
+preferences:
+  terminal:
+    font: 'Hack Nerd Font Mono 12'
+    key_repeat: 1
+    initial_key_repeat: 10
+    press_and_hold: false
+
 # Vim Configuration
 vim:
   options:

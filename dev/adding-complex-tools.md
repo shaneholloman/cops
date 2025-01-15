@@ -119,6 +119,13 @@ setup_toolname() {
    - Use return 1 for failures
    - Provide clear error messages
    - Handle missing dependencies
+   - Notify users when restart is required
+
+4. System Changes:
+   - Identify which changes require restart
+   - Warn users about pending restart requirements
+   - Group restart-requiring changes together when possible
+   - Document restart requirements in comments
 
 ### Best Practices
 

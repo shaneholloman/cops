@@ -118,6 +118,7 @@ main() {
   install_tools
   setup_file_associations
   setup_iterm2
+  setup_preferences
   validate_installation
   initialize_git_repo
 
