@@ -102,6 +102,19 @@ If you need to ignore specific shellcheck warnings:
    readonly MY_VAR="value"
    ```
 
+## Development Workflow
+
+1. **File-by-File Validation**
+   - ALWAYS run shellcheck on each file immediately after making changes
+   - Never move on to editing another file until current file passes all checks
+   - Fix any issues before proceeding to next file
+   - This prevents issues from compounding and makes debugging easier
+
+2. **Running Checks**
+   - For single file: `shellcheck -x -a --severity=style path/to/file.sh`
+   - For all files: `./analyze-scripts.sh`
+   - Always fix warnings, even style-level ones
+
 ## Pre-commit Check
 
 Before committing changes:

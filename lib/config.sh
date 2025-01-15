@@ -26,3 +26,9 @@ get_command_name() {
   *) echo "$tool" ;;
   esac
 }
+
+# Check if a feature is enabled in config
+is_feature_enabled() {
+  local feature="$1"
+  get_config ".enable_${feature}" || echo "false"
+}

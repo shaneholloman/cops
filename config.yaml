@@ -1,5 +1,12 @@
 # Dotfiles Configuration
 
+# Master Switches
+enable_preferences: false # Disabled by default for safety
+enable_tools: true # Most users want tools
+enable_aliases: true # Shell aliases are safe
+enable_vim: true # Editor config is safe
+enable_file_assoc: true # File associations are safe
+
 # User Information
 user:
   name: 'Shane Holloman'

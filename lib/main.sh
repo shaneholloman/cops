@@ -44,46 +44,86 @@ analyze_tools() {
   done < <(get_config_array '.tools.cask[]')
 }
 
+show_master_switches() {
+  print_header "Master Switches Status"
+
+  # Show status of each master switch with explanation
+  local preferences_status
+  local tools_status
+  local aliases_status
+  local vim_status
+  local file_assoc_status
+
+  preferences_status=$(is_feature_enabled "preferences")
+  tools_status=$(is_feature_enabled "tools")
+  aliases_status=$(is_feature_enabled "aliases")
+  vim_status=$(is_feature_enabled "vim")
+  file_assoc_status=$(is_feature_enabled "file_assoc")
+
+  printf "System Preferences: %s\n" "$([[ "$preferences_status" = "true" ]] && printf "ENABLED" || printf "DISABLED")"
+  printf "  - Controls system settings including keyboard and terminal preferences\n"
+  printf "\n"
+  printf "Tool Installation: %s\n" "$([[ "$tools_status" = "true" ]] && printf "ENABLED" || printf "DISABLED")"
+  printf "  - Controls installation of CLI tools and applications\n"
+  printf "\n"
+  printf "Shell Aliases: %s\n" "$([[ "$aliases_status" = "true" ]] && printf "ENABLED" || printf "DISABLED")"
+  printf "  - Controls setup of shell aliases and shortcuts\n"
+  printf "\n"
+  printf "Vim Configuration: %s\n" "$([[ "$vim_status" = "true" ]] && printf "ENABLED" || printf "DISABLED")"
+  printf "  - Controls Vim editor settings and configuration\n"
+  printf "\n"
+  printf "File Associations: %s\n" "$([[ "$file_assoc_status" = "true" ]] && printf "ENABLED" || printf "DISABLED")"
+  printf "  - Controls default application associations for file types\n"
+  printf "\n"
+
+  printf "Please review the enabled features carefully.\n"
+  read -r -p "Would you like to proceed with these settings? [y/N] " -n 1
+  echo
+  if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    echo "Installation cancelled"
+    exit 1
+  fi
+}
+
 show_summary() {
   print_header "Installation Summary"
-  echo "This script will make the following changes:"
-  echo
-  echo "1. Directory Changes:"
-  echo "   - Create $DOTFILES_ROOT structure"
-  echo "   - Organize configurations by tool"
-  echo
+  printf "This script will make the following changes:\n"
+  printf "\n"
+  printf "1. Directory Changes:\n"
+  printf "   - Create %s structure\n" "$DOTFILES_ROOT"
+  printf "   - Organize configurations by tool\n"
+  printf "\n"
 
   # Only show tool installation section if there are tools to install
   if ((${#CLI_TOOLS_TO_INSTALL[@]} > 0)) || ((${#CASK_APPS_TO_INSTALL[@]} > 0)); then
-    echo "2. Tool Installation:"
+    printf "2. Tool Installation:\n"
     if ((${#CLI_TOOLS_TO_INSTALL[@]} > 0)); then
-      echo "   - Install CLI tools: ${CLI_TOOLS_TO_INSTALL[*]}"
+      printf "   - Install CLI tools: %s\n" "${CLI_TOOLS_TO_INSTALL[@]}"
     fi
     if ((${#CASK_APPS_TO_INSTALL[@]} > 0)); then
-      echo "   - Install applications: ${CASK_APPS_TO_INSTALL[*]}"
+      printf "   - Install applications: %s\n" "${CASK_APPS_TO_INSTALL[@]}"
     fi
-    echo
+    printf "\n"
   fi
 
-  echo "3. Configuration Changes:"
-  echo "   - Create or update dotfiles (.zshrc, .gitconfig, .vimrc)"
-  echo "   - Backup existing configurations"
-  echo "   - Set up aliases and environment variables"
-  echo
-  echo "4. Shell Configuration:"
-  echo "   - Configure $(get_config '.shell.default') with DevOps tooling"
-  echo "   - Set up Oh My Posh theme"
-  echo "   - Configure development environment"
-  echo
-  echo "5. File Associations:"
-  echo "   - Set up VS Code Insiders as default editor for development files"
-  echo "   - Configure associations for common file types (py, js, ts, etc.)"
-  echo
-  echo "6. Terminal Configuration:"
-  echo "   - Set up iTerm2 as default terminal"
-  echo "   - Configure Finder integration"
-
-  echo
+  printf "3. Configuration Changes:\n"
+  printf "   - Create or update dotfiles (.zshrc, .gitconfig, .vimrc)\n"
+  printf "   - Backup existing configurations\n"
+  printf "   - Set up aliases and environment variables\n"
+  printf "\n"
+  printf "4. Shell Configuration:\n"
+  printf "   - Configure %s with DevOps tooling\n" "$(get_config '.shell.default')"
+  printf "   - Set up Oh My Posh theme\n"
+  printf "   - Configure development environment\n"
+  printf "\n"
+  printf "5. File Associations:\n"
+  printf "   - Set up VS Code Insiders as default editor for development files\n"
+  printf "   - Configure associations for common file types (py, js, ts, etc.)\n"
+  printf "\n"
+  printf "6. Terminal Configuration:\n"
+  printf "   - Set up iTerm2 as default terminal\n"
+  printf "   - Configure Finder integration\n"
+  printf "\n"
   read -r -p "Would you like to proceed with these changes? [y/N] " -n 1
   echo
   if [[ ! $REPLY =~ ^[Yy]$ ]]; then
@@ -94,7 +134,7 @@ show_summary() {
 
 main() {
   print_header "DevOps Environment Setup Analysis"
-  echo "Analyzing your current setup..."
+  printf "Analyzing your current setup...\n"
 
   check_dotfiles
   check_tools
@@ -103,7 +143,11 @@ main() {
   check_directories
   check_file_associations
 
-  show_summary # Now uses the stored tool status
+  # Show and confirm master switches first
+  show_master_switches
+
+  # Then show detailed summary
+  show_summary
 
   # If user confirms, proceed with installation
   print_header "Starting Installation"
@@ -111,18 +155,34 @@ main() {
   setup_directories
   setup_git_config
   setup_zsh_config
-  setup_vim_config
+
+  # Only run feature setup if enabled
+  if [[ "$(is_feature_enabled "vim")" = "true" ]]; then
+    setup_vim_config
+  fi
+
   backup_existing_files
   create_symlinks
   setup_homebrew
-  install_tools
-  setup_file_associations
+
+  if [[ "$(is_feature_enabled "tools")" = "true" ]]; then
+    install_tools
+  fi
+
+  if [[ "$(is_feature_enabled "file_assoc")" = "true" ]]; then
+    setup_file_associations
+  fi
+
   setup_iterm2
-  setup_preferences
+
+  if [[ "$(is_feature_enabled "preferences")" = "true" ]]; then
+    setup_preferences
+  fi
+
   validate_installation
   initialize_git_repo
 
   print_header "Installation Complete"
-  echo "Please verify the configuration in $CONFIG_FILE matches your preferences."
-  echo "Your previous configurations have been backed up with .backup extension."
+  printf "Please verify the configuration in %s matches your preferences.\n" "$CONFIG_FILE"
+  printf "Your previous configurations have been backed up with .backup extension.\n"
 }
