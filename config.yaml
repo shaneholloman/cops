@@ -129,3 +129,23 @@ file_associations:
     - 'yaml' # YAML
     - 'yml' # YAML
     - 'sh' # Shell scripts
+
+# Restore Configuration
+restore:
+  paths:
+    mount_point: '/tmp/snap'
+    disk_device: '/dev/disk3s5'
+    user_home: '$HOME'
+    root: '/'
+    backup_dir_prefix: '.dotfiles_backup_'
+  files:
+    dotfiles:
+      - '.zshrc'
+      - '.bashrc'
+      - '.gitconfig'
+    config_dirs:
+      - '.config'
+      - '.aws'
+      - '.terraform.d'
+      - '.kube'
+      - '.vscode-insiders'

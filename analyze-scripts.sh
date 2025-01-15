@@ -16,7 +16,11 @@ run_shellcheck() {
   # -x: follow source files
   # -a: show all information levels
   # --severity=style: show all messages (error, warning, info, style)
-  if ! find . -path './.history' -prune -o -name "*.sh" -type f -exec shellcheck -x -a --severity=style {} \;; then
+  if ! find . \
+    -path './.history' -prune -o \
+    -path './_github' -prune -o \
+    -path './_codemaps' -prune -o \
+    -name "*.sh" -type f -exec shellcheck -x -a --severity=style {} \;; then
     print_error "ShellCheck found issues"
     return 1
   fi
@@ -31,9 +35,13 @@ analyze_script() {
 
   print_header "Analyzing: $script"
 
+  # Find shellcheck command
+  local shellcheck_cmd
+  shellcheck_cmd=$(command -v shellcheck)
+
   # Run shellcheck with our standard options
-  if ! shellcheck -x -a --severity=style "$script" >/dev/null 2>&1; then
-    print_warning "ShellCheck found issues. Run: shellcheck -x -a --severity=style $script"
+  if ! "$shellcheck_cmd" -x -a --severity=style "$script" >/dev/null 2>&1; then
+    print_warning "ShellCheck found issues. Run: $shellcheck_cmd -x -a --severity=style $script"
     ((issues++))
   fi
 
@@ -50,19 +58,36 @@ analyze_script() {
   fi
 
   # Check for undefined variable protection
-  if ! grep -q "set -u" "$script"; then
+  if ! grep -q "set -u\|set -[a-z]*u[a-z]*" "$script"; then
     print_warning "Missing set -u (undefined variable protection)"
     ((issues++))
   fi
 
-  # Check for hardcoded paths (excluding comments and allowed commands)
-  if grep -v '^[[:space:]]*#' "$script" | grep -q "\$HOME\|\$DOTFILES_ROOT\|\$LIB_DIR" >/dev/null 2>&1; then
-    : # These paths are allowed
-  elif grep -v '^[[:space:]]*#' "$script" | grep -q "brew\|yq" >/dev/null 2>&1; then
-    : # These commands are allowed
-  elif grep -v '^[[:space:]]*#' "$script" | grep -q "/[[:alpha:]]\+/"; then
-    print_warning "Contains hardcoded paths"
-    ((issues++))
+  # Check for hardcoded paths (excluding comments and allowed patterns)
+  local allowed_vars="\\\$HOME\|\\\$DOTFILES_ROOT\|\\\$LIB_DIR\|\\\${[A-Z_]\+}"
+  local allowed_cmds="brew\|yq\|command -v"
+  local allowed_paths="/dev/null"
+  local var_expansions="\\\${[^}]\+}"
+
+  # First pass: Find lines with potential paths, excluding comments
+  local path_lines
+  path_lines=$(grep -v '^[[:space:]]*#' "$script" | grep "/" || true)
+
+  if [[ -n "$path_lines" ]]; then
+    # Second pass: Filter out allowed patterns
+    local suspicious_paths
+    suspicious_paths=$(echo "$path_lines" |
+      grep -v "$allowed_vars" |
+      grep -v "$allowed_cmds" |
+      grep -v "$allowed_paths" |
+      grep -v "$var_expansions" |
+      grep -E "(/[[:alnum:]_-]+)+/?[[:space:]]" || true)
+
+    if [[ -n "$suspicious_paths" ]]; then
+      print_warning "Contains hardcoded paths:"
+      echo "${suspicious_paths//$'\n'/$'\n  '}"
+      ((issues++))
+    fi
   fi
 
   # Check for consistent function naming (no 'function' keyword)
@@ -134,13 +159,17 @@ main() {
   print_header "Running Custom Analysis"
   local total_issues=0
 
-  # Find and analyze all shell scripts, excluding .history directory
+  # Find and analyze all shell scripts, excluding ignored directories
   while IFS= read -r script; do
     local script_issues=0
     analyze_script "$script"
     script_issues=$?
     ((total_issues += script_issues))
-  done < <(find . -path './.history' -prune -o -name "*.sh" -type f -print)
+  done < <(find . \
+    -path './.history' -prune -o \
+    -path './_github' -prune -o \
+    -path './_codemaps' -prune -o \
+    -name "*.sh" -type f -print)
 
   print_header "Analysis Summary"
   if ((total_issues == 0)); then

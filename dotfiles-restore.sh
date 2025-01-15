@@ -5,27 +5,23 @@
 set -e
 set -u
 
-set -euo pipefail
+# Source our configuration functions
+# shellcheck source=lib/config.sh
+source "lib/config.sh"
 
-# Path variables
-MOUNT_POINT="/tmp/snap"
-DISK_DEVICE="/dev/disk3s5"
-USER_HOME="/Users/shaneholloman"
+# Path variables with environment overrides
+MOUNT_POINT=${DOTFILES_MOUNT_POINT:-$(get_config ".restore.paths.mount_point")}
+DISK_DEVICE=${DOTFILES_DISK_DEVICE:-$(get_config ".restore.paths.disk_device")}
+USER_HOME=${DOTFILES_USER_HOME:-$(get_config ".restore.paths.user_home" | envsubst)}
+ROOT_PATH=${DOTFILES_ROOT_PATH:-$(get_config ".restore.paths.root")}
+BACKUP_PREFIX=${DOTFILES_BACKUP_PREFIX:-$(get_config ".restore.paths.backup_dir_prefix")}
 
-# Config files and directories to backup/restore
-DOTFILES=(
-  ".zshrc"
-  ".bashrc"
-  ".gitconfig"
-)
+# Get config files and directories from config
+readarray -t DOTFILES < <(get_config_array ".restore.files.dotfiles[]")
+readarray -t CONFIG_DIRS < <(get_config_array ".restore.files.config_dirs[]")
 
-CONFIG_DIRS=(
-  ".config"
-  ".aws"
-  ".terraform.d"
-  ".kube"
-  ".vscode-insiders"
-)
+# Find sudo path
+SUDO=$(command -v sudo)
 
 # Colors for output
 RED='\033[0;31m'
@@ -57,13 +53,13 @@ EOF
 # List available snapshots
 list_snapshots() {
   log_info "Available snapshots:"
-  tmutil listlocalsnapshots / | sed 's/com.apple.TimeMachine.\(.*\).local/\1/'
+  tmutil listlocalsnapshots "$ROOT_PATH" | sed 's/com.apple.TimeMachine.\(.*\).local/\1/'
 }
 
 # Check if snapshot exists
 check_snapshot() {
   local snapshot_date=$1
-  if ! tmutil listlocalsnapshots / | grep -q "$snapshot_date"; then
+  if ! tmutil listlocalsnapshots "$ROOT_PATH" | grep -q "$snapshot_date"; then
     log_error "Snapshot $snapshot_date not found"
     list_snapshots
     exit 1
@@ -75,16 +71,16 @@ mount_snapshot() {
   local snapshot_date=$1
 
   log_info "Creating mount point..."
-  sudo mkdir -p "$MOUNT_POINT"
+  "$SUDO" mkdir -p "$MOUNT_POINT"
 
   log_info "Mounting snapshot..."
-  sudo mount_apfs -s "com.apple.TimeMachine.${snapshot_date}.local" "$DISK_DEVICE" "$MOUNT_POINT"
+  "$SUDO" mount_apfs -s "com.apple.TimeMachine.${snapshot_date}.local" "$DISK_DEVICE" "$MOUNT_POINT"
 }
 
 # Restore files
 restore_files() {
   local backup_dir
-  backup_dir="${USER_HOME}/.dotfiles_backup_$(date +%Y%m%d_%H%M%S)"
+  backup_dir="${USER_HOME}/${BACKUP_PREFIX}$(date +%Y%m%d_%H%M%S)"
 
   log_info "Creating backup directory for current files..."
   mkdir -p "$backup_dir"
@@ -104,24 +100,24 @@ restore_files() {
 
   # Core config files
   for file in "${DOTFILES[@]}"; do
-    sudo cp "${MOUNT_POINT}${USER_HOME}/${file}" "${USER_HOME}/" 2>/dev/null || log_warn "No ${file} found in snapshot"
+    "$SUDO" cp "${MOUNT_POINT}${USER_HOME}/${file}" "${USER_HOME}/" 2>/dev/null || log_warn "No ${file} found in snapshot"
   done
 
   # Config directories
   for dir in "${CONFIG_DIRS[@]}"; do
     if [[ -d "${MOUNT_POINT}${USER_HOME}/${dir}" ]]; then
-      sudo cp -R "${MOUNT_POINT}${USER_HOME}/${dir}" "${USER_HOME}/"
+      "$SUDO" cp -R "${MOUNT_POINT}${USER_HOME}/${dir}" "${USER_HOME}/"
     fi
   done
 
   # Fix permissions
   log_info "Fixing permissions..."
   for dir in "${CONFIG_DIRS[@]}"; do
-    sudo chown -R "$(whoami)" "${USER_HOME}/${dir}" 2>/dev/null || true
+    "$SUDO" chown -R "$(whoami)" "${USER_HOME}/${dir}" 2>/dev/null || true
   done
 
   for file in "${DOTFILES[@]}"; do
-    sudo chown "$(whoami)" "${USER_HOME}/${file}" 2>/dev/null || true
+    "$SUDO" chown "$(whoami)" "${USER_HOME}/${file}" 2>/dev/null || true
   done
 
   log_info "Backup of current files saved to: $backup_dir"
@@ -130,8 +126,8 @@ restore_files() {
 # Cleanup
 cleanup() {
   log_info "Cleaning up..."
-  sudo umount "$MOUNT_POINT" 2>/dev/null || true
-  sudo rmdir "$MOUNT_POINT" 2>/dev/null || true
+  "$SUDO" umount "$MOUNT_POINT" 2>/dev/null || true
+  "$SUDO" rmdir "$MOUNT_POINT" 2>/dev/null || true
 }
 
 # Main script
