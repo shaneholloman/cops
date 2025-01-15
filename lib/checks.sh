@@ -26,13 +26,8 @@ check_tools() {
 
   # Check CLI tools
   while IFS= read -r tool; do
-    # Map package names to their actual commands
-    local cmd="$tool"
-    case "$tool" in
-    "awscli") cmd="aws" ;;
-    "kubernetes-cli") cmd="kubectl" ;;
-    esac
-
+    local cmd
+    cmd=$(get_command_name "$tool")
     if command -v "$cmd" >/dev/null 2>&1; then
       version="$("$cmd" --version 2>/dev/null | head -n1)"
       print_success "$tool is installed ($version)"

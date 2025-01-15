@@ -16,3 +16,13 @@ get_config_array() {
     echo "${line#- }"
   done
 }
+
+# Get the actual command name for a tool
+get_command_name() {
+  local tool="$1"
+  case "$tool" in
+  "awscli") echo "aws" ;;
+  "kubernetes-cli") echo "kubectl" ;;
+  *) echo "$tool" ;;
+  esac
+}

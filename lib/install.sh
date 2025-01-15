@@ -40,13 +40,8 @@ validate_installation() {
 
   # Validate CLI tools
   while IFS= read -r tool; do
-    # Map package names to their actual commands
-    local cmd="$tool"
-    case "$tool" in
-    "awscli") cmd="aws" ;;
-    "kubernetes-cli") cmd="kubectl" ;;
-    esac
-
+    local cmd
+    cmd=$(get_command_name "$tool")
     if command -v "$cmd" >/dev/null 2>&1; then
       print_success "$tool installed successfully"
     else
