@@ -1,6 +1,31 @@
 #!/bin/bash
 # shellcheck shell=bash
+
+# Exit on error or undefined variable
+set -e
+set -u
+
 set -euo pipefail
+
+# Path variables
+MOUNT_POINT="/tmp/snap"
+DISK_DEVICE="/dev/disk3s5"
+USER_HOME="/Users/shaneholloman"
+
+# Config files and directories to backup/restore
+DOTFILES=(
+  ".zshrc"
+  ".bashrc"
+  ".gitconfig"
+)
+
+CONFIG_DIRS=(
+  ".config"
+  ".aws"
+  ".terraform.d"
+  ".kube"
+  ".vscode-insiders"
+)
 
 # Colors for output
 RED='\033[0;31m'
@@ -48,72 +73,56 @@ check_snapshot() {
 # Mount snapshot
 mount_snapshot() {
   local snapshot_date=$1
-  local mount_point="/tmp/snap"
 
   log_info "Creating mount point..."
-  sudo mkdir -p "$mount_point"
+  sudo mkdir -p "$MOUNT_POINT"
 
   log_info "Mounting snapshot..."
-  sudo mount_apfs -s "com.apple.TimeMachine.${snapshot_date}.local" /dev/disk3s5 "$mount_point"
+  sudo mount_apfs -s "com.apple.TimeMachine.${snapshot_date}.local" "$DISK_DEVICE" "$MOUNT_POINT"
 }
 
 # Restore files
 restore_files() {
-  local mount_point
-  mount_point="/tmp/snap"
-  local user_home
-  user_home="/Users/shaneholloman"
   local backup_dir
-  backup_dir="${user_home}/.dotfiles_backup_$(date +%Y%m%d_%H%M%S)"
+  backup_dir="${USER_HOME}/.dotfiles_backup_$(date +%Y%m%d_%H%M%S)"
 
   log_info "Creating backup directory for current files..."
   mkdir -p "$backup_dir"
 
   # Backup current files
   log_info "Backing up current dotfiles..."
-  [[ -f "${user_home}/.zshrc" ]] && cp "${user_home}/.zshrc" "$backup_dir/"
-  [[ -f "${user_home}/.bashrc" ]] && cp "${user_home}/.bashrc" "$backup_dir/"
-  [[ -f "${user_home}/.gitconfig" ]] && cp "${user_home}/.gitconfig" "$backup_dir/"
-  [[ -d "${user_home}/.config" ]] && cp -R "${user_home}/.config" "$backup_dir/"
-  [[ -d "${user_home}/.aws" ]] && cp -R "${user_home}/.aws" "$backup_dir/"
-  [[ -d "${user_home}/.terraform.d" ]] && cp -R "${user_home}/.terraform.d" "$backup_dir/"
-  [[ -d "${user_home}/.kube" ]] && cp -R "${user_home}/.kube" "$backup_dir/"
-  [[ -d "${user_home}/.vscode-insiders" ]] && cp -R "${user_home}/.vscode-insiders" "$backup_dir/"
+  for file in "${DOTFILES[@]}"; do
+    [[ -f "${USER_HOME}/${file}" ]] && cp "${USER_HOME}/${file}" "$backup_dir/"
+  done
+
+  for dir in "${CONFIG_DIRS[@]}"; do
+    [[ -d "${USER_HOME}/${dir}" ]] && cp -R "${USER_HOME}/${dir}" "$backup_dir/"
+  done
 
   # Restore from snapshot
   log_info "Restoring files from snapshot..."
 
   # Core config files
-  sudo cp "${mount_point}${user_home}/.zshrc" "${user_home}/" 2>/dev/null || log_warn "No .zshrc found in snapshot"
-  sudo cp "${mount_point}${user_home}/.bashrc" "${user_home}/" 2>/dev/null || log_warn "No .bashrc found in snapshot"
-  sudo cp "${mount_point}${user_home}/.gitconfig" "${user_home}/" 2>/dev/null || log_warn "No .gitconfig found in snapshot"
+  for file in "${DOTFILES[@]}"; do
+    sudo cp "${MOUNT_POINT}${USER_HOME}/${file}" "${USER_HOME}/" 2>/dev/null || log_warn "No ${file} found in snapshot"
+  done
 
   # Config directories
-  if [[ -d "${mount_point}${user_home}/.config" ]]; then
-    sudo cp -R "${mount_point}${user_home}/.config" "${user_home}/"
-  fi
-
-  # Tool-specific configs
-  if [[ -d "${mount_point}${user_home}/.aws" ]]; then
-    sudo cp -R "${mount_point}${user_home}/.aws" "${user_home}/"
-  fi
-
-  if [[ -d "${mount_point}${user_home}/.terraform.d" ]]; then
-    sudo cp -R "${mount_point}${user_home}/.terraform.d" "${user_home}/"
-  fi
-
-  if [[ -d "${mount_point}${user_home}/.kube" ]]; then
-    sudo cp -R "${mount_point}${user_home}/.kube" "${user_home}/"
-  fi
-
-  if [[ -d "${mount_point}${user_home}/.vscode-insiders" ]]; then
-    sudo cp -R "${mount_point}${user_home}/.vscode-insiders" "${user_home}/"
-  fi
+  for dir in "${CONFIG_DIRS[@]}"; do
+    if [[ -d "${MOUNT_POINT}${USER_HOME}/${dir}" ]]; then
+      sudo cp -R "${MOUNT_POINT}${USER_HOME}/${dir}" "${USER_HOME}/"
+    fi
+  done
 
   # Fix permissions
   log_info "Fixing permissions..."
-  sudo chown -R "$(whoami)" "${user_home}/.config" "${user_home}/.aws" "${user_home}/.terraform.d" "${user_home}/.kube" "${user_home}/.vscode-insiders" 2>/dev/null || true
-  sudo chown "$(whoami)" "${user_home}/.zshrc" "${user_home}/.bashrc" "${user_home}/.gitconfig" 2>/dev/null || true
+  for dir in "${CONFIG_DIRS[@]}"; do
+    sudo chown -R "$(whoami)" "${USER_HOME}/${dir}" 2>/dev/null || true
+  done
+
+  for file in "${DOTFILES[@]}"; do
+    sudo chown "$(whoami)" "${USER_HOME}/${file}" 2>/dev/null || true
+  done
 
   log_info "Backup of current files saved to: $backup_dir"
 }
@@ -121,8 +130,8 @@ restore_files() {
 # Cleanup
 cleanup() {
   log_info "Cleaning up..."
-  sudo umount /tmp/snap 2>/dev/null || true
-  sudo rmdir /tmp/snap 2>/dev/null || true
+  sudo umount "$MOUNT_POINT" 2>/dev/null || true
+  sudo rmdir "$MOUNT_POINT" 2>/dev/null || true
 }
 
 # Main script

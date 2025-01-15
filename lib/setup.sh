@@ -113,6 +113,34 @@ setup_file_associations() {
   done < <(get_config_array '.file_associations.extensions[]')
 }
 
+setup_iterm2() {
+  print_header "Setting up iTerm2 configuration"
+
+  if [[ -d "/Applications/iTerm.app" ]]; then
+    # Set iTerm2 as default terminal
+    if ! defaults write com.apple.Terminal "Default Window Settings" -string "iTerm2" ||
+      ! defaults write com.apple.Terminal "Startup Window Settings" -string "iTerm2"; then
+      print_error "Failed to set iTerm2 as default terminal"
+      return 1
+    fi
+
+    # Enable Finder quit menu item
+    if ! defaults write com.apple.finder QuitMenuItem -bool true; then
+      print_error "Failed to enable Finder quit menu item"
+      return 1
+    fi
+
+    # Restart Finder to apply changes
+    if ! killall Finder; then
+      print_warning "Failed to restart Finder - changes may require manual restart"
+    fi
+
+    print_success "iTerm2 configuration completed successfully"
+  else
+    print_warning "iTerm2 not installed - skipping configuration"
+  fi
+}
+
 setup_homebrew() {
   print_header "Setting up Homebrew"
   if ! command -v brew >/dev/null 2>&1; then

@@ -48,6 +48,7 @@ tools:
   cask:
     - carbon-copy-cloner
     - claude
+    - iterm2
     - dropbox
     - firefox
     - font-hack-nerd-font

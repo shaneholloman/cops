@@ -76,6 +76,10 @@ show_summary() {
   echo "5. File Associations:"
   echo "   - Set up VS Code Insiders as default editor for development files"
   echo "   - Configure associations for common file types (py, js, ts, etc.)"
+  echo
+  echo "6. Terminal Configuration:"
+  echo "   - Set up iTerm2 as default terminal"
+  echo "   - Configure Finder integration"
 
   echo
   read -r -p "Would you like to proceed with these changes? [y/N] " -n 1
@@ -111,6 +115,7 @@ main() {
   setup_homebrew
   install_tools
   setup_file_associations
+  setup_iterm2
   validate_installation
   initialize_git_repo
 
