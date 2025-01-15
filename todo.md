@@ -1,7 +1,7 @@
 # TODO
 
 - [x] keep a the single config file for all the functions
-- [ ] break out functions to separate files from the main script
+- [x] break out functions to separate files from the main script
 - [ ] add namespace support for k8s functions
 - [ ] add machine name function
 - [ ] add a method to import some custom profile functions/aliases
