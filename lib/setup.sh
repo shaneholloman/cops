@@ -44,7 +44,7 @@ setup_zsh_config() {
 export PATH="$DOTFILES_ROOT/bin:$PATH"
 
 # Oh My Posh configuration
-eval "\$(oh-my-posh init zsh --config \"$theme_path\")"
+eval "\$(oh-my-posh init zsh --config $theme_path)"
 
 # Environment variables
 EOF
