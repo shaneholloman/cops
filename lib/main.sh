@@ -64,19 +64,19 @@ show_master_switches() {
   vim_status=$(is_feature_enabled "vim")
   file_assoc_status=$(is_feature_enabled "file_assoc")
 
-  printf "System Preferences: %s\n" "$([[ "$preferences_status" = "true" ]] && printf "\033[1;32mENABLED\033[0m" || printf "\033[1;31mDISABLED\033[0m")"
+  printf "System Preferences: %s\n" "$(print_status "$preferences_status")"
   printf "  - Controls system settings including keyboard and terminal preferences\n"
   printf "\n"
-  printf "Tool Installation: %s\n" "$([[ "$tools_status" = "true" ]] && printf "\033[1;32mENABLED\033[0m" || printf "\033[1;31mDISABLED\033[0m")"
+  printf "Tool Installation: %s\n" "$(print_status "$tools_status")"
   printf "  - Controls installation of CLI tools and applications\n"
   printf "\n"
-  printf "Shell Aliases: %s\n" "$([[ "$aliases_status" = "true" ]] && printf "\033[1;32mENABLED\033[0m" || printf "\033[1;31mDISABLED\033[0m")"
+  printf "Shell Aliases: %s\n" "$(print_status "$aliases_status")"
   printf "  - Controls setup of shell aliases and shortcuts\n"
   printf "\n"
-  printf "Vim Configuration: %s\n" "$([[ "$vim_status" = "true" ]] && printf "\033[1;32mENABLED\033[0m" || printf "\033[1;31mDISABLED\033[0m")"
+  printf "Vim Configuration: %s\n" "$(print_status "$vim_status")"
   printf "  - Controls Vim editor settings and configuration\n"
   printf "\n"
-  printf "File Associations: %s\n" "$([[ "$file_assoc_status" = "true" ]] && printf "\033[1;32mENABLED\033[0m" || printf "\033[1;31mDISABLED\033[0m")"
+  printf "File Associations: %s\n" "$(print_status "$file_assoc_status")"
   printf "  - Controls default application associations for file types\n"
   printf "\n"
 
