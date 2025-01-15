@@ -1,22 +1,22 @@
 # Dotfiles Configuration
 
 # Master Switches
-enable_preferences: false     # System preferences and defaults
-enable_tools: true          # CLI and GUI tools installation
-enable_aliases: true        # Shell aliases and functions
-enable_vim: true           # Vim configuration
-enable_file_assoc: true    # File associations
-enable_security: false      # Security configurations
-enable_dev_env: true       # Development environment setup
-enable_app_config: true    # Application specific configurations
-enable_system_defaults: false # macOS system defaults
-enable_backup: true        # Backup functionality
+enable_preferences: false      # System preferences and defaults
+enable_tools: true             # CLI and GUI tools installation
+enable_aliases: true           # Shell aliases and functions
+enable_vim: true               # Vim configuration
+enable_file_assoc: true        # File associations
+enable_security: false         # Security configurations
+enable_dev_env: true           # Development environment setup
+enable_app_config: true        # Application specific configurations
+enable_system_defaults: false  # macOS system defaults
+enable_backup: true            # Backup functionality
 
 # System Configuration
 system:
   hostname: 'macbook-pro'
   computer_name: 'Shane's MacBook Pro'
-  timezone: 'America/New_York'
+  timezone: 'Pacific/Auckland'
   locale:
     lang: 'en_US.UTF-8'
     lc_all: 'en_US.UTF-8'
