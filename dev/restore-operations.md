@@ -4,8 +4,8 @@
 
 This guide covers two restoration scripts:
 
-1. `dotfiles-restore.sh` - Targeted restoration of dotfiles and configuration
-2. `home-restore.sh` - Broader restoration of home directory contents
+1. `dotfiles-restore.sh` - Targeted restoration of dotfiles and configuration - NOT USING currently!
+2. `home-restore.sh` - Broader restoration of home directory contents - NOT USING currently!
 
 Both scripts work with macOS Time Machine local snapshots, providing different levels of granularity for system restoration.
 

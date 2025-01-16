@@ -6,6 +6,7 @@ enable_tools: true # Most users want tools
 enable_aliases: true # Shell aliases are safe
 enable_vim: true # Editor config is safe
 enable_file_assoc: true # File associations are safe
+enable_snapshots: true # Create APFS snapshot before changes
 
 # User Information
 user:

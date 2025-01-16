@@ -7,6 +7,7 @@ set -u
 
 # Source our output functions
 # shellcheck source=lib/output.sh
+# shellcheck disable=SC1091
 source "lib/output.sh"
 
 # Global arrays to store tools that need installation
@@ -57,13 +58,18 @@ show_master_switches() {
   local aliases_status
   local vim_status
   local file_assoc_status
+  local snapshots_status
 
   preferences_status=$(is_feature_enabled "preferences")
   tools_status=$(is_feature_enabled "tools")
   aliases_status=$(is_feature_enabled "aliases")
   vim_status=$(is_feature_enabled "vim")
   file_assoc_status=$(is_feature_enabled "file_assoc")
+  snapshots_status=$(is_feature_enabled "snapshots")
 
+  printf "APFS Snapshots: %s\n" "$(print_status "$snapshots_status")"
+  printf "  - Creates a system snapshot before making changes\n"
+  printf "\n"
   printf "System Preferences: %s\n" "$(print_status "$preferences_status")"
   printf "  - Controls system settings including keyboard and terminal preferences\n"
   printf "\n"
@@ -95,14 +101,22 @@ show_summary() {
   print_header "Installation Summary"
   printf "This script will make the following changes:\n"
   printf "\n"
-  printf "1. Directory Changes:\n"
+
+  # Show snapshot creation if enabled
+  if [[ "$(is_feature_enabled "snapshots")" = "true" ]]; then
+    printf "1. Safety Measures:\n"
+    printf "   - Create APFS snapshot for system rollback\n"
+    printf "\n"
+  fi
+
+  printf "2. Directory Changes:\n"
   printf "   - Create %s structure\n" "$DOTFILES_ROOT"
   printf "   - Organize configurations by tool\n"
   printf "\n"
 
   # Only show tool installation section if there are tools to install
   if ((${#CLI_TOOLS_TO_INSTALL[@]} > 0)) || ((${#CASK_APPS_TO_INSTALL[@]} > 0)); then
-    printf "2. Tool Installation:\n"
+    printf "3. Tool Installation:\n"
     if ((${#CLI_TOOLS_TO_INSTALL[@]} > 0)); then
       printf "   - Install CLI tools: %s\n" "${CLI_TOOLS_TO_INSTALL[@]}"
     fi
@@ -112,21 +126,21 @@ show_summary() {
     printf "\n"
   fi
 
-  printf "3. Configuration Changes:\n"
+  printf "4. Configuration Changes:\n"
   printf "   - Create or update dotfiles (.zshrc, .gitconfig, .vimrc)\n"
   printf "   - Backup existing configurations\n"
   printf "   - Set up aliases and environment variables\n"
   printf "\n"
-  printf "4. Shell Configuration:\n"
+  printf "5. Shell Configuration:\n"
   printf "   - Configure %s with DevOps tooling\n" "$(get_config '.shell.default')"
   printf "   - Set up Oh My Posh theme\n"
   printf "   - Configure development environment\n"
   printf "\n"
-  printf "5. File Associations:\n"
+  printf "6. File Associations:\n"
   printf "   - Set up VS Code Insiders as default editor for development files\n"
   printf "   - Configure associations for common file types (py, js, ts, etc.)\n"
   printf "\n"
-  printf "6. Terminal Configuration:\n"
+  printf "7. Terminal Configuration:\n"
   printf "   - Set up iTerm2 as default terminal\n"
   printf "   - Configure Finder integration\n"
   printf "\n"
@@ -159,6 +173,18 @@ main() {
 
   # If user confirms, proceed with installation
   print_header "Starting Installation"
+
+  # Create APFS snapshot if enabled
+  if [[ "$(is_feature_enabled "snapshots")" = "true" ]]; then
+    print_header "Creating System Snapshot"
+    if tmutil localsnapshot / >/dev/null 2>&1; then
+      local snapshot_name
+      snapshot_name=$(tmutil listlocalsnapshots / | tail -n 1)
+      print_success "Created APFS snapshot: $snapshot_name"
+    else
+      print_error "Failed to create APFS snapshot"
+    fi
+  fi
 
   setup_directories
   setup_git_config
