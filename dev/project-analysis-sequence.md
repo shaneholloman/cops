@@ -7,7 +7,7 @@ First, understand the project's vision and direction:
 ```bash
 read dev/core-concepts.md     # New vision and approach
 read dev/shellchecking.md     # Code quality standards
-read dev/project-blueprint.md # Future plans
+read dev/project-blueprint.md # Future plans, also see README.md which still need to reflect the new vision of cops instead of dotfiles
 ```
 
 ## 2. Current Implementation
