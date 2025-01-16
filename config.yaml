@@ -40,23 +40,43 @@ shell:
 # Tools to Install
 tools:
   cli:
-    - bash # Modern bash via Homebrew
+    - ack
     - awscli
+    - bash
+    - bash-completion2
     - cmake
+    - findutils
     - gh
+    - gmp
+    - gnu-sed
+    - gnupg
     - go
+    - grep
     - helm
+    - imagemagick
     - jq
     - kubernetes-cli
+    - lua
+    - lynx
+    - moreutils
     - oh-my-posh
+    - openssh
+    - p7zip
+    - php
+    - pigz
     - pkgconf
+    - pv
+    - rename
+    - rlwrap
     - rust
+    - screen
     - terraform
-    - volta
+    - tree
     - uv
+    - volta
     - yq
+
   cask:
-    - carbon-copy-cloner # just testing
     - docker
     - claude
     - ollama
@@ -68,6 +88,32 @@ tools:
     - powershell # yet to add oh-my-posh as we already have for zsh
     - visual-studio-code # intent is to add plugins/setting via another module
     - visual-studio-code@insiders # intent is to add plugins/setting via another module
+
+  forensic:
+    # - aircrack-ng
+    # - bfg
+    # - binutils
+    # - binwalk
+    # - cifer
+    # - dex2jar
+    # - dns2tcp
+    # - fcrackzip
+    # - foremost
+    # - hashpump
+    # - hydra
+    # - john
+    # - knock
+    # - netpbm
+    # - nmap
+    # - pngcheck
+    # - socat
+    # - sqlmap
+    # - tcpflow
+    # - tcpreplay
+    # - tcptrace
+    # - ucspi-tcp
+    # - xpdf
+    # - xz
 
 # Aliases
 aliases:
