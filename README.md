@@ -69,6 +69,46 @@ The script provides a two-step confirmation process:
 - Application-specific configurations
 - Extended backup capabilities
 
+## Development Workflow
+
+> [!NOTE]
+> This repository is designed to be location-independent, allowing for safe development and testing without affecting your actual dotfiles.
+
+### Location Independence
+
+The setup supports two primary workflows:
+
+1. **Direct Installation**
+
+    ```bash
+    # Clone and run from ~/.dotfiles
+    git clone https://github.com/shaneholloman/dotfiles-macos.git ~/.dotfiles
+    cd ~/.dotfiles
+    ./dotfiles-setup.sh
+    ```
+
+2. **Development Mode**
+
+    ```bash
+    # Clone to any development location
+    git clone https://github.com/shaneholloman/dotfiles-macos.git ~/projects/dotfiles-dev
+    cd ~/projects/dotfiles-dev
+    ./dotfiles-setup.sh
+    ```
+
+Both approaches work identically because:
+
+- The `config.yaml` defines the target location (`$HOME/.dotfiles`) independently of the script location
+- All paths are resolved relative to the configured `DOTFILES_ROOT`
+- Scripts can run from any location while still targeting the correct installation directory
+
+This separation allows you to:
+
+- Develop and test changes safely from any directory
+- Keep your development work separate from your active dotfiles
+- Deploy to ~/.dotfiles only when ready
+- Maintain multiple versions or branches without conflicts
+
 ## Documentation
 
 - [Blueprint](./dev/dotfiles-blueprint.md) - Comprehensive future plans
