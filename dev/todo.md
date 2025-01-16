@@ -4,6 +4,7 @@ Future, not implemented yet.
 
 - [x] keep a the single config file for all the functions
 - [x] break out functions to separate files from the main script
+- [ ] consider using gnu stow for dotfiles
 - [ ] add namespace support for k8s functions
 - [ ] add machine name function
 - [ ] add a method to import some custom profile functions/aliases

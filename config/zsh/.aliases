@@ -1,0 +1,45 @@
+# .aliases - doesn't use a shebang
+# This file should be sourced by .zshrc
+
+## Navigation
+alias dropbox='cd ~/Dropbox'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias dl='cd ~/Downloads'
+alias dt='cd ~/Desktop'
+alias docs='cd ~/Documents'
+alias p='cd ~/Projects'
+alias d='cd ~/Dropbox'
+
+## Common Utils
+alias ls='ls -G'
+alias ll='ls -lah'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias path='echo $PATH | tr ":" "\n"'
+alias ports='sudo lsof -iTCP -sTCP:LISTEN -P'
+alias pubkey='cat ~/.ssh/id_rsa.pub | pbcopy'
+alias week='date +%V'
+
+## Git
+alias g='git'
+alias gs='git status'
+alias gp='git push'
+alias gl='git pull'
+alias gc='git commit'
+alias gd='git diff'
+alias gb='git branch'
+alias gco='git checkout'
+
+## Docker
+alias dk='docker'
+alias dkc='docker compose'
+alias dkp='docker ps'
+alias dki='docker images'
+
+## Development
+alias py='python3'
+alias pip='pip3'
+alias serve='python3 -m http.server'
