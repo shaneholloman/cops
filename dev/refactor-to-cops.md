@@ -2,7 +2,7 @@
 
 This document tracks the refactoring process from "dotfiles" to "cops" naming convention.
 
-## Phase 1: Repository Changes (Completed)
+## Phase 1: Repository Changes (Completed ✓)
 
 ### Initial Analysis
 
@@ -26,16 +26,89 @@ This document tracks the refactoring process from "dotfiles" to "cops" naming co
 5. Committed changes with breaking change notice
 6. Pushed to GitHub for CI testing
 
-### CI Verification (In Progress)
+### CI Verification (Completed ✓)
 
 1. Updated workflow name in `.github/workflows/ci.yml` to "macOS Cops Test"
-2. Triggered workflow manually using:
+2. Triggered workflow manually using GitHub CLI:
 
    ```bash
+   # Trigger the workflow
    gh workflow run "macOS Cops Test" --ref refactor/dotfiles-to-cops
+
+   # Monitor workflow status
+   gh run list --workflow=ci.yml
+
+   # View detailed results
+   gh run view [RUN_ID]
    ```
 
-3. Monitoring CI results to ensure changes work correctly
+3. CI Results:
+   - Both test runs completed successfully
+   - Verified renaming changes work correctly
+   - Confirmed script idempotency (multiple runs succeed)
+   - All core functionality remains intact
+
+### Next Steps
+
+1. Merge to Main:
+
+   ```bash
+   # Switch to main branch
+   git checkout main
+
+   # Merge the refactor branch
+   git merge refactor/dotfiles-to-cops
+
+   # Push changes
+   git push origin main
+   ```
+
+2. Update Repository Name:
+   - Go to GitHub repository settings
+   - Change repository name from `dotfiles-macos` to `cops`
+   - Update local repository remote:
+
+   ```bash
+   git remote set-url origin https://github.com/shaneholloman/cops.git
+   ```
+
+3. Update Documentation:
+   - Review all markdown files for any remaining "dotfiles" references
+   - Update project description in GitHub
+   - Update any external documentation or links
+
+4. Create Release:
+
+   ```bash
+   # Create and push tag
+   git tag -a v2.0.0 -m "Rename project from dotfiles to cops"
+   git push origin v2.0.0
+
+   # Create GitHub release using CLI
+   gh release create v2.0.0 \
+     --title "v2.0.0 - Project Renamed to cops" \
+     --notes "BREAKING CHANGE: Project renamed from dotfiles to cops. See dev/refactor-to-cops.md for details."
+   ```
+
+### GitHub CLI Commands Used
+
+During this refactoring, we utilized several GitHub CLI commands that proved very useful:
+
+```bash
+# Workflow Management
+gh workflow run - Trigger a workflow
+gh run list    - List recent workflow runs
+gh run view    - View detailed workflow results
+
+# Example with filters
+gh run list --workflow=ci.yml --limit 3  # Show last 3 runs of specific workflow
+
+# Detailed run information
+gh run view [RUN_ID] --log              # View complete run logs
+gh run view [RUN_ID] --job [JOB_ID]     # View specific job details
+```
+
+These commands provided efficient workflow management and monitoring directly from the terminal.
 
 ## Phase 2: Local Migration Plan (Pending)
 
@@ -83,7 +156,7 @@ This document tracks the refactoring process from "dotfiles" to "cops" naming co
 1. Clone new repository:
 
    ```bash
-   git clone -b refactor/dotfiles-to-cops https://github.com/shaneholloman/cops-macos.git ~/.config/cops
+   git clone -b refactor/dotfiles-to-cops https://github.com/shaneholloman/cops.git ~/.config/cops
    ```
 
 2. Update symlinks:
