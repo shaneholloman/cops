@@ -23,6 +23,7 @@ get_command_name() {
   case "$tool" in
   "awscli") echo "aws" ;;
   "kubernetes-cli") echo "kubectl" ;;
+  "rust") echo "rustc" ;;
   *) echo "$tool" ;;
   esac
 }

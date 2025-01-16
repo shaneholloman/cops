@@ -14,6 +14,9 @@ To add a new tool (e.g., terraform-docs):
 
 2. If command name differs from package name, add mapping in lib/config.sh:
 
+    > [!IMPORTANT]
+    > This is a gotcha! Watch out for this!
+
     ```bash
     get_command_name() {
       local tool="$1"

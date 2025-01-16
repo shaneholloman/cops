@@ -42,18 +42,21 @@ tools:
     - bash # Modern bash via Homebrew
     - awscli
     - cmake
-    - docker
     - gh
     - go
     - helm
     - jq
     - kubernetes-cli
     - oh-my-posh
+    - pkgconf
+    - rust
     - terraform
     - volta
+    - uv
     - yq
   cask:
     - carbon-copy-cloner # just testing
+    - docker
     - claude
     - ollama
     - iterm2
