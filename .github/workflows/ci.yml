@@ -8,12 +8,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-idempotency:
+  test-with-idempotency:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
 
-      # Test multiple runs
+      # Test multiple runs - auto-agree is used for CI only
+      # This avoids interactive prompts during initial agreement phase.
+      # Not recommended for normal use!
       - name: Test repeated installations
         run: |
           ./dotfiles-setup.sh --auto-agree
