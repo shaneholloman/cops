@@ -1,9 +1,16 @@
 # macOS DevOps Environment Dotfiles
 
+NOTE to Ai: We are going to dump the legacy naming of dotfiles and use COPS instead. So this doc will be refactored as well
+
+see:
+
+- [core-concepts](./dev/core-concepts.md)
+- [project analysis](./dev/project-analysis-sequence.md)
+
 > [!IMPORTANT]
 > Works, but not complete yet!
 >
-> This dotfiles setup implements opinionated configuration choices and represents an initial foundation. For a complete overview of planned enhancements and additional features, please refer to the [blueprint](./dev/dotfiles-blueprint.md).
+> This dotfiles setup implements opinionated configuration choices and represents an initial foundation. For a complete overview of planned enhancements and additional features, please refer to the [blueprint](./dev/project-blueprint.md).
 >
 > The repository provides multiple safeguards for risk-free testing and deployment:
 >
@@ -69,7 +76,7 @@ The script provides a two-step confirmation process:
 ## Planned Features
 
 > [!NOTE]
-> These features are under development. See [blueprint](./dev/dotfiles-blueprint.md) for details.
+> These features are under development. See [blueprint](./dev/project-blueprint.md) for details.
 
 - Manual binary installations for non-Homebrew tools
 - Improved security configurations
@@ -142,7 +149,7 @@ This separation allows you to:
 
 ## Documentation
 
-- [Blueprint](./dev/dotfiles-blueprint.md) - Comprehensive future plans
+- [Blueprint](./dev/project-blueprint.md) - Comprehensive future plans
 - [Manual Installations](./dev/manual-installations.md) - Binary tool management (planned)
 - [Restore Operations](./dev/restore-operations.md) - Backup and restore capabilities
 - [Adding Tools](./dev/adding-simple-tools.md) - Guide for tool integration
