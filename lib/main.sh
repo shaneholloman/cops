@@ -80,12 +80,14 @@ show_master_switches() {
   printf "  - Controls default application associations for file types\n"
   printf "\n"
 
-  printf "Please review the enabled features carefully.\n"
-  read -r -p "Would you like to proceed with these settings? [y/N] " -n 1
-  echo
-  if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-    echo "Installation cancelled"
-    exit 1
+  if [[ "${AUTO_AGREE:-false}" != "true" ]]; then
+    printf "Please review the enabled features carefully.\n"
+    read -r -p "Would you like to proceed with these settings? [y/N] " -n 1
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+      echo "Installation cancelled"
+      exit 1
+    fi
   fi
 }
 
@@ -128,11 +130,13 @@ show_summary() {
   printf "   - Set up iTerm2 as default terminal\n"
   printf "   - Configure Finder integration\n"
   printf "\n"
-  read -r -p "Would you like to proceed with these changes? [y/N] " -n 1
-  echo
-  if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-    echo "Installation cancelled"
-    exit 1
+  if [[ "${AUTO_AGREE:-false}" != "true" ]]; then
+    read -r -p "Would you like to proceed with these changes? [y/N] " -n 1
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+      echo "Installation cancelled"
+      exit 1
+    fi
   fi
 }
 

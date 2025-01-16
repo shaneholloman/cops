@@ -16,9 +16,25 @@ if ! command -v yq &>/dev/null; then
   fi
 fi
 
+# Parse command line arguments
+AUTO_AGREE=false
+while [[ $# -gt 0 ]]; do
+  case $1 in
+  --auto-agree)
+    AUTO_AGREE=true
+    shift
+    ;;
+  *)
+    echo "Unknown option: $1"
+    exit 1
+    ;;
+  esac
+done
+
 # Global configuration
 CONFIG_FILE="config.yaml"
 readonly CONFIG_FILE
+export AUTO_AGREE
 
 DOTFILES_ROOT=$(yq eval '.paths.dotfiles' "$CONFIG_FILE" | envsubst)
 export DOTFILES_ROOT

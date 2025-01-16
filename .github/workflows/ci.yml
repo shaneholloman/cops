@@ -16,7 +16,7 @@ jobs:
       # Test fresh install
       - name: Run fresh installation
         run: |
-          ./dotfiles-setup.sh
+          ./dotfiles-setup.sh --auto-agree
 
       # Verify critical tools installed
       - name: Verify Homebrew packages
@@ -43,6 +43,6 @@ jobs:
       # Test multiple runs
       - name: Test repeated installations
         run: |
-          ./dotfiles-setup.sh
-          ./dotfiles-setup.sh
-          ./dotfiles-setup.sh
+          ./dotfiles-setup.sh --auto-agree
+          ./dotfiles-setup.sh --auto-agree
+          ./dotfiles-setup.sh --auto-agree
