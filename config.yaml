@@ -48,7 +48,6 @@ tools:
     - helm
     - jq
     - kubernetes-cli
-    - ollama
     - oh-my-posh
     - terraform
     - volta
@@ -56,6 +55,7 @@ tools:
   cask:
     - carbon-copy-cloner # just testing
     - claude
+    - ollama
     - iterm2
     - dropbox
     - firefox
