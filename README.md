@@ -5,12 +5,13 @@
 >
 > This dotfiles setup implements opinionated configuration choices and represents an initial foundation. For a complete overview of planned enhancements and additional features, please refer to the [blueprint](./dev/dotfiles-blueprint.md).
 >
-> The repository offers multiple safe ways to test and deploy:
+> The repository provides multiple safeguards for risk-free testing and deployment:
 >
 > - Develop from any directory while targeting ~/.dotfiles
-> - Run risk free automated tests in clean CI environments
-> - Use Time Machine snapshots for easy rollbacks
-> - Test changes without affecting your active configuration
+> - Run risk free automated tests in clean CI environments directly in GitHub
+> - Verify idempotency through repeated test runs
+> - Use Time Machine snapshots for instant rollbacks
+> - Test changes in isolation from your active configuration
 
 A modular dotfiles management system for macOS that automates the setup of development environments through a centralized YAML configuration. The system emphasizes safety, reversibility, and maintainability through master switches and comprehensive backup capabilities.
 
@@ -56,14 +57,14 @@ vim ~/.dotfiles/config.yaml
 The script provides a two-step confirmation process:
 
 1. **Master Switches Review**
-   - Shows enabled/disabled status for each feature
-   - Explains impact of enabled features
-   - Requires explicit confirmation
+    - Shows enabled/disabled status for each feature
+    - Explains impact of enabled features
+    - Requires explicit confirmation
 
 2. **Detailed Changes Review**
-   - Lists specific changes to be made
-   - Shows tools to be installed
-   - Final confirmation before proceeding
+    - Lists specific changes to be made
+    - Shows tools to be installed
+    - Final confirmation before proceeding
 
 ## Planned Features
 
