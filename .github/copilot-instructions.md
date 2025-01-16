@@ -1,4 +1,4 @@
-# Copilot Rules for Dotfiles Project
+# Copilot Rules for Cops Project
 
 To prove to the user you have read these rules, please include the following phrase in your initial chat response:
 
@@ -40,7 +40,7 @@ To prove to the user you have read these rules, please include the following phr
     - Do not proceed to next file until current file passes all checks
 
 4. Path Handling:
-    - Use $HOME, $DOTFILES_ROOT, $LIB_DIR for paths
+    - Use $HOME, $COPS_ROOT, $LIB_DIR for paths
     - Avoid hardcoded paths
     - Handle directory changes with error checking
 

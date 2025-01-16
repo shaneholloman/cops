@@ -1,5 +1,5 @@
 # Path extensions
-export PATH="/Users/shaneholloman/.dotfiles/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="/Users/shaneholloman/.cops/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 # Oh My Posh configuration
 eval "$(oh-my-posh init zsh --config ~/Dropbox/shane/conf/warpdeck.omp.json)"
@@ -15,4 +15,4 @@ export TERRAFORM_CONFIG="null"
 export null="$HOME/.terraform.d/config.tfrc"
 
 # Load aliases
-source ~/.dotfiles/config/zsh/.aliases
+source ~/.cops/config/zsh/.aliases

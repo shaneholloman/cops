@@ -1,8 +1,6 @@
-# macOS DevOps Environment Dotfiles
+# Cops
 
-NOTE to Ai: We are going to dump the legacy naming of dotfiles and use COPS instead. So this doc will be refactored as well
-
-see:
+>For macOS setups ...
 
 - [core-concepts](./dev/core-concepts.md)
 - [project analysis](./dev/project-analysis-sequence.md)
@@ -10,17 +8,17 @@ see:
 > [!IMPORTANT]
 > Works, but not complete yet!
 >
-> This dotfiles setup implements opinionated configuration choices and represents an initial foundation. For a complete overview of planned enhancements and additional features, please refer to the [blueprint](./dev/project-blueprint.md).
+> This cops setup implements opinionated configuration choices and represents an initial foundation. For a complete overview of planned enhancements and additional features, please refer to the [blueprint](./dev/project-blueprint.md).
 >
 > The repository provides multiple safeguards for risk-free testing and deployment:
 >
-> - Develop from any directory while targeting ~/.dotfiles
+> - Develop from any directory while targeting ~/.cops
 > - Run risk free automated tests in clean CI environments directly in GitHub
 > - Verify idempotency through repeated test runs
 > - Use Time Machine snapshots for instant rollbacks
 > - Test changes in isolation from your active configuration
 
-A modular dotfiles management system for macOS that automates the setup of development environments through a centralized YAML configuration. The system emphasizes safety, reversibility, and maintainability through master switches and comprehensive backup capabilities.
+A modular cops management system for macOS that automates the setup of development environments through a centralized YAML configuration. The system emphasizes safety, reversibility, and maintainability through master switches and comprehensive backup capabilities.
 
 ## Core Features
 
@@ -44,7 +42,7 @@ A modular dotfiles management system for macOS that automates the setup of devel
 
 - **Backup & Restore**
   - Time Machine snapshot integration
-  - Targeted dotfiles restoration
+  - Targeted cops restoration
   - Home directory restore capabilities
   - Comprehensive backup before changes
 
@@ -52,13 +50,13 @@ A modular dotfiles management system for macOS that automates the setup of devel
 
 ```bash
 # Clone repository
-git clone https://github.com/shaneholloman/dotfiles-macos.git ~/.dotfiles
+git clone https://github.com/shaneholloman/cops.git ~/.cops
 
 # Review and customize configuration
-vim ~/.dotfiles/config.yaml
+vim ~/.cops/config.yaml
 
 # Run setup
-./dotfiles-setup.sh
+./cops-setup.sh
 ```
 
 The script provides a two-step confirmation process:
@@ -87,7 +85,7 @@ The script provides a two-step confirmation process:
 ## Development Workflow
 
 > [!NOTE]
-> This repository is designed to be location-independent, allowing for safe development and testing without affecting your actual dotfiles.
+> This repository is designed to be location-independent, allowing for safe development and testing without affecting your actual cops.
 
 ### Location Independence
 
@@ -96,19 +94,19 @@ The setup supports two primary workflows:
 1. **Direct Installation**
 
     ```bash
-    # Clone and run from ~/.dotfiles
-    git clone https://github.com/shaneholloman/dotfiles-macos.git ~/.dotfiles
-    cd ~/.dotfiles
-    ./dotfiles-setup.sh
+    # Clone and run from ~/.cops
+    git clone https://github.com/shaneholloman/cops-macos.git ~/.cops
+    cd ~/.cops
+    ./cops-setup.sh
     ```
 
 2. **Development Mode**
 
     ```bash
     # Clone to any development location
-    git clone https://github.com/shaneholloman/dotfiles-macos.git ~/projects/dotfiles-dev
-    cd ~/projects/dotfiles-dev
-    ./dotfiles-setup.sh
+    git clone https://github.com/shaneholloman/cops-macos.git ~/projects/cops-dev
+    cd ~/projects/cops-dev
+    ./cops-setup.sh
     ```
 
 3. **CI Testing Mode**
@@ -123,9 +121,9 @@ The setup supports two primary workflows:
           - uses: actions/checkout@v4
           - name: Test repeated installations
             run: |
-              ./dotfiles-setup.sh --auto-agree  # Skip confirmation prompts in CI
-              ./dotfiles-setup.sh --auto-agree  # Test idempotency
-              ./dotfiles-setup.sh --auto-agree  # Verify consistent results
+              ./cops-setup.sh --auto-agree  # Skip confirmation prompts in CI
+              ./cops-setup.sh --auto-agree  # Test idempotency
+              ./cops-setup.sh --auto-agree  # Verify consistent results
     ```
 
     This provides several benefits:
@@ -136,15 +134,15 @@ The setup supports two primary workflows:
 
 All approaches work identically because:
 
-- The `config.yaml` defines the target location (`$HOME/.dotfiles`) independently of the script location
-- All paths are resolved relative to the configured `DOTFILES_ROOT`
+- The `config.yaml` defines the target location (`$HOME/.cops`) independently of the script location
+- All paths are resolved relative to the configured `COPS_ROOT`
 - Scripts can run from any location while still targeting the correct installation directory
 
 This separation allows you to:
 
 - Develop and test changes safely from any directory
-- Keep your development work separate from your active dotfiles
-- Deploy to ~/.dotfiles only when ready
+- Keep your development work separate from your active cops
+- Deploy to ~/.cops only when ready
 - Maintain multiple versions or branches without conflicts
 
 ## Documentation

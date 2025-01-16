@@ -110,7 +110,7 @@ show_summary() {
   fi
 
   printf "2. Directory Changes:\n"
-  printf "   - Create %s structure\n" "$DOTFILES_ROOT"
+  printf "   - Create %s structure\n" "$COPS_ROOT"
   printf "   - Organize configurations by tool\n"
   printf "\n"
 
@@ -127,7 +127,7 @@ show_summary() {
   fi
 
   printf "4. Configuration Changes:\n"
-  printf "   - Create or update dotfiles (.zshrc, .gitconfig, .vimrc)\n"
+  printf "   - Create or update cops (.zshrc, .gitconfig, .vimrc)\n"
   printf "   - Backup existing configurations\n"
   printf "   - Set up aliases and environment variables\n"
   printf "\n"
@@ -158,7 +158,7 @@ main() {
   print_header "DevOps Environment Setup Analysis"
   printf "Analyzing your current setup...\n"
 
-  check_dotfiles
+  check_cops
   check_tools
   analyze_tools # Store which tools need installation
   check_shell

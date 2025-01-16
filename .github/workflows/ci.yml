@@ -1,4 +1,4 @@
-name: macOS Dotfiles Test
+name: macOS Cops Test
 
 on:
   # push:
@@ -18,6 +18,6 @@ jobs:
       # Not recommended for normal use!
       - name: Test repeated installations
         run: |
-          ./dotfiles-setup.sh --auto-agree
-          ./dotfiles-setup.sh --auto-agree
-          ./dotfiles-setup.sh --auto-agree
+          ./cops-setup.sh --auto-agree
+          ./cops-setup.sh --auto-agree
+          ./cops-setup.sh --auto-agree

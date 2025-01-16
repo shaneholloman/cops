@@ -1,10 +1,10 @@
-# Dotfiles-macOS Project Blueprint
+# Cops-macOS Project Blueprint
 
 Future, not implemented yet.
 
 Back to [README.md](../README.md)
 
-> Living document for planning improvements to dotfiles-macos project
+> Living document for planning improvements to cops-macos project
 
 ## Core Principles
 

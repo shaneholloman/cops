@@ -1,4 +1,4 @@
-# ShellCheck Guidelines for Dotfiles Project
+# ShellCheck Guidelines for Cops Project
 
 ## Running Analysis
 
@@ -53,7 +53,7 @@ To run both analyses:
 
 2. **Variable Exports**
    - Variables used across sourced files must be exported
-   - Example: `DOTFILES_ROOT` is exported in dotfiles-setup.sh because it's used in library files
+   - Example: `COPS_ROOT` is exported in cops-setup.sh because it's used in library files
 
 3. **Directory Changes**
    - Always add error handling to cd commands
@@ -67,7 +67,7 @@ To run both analyses:
 
 5. **Path Usage**
    - Avoid hardcoded paths
-   - Use variables like $HOME, $DOTFILES_ROOT, $LIB_DIR
+   - Use variables like $HOME, $COPS_ROOT, $LIB_DIR
    - System commands (brew, yq) are allowed
 
 ## Project Structure
@@ -128,7 +128,7 @@ Before committing changes:
 When adding new library files:
 
 1. Add to lib/ directory
-2. Source in dotfiles-setup.sh using $LIB_DIR
+2. Source in cops-setup.sh using $LIB_DIR
 3. Run analyze-scripts.sh to verify
 4. Ensure any shared variables are properly exported
 

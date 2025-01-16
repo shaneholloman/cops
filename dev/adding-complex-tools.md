@@ -1,4 +1,4 @@
-# Adding Complex Tools to Dotfiles
+# Adding Complex Tools to Cops
 
 ## TLDR: Quick Example (iTerm2)
 

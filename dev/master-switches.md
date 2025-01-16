@@ -1,8 +1,8 @@
-# Adding Master Switches to Dotfiles
+# Adding Master Switches to Cops
 
 ## Overview
 
-Add top-level master switches to control entire feature sets in the dotfiles configuration. This makes the system more approachable for new users while maintaining full power for advanced users.
+Add top-level master switches to control entire feature sets in the cops configuration. This makes the system more approachable for new users while maintaining full power for advanced users.
 
 ## Current Status
 
@@ -230,4 +230,4 @@ This dual confirmation approach ensures users:
 
 ## Conclusion
 
-This change makes the dotfiles system more approachable while maintaining all existing functionality. The two-step confirmation process ensures users fully understand and agree to the changes being made, building trust and improving usability.
+This change makes the cops system more approachable while maintaining all existing functionality. The two-step confirmation process ensures users fully understand and agree to the changes being made, building trust and improving usability.

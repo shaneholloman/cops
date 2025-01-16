@@ -1,4 +1,4 @@
-# Dotfiles Configuration
+# Cops Configuration
 
 # Master Switches
 enable_preferences: false # Disabled by default for safety
@@ -10,32 +10,32 @@ enable_snapshots: true # Create APFS snapshot before changes
 
 # User Information
 user:
-  name: 'Shane Holloman'
-  email: 'shaneholloman@gmail.com'
+  name: "Shane Holloman"
+  email: "shaneholloman@gmail.com"
 
 # Paths and Locations
 paths:
-  dotfiles: '$HOME/.dotfiles'
-  oh_my_posh_theme: '$HOME/Dropbox/shane/conf/warpdeck.omp.json'
+  cops: "$HOME/.cops"
+  oh_my_posh_theme: "$HOME/Dropbox/shane/conf/warpdeck.omp.json"
 
 # Git Configuration
 git:
-  editor: 'vim'
-  default_branch: 'main'
+  editor: "vim"
+  default_branch: "main"
   pull_rebase: true
   color_ui: true
 
 # Shell Configuration
 shell:
-  default: 'zsh'
+  default: "zsh"
   theme:
-    type: 'oh-my-posh'
-    path: '~/Dropbox/shane/conf/warpdeck.omp.json'
+    type: "oh-my-posh"
+    path: "~/Dropbox/shane/conf/warpdeck.omp.json"
   env_vars:
-    AWS_CONFIG_FILE: '$HOME/.aws/config'
-    AWS_SHARED_CREDENTIALS_FILE: '$HOME/.aws/credentials'
-    KUBECONFIG: '$HOME/.kube/config'
-    TERRAFORM_CONFIG: '$HOME/.terraform.d/config.tfrc'
+    AWS_CONFIG_FILE: "$HOME/.aws/config"
+    AWS_SHARED_CREDENTIALS_FILE: "$HOME/.aws/credentials"
+    KUBECONFIG: "$HOME/.kube/config"
+    TERRAFORM_CONFIG: "$HOME/.terraform.d/config.tfrc"
 
 # Tools to Install
 tools:
@@ -117,16 +117,16 @@ tools:
 
 # Aliases
 aliases:
-  d: 'docker'
-  dc: 'docker-compose'
-  g: 'git'
-  gcb: 'git checkout -b'
-  gco: 'git checkout'
-  gp: 'git pull'
-  gs: 'git status'
-  k: 'kubectl'
-  ll: 'ls -la'
-  tf: 'terraform'
+  d: "docker"
+  dc: "docker-compose"
+  g: "git"
+  gcb: "git checkout -b"
+  gco: "git checkout"
+  gp: "git pull"
+  gs: "git status"
+  k: "kubectl"
+  ll: "ls -la"
+  tf: "terraform"
 
 # Directory Structure
 directories:
@@ -142,7 +142,7 @@ directories:
 # User Preferences
 preferences:
   terminal:
-    font: 'Hack Nerd Font Mono 12'
+    font: "Hack Nerd Font Mono 12"
     key_repeat: 1
     initial_key_repeat: 10
     press_and_hold: false
@@ -150,55 +150,55 @@ preferences:
 # Vim Configuration
 vim:
   options:
-    - 'syntax on'
-    - 'set number'
-    - 'set ruler'
-    - 'set expandtab'
-    - 'set tabstop=2'
-    - 'set shiftwidth=2'
-    - 'set autoindent'
-    - 'set smartindent'
-    - 'set paste'
-    - 'set hlsearch'
-    - 'set incsearch'
-    - 'set cursorline'
+    - "syntax on"
+    - "set number"
+    - "set ruler"
+    - "set expandtab"
+    - "set tabstop=2"
+    - "set shiftwidth=2"
+    - "set autoindent"
+    - "set smartindent"
+    - "set paste"
+    - "set hlsearch"
+    - "set incsearch"
+    - "set cursorline"
   filetypes:
-    yaml: 'setlocal ts=2 sts=2 sw=2 expandtab'
-    terraform: 'setlocal ts=2 sts=2 sw=2 expandtab'
-    json: 'setlocal ts=2 sts=2 sw=2 expandtab'
+    yaml: "setlocal ts=2 sts=2 sw=2 expandtab"
+    terraform: "setlocal ts=2 sts=2 sw=2 expandtab"
+    json: "setlocal ts=2 sts=2 sw=2 expandtab"
 
 # File Associations Configuration
 file_associations:
   editor:
-    bundle_id: 'com.microsoft.VSCodeInsiders'
+    bundle_id: "com.microsoft.VSCodeInsiders"
   extensions:
-    - 'py' # Python
-    - 'js' # JavaScript
-    - 'ts' # TypeScript
-    - 'css' # CSS
-    - 'json' # JSON
-    - 'md' # Markdown
-    - 'xml' # XML
-    - 'yaml' # YAML
-    - 'yml' # YAML
-    - 'sh' # Shell scripts
+    - "py" # Python
+    - "js" # JavaScript
+    - "ts" # TypeScript
+    - "css" # CSS
+    - "json" # JSON
+    - "md" # Markdown
+    - "xml" # XML
+    - "yaml" # YAML
+    - "yml" # YAML
+    - "sh" # Shell scripts
 
 # Restore Configuration
 restore:
   paths:
-    mount_point: '/tmp/snap'
-    disk_device: '/dev/disk3s5'
-    user_home: '$HOME'
-    root: '/'
-    backup_dir_prefix: '.dotfiles_backup_'
+    mount_point: "/tmp/snap"
+    disk_device: "/dev/disk3s5"
+    user_home: "$HOME"
+    root: "/"
+    backup_dir_prefix: ".cops_backup_"
   files:
-    dotfiles:
-      - '.zshrc'
-      - '.bashrc'
-      - '.gitconfig'
+    cops:
+      - ".zshrc"
+      - ".bashrc"
+      - ".gitconfig"
     config_dirs:
-      - '.config'
-      - '.aws'
-      - '.terraform.d'
-      - '.kube'
-      - '.vscode-insiders'
+      - ".config"
+      - ".aws"
+      - ".terraform.d"
+      - ".kube"
+      - ".vscode-insiders"

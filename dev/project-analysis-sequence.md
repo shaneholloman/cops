@@ -1,4 +1,4 @@
-# Project Analysis Sequence for COPS Refactoring
+# Project Analysis Sequence for `Cops` Refactoring
 
 ## 1. Core Understanding
 
@@ -90,6 +90,8 @@ read dev/restore-operations.md     # Backup capabilities
 ## File System Migration
 
 ### Current to New Naming
+
+TODO: Done!
 
 ```bash
 # Core Files

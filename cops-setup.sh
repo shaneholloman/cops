@@ -36,9 +36,9 @@ CONFIG_FILE="config.yaml"
 readonly CONFIG_FILE
 export AUTO_AGREE
 
-DOTFILES_ROOT=$(yq eval '.paths.dotfiles' "$CONFIG_FILE" | envsubst)
-export DOTFILES_ROOT
-readonly DOTFILES_ROOT
+COPS_ROOT=$(yq eval '.paths.cops' "$CONFIG_FILE" | envsubst)
+export COPS_ROOT
+readonly COPS_ROOT
 
 # Source all library files from lib directory
 LIB_DIR="lib"

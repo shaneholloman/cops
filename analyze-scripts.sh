@@ -64,7 +64,7 @@ analyze_script() {
   fi
 
   # Check for hardcoded paths (excluding comments and allowed patterns)
-  local allowed_vars="\\\$HOME\|\\\$DOTFILES_ROOT\|\\\$LIB_DIR\|\\\${[A-Z_]\+}"
+  local allowed_vars="\\\$HOME\|\\\$COPS_ROOT\|\\\$LIB_DIR\|\\\${[A-Z_]\+}"
   local allowed_cmds="brew\|yq\|command -v"
   local allowed_paths="/dev/null"
   local var_expansions="\\\${[^}]\+}"
@@ -102,8 +102,8 @@ analyze_script() {
     ((issues++))
   fi
 
-  # Check for proper lib file sourcing (only in dotfiles-setup.sh)
-  if [[ "$script" == "./dotfiles-setup.sh" ]]; then
+  # Check for proper lib file sourcing (only in cops-setup.sh)
+  if [[ "$script" == "./cops-setup.sh" ]]; then
     local required_sources=(
       "output.sh"
       "config.sh"

@@ -61,7 +61,7 @@ tools:
    - Custom version verification
 
 3. **Integration**
-   - Fits existing dotfiles structure
+   - Fits existing cops structure
    - Uses current logging/output system
    - Follows established patterns
 
@@ -165,4 +165,4 @@ tools:
 
 ## Notes
 
-> This is a concept document for future development. The Ansible-inspired approach provides a clean way to manage manual binary installations while maintaining the simplicity and modularity of the dotfiles system.
+> This is a concept document for future development. The Ansible-inspired approach provides a clean way to manage manual binary installations while maintaining the simplicity and modularity of the cops system.

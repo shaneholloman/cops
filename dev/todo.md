@@ -4,13 +4,13 @@ Future, not implemented yet.
 
 - [x] keep a the single config file for all the functions
 - [x] break out functions to separate files from the main script
-- [ ] consider using gnu stow for dotfiles
+- [ ] consider using gnu stow for cops
 - [ ] add namespace support for k8s functions
 - [ ] add machine name function
 - [ ] add a method to import some custom profile functions/aliases
 - [ ] add ollama functions to pull a vision and an instruct model
 - [ ] add Claude desktop MCP function to build config based on the volta set path of node, npx etc
-- [ ] add a function to pull the latest version of the dotfiles
+- [ ] add a function to pull the latest version of the cops
 - [ ] add a function to set default browser - defaulted to firefox
 - [ ] add a function to set default editor - defaulted to vscode
 - [ ] add a function to set default terminal - defaulted to iterm2

@@ -1,4 +1,4 @@
-# Dotfiles Configuration
+# Cops Configuration
 
 # Future, not implemented yet.
 
@@ -46,9 +46,9 @@ security:
 
 # Paths and Locations
 paths:
-  dotfiles: '$HOME/.dotfiles'
+  cops: '$HOME/.cops'
   oh_my_posh_theme: '$HOME/Dropbox/shane/conf/warpdeck.omp.json'
-  backup_dir: '$HOME/.dotfiles_backup'
+  backup_dir: '$HOME/.cops_backup'
   local_bin: '$HOME/.local/bin'
 
 # Git Configuration
@@ -148,10 +148,10 @@ tools:
 # Application Configurations
 app_config:
   vscode:
-    extensions_file: '$HOME/.dotfiles/config/vscode/extensions.txt'
-    settings_file: '$HOME/.dotfiles/config/vscode/settings.json'
+    extensions_file: '$HOME/.cops/config/vscode/extensions.txt'
+    settings_file: '$HOME/.cops/config/vscode/settings.json'
   iterm2:
-    preferences_folder: '$HOME/.dotfiles/config/iterm2'
+    preferences_folder: '$HOME/.cops/config/iterm2'
   terminal:
     theme: 'Solarized Dark'
     font: 'Hack Nerd Font Mono'

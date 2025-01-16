@@ -71,15 +71,15 @@ backup_existing_files() {
 
 create_symlinks() {
   print_header "Creating symlinks"
-  ln -sf "$DOTFILES_ROOT/config/git/.gitconfig" "$HOME/.gitconfig"
-  ln -sf "$DOTFILES_ROOT/config/zsh/.zshrc" "$HOME/.zshrc"
-  ln -sf "$DOTFILES_ROOT/config/vim/.vimrc" "$HOME/.vimrc"
+  ln -sf "$COPS_ROOT/config/git/.gitconfig" "$HOME/.gitconfig"
+  ln -sf "$COPS_ROOT/config/zsh/.zshrc" "$HOME/.zshrc"
+  ln -sf "$COPS_ROOT/config/vim/.vimrc" "$HOME/.vimrc"
 }
 
 initialize_git_repo() {
   print_header "Initializing Git repository"
-  cd "$DOTFILES_ROOT" || exit 1
+  cd "$COPS_ROOT" || exit 1
   git init
   git add .
-  git commit -m "Initial dotfiles setup"
+  git commit -m "Initial cops setup"
 }

@@ -5,15 +5,15 @@
 set -e
 set -u
 
-check_dotfiles() {
-  print_header "Checking Existing Dotfiles"
+check_cops() {
+  print_header "Checking Existing Cops"
 
   for file in .zshrc .gitconfig .vimrc; do
     if [[ -f "$HOME/$file" ]]; then
       print_warning "Found existing $HOME/$file (will backup)"
-      if [[ -f "$DOTFILES_ROOT/config/${file#.}/$file" ]]; then
+      if [[ -f "$COPS_ROOT/config/${file#.}/$file" ]]; then
         echo "  Key differences:"
-        diff -u "$HOME/$file" "$DOTFILES_ROOT/config/${file#.}/$file" 2>/dev/null || true
+        diff -u "$HOME/$file" "$COPS_ROOT/config/${file#.}/$file" 2>/dev/null || true
       fi
     else
       print_success "Will create new $HOME/$file"
@@ -71,7 +71,7 @@ check_directories() {
   print_header "Checking Directory Structure"
 
   while IFS= read -r dir; do
-    local full_path="$DOTFILES_ROOT/$dir"
+    local full_path="$COPS_ROOT/$dir"
     if [[ -d "$full_path" ]]; then
       print_warning "$full_path exists (will merge)"
     else

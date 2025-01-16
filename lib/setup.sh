@@ -8,13 +8,13 @@ set -u
 setup_directories() {
   print_header "Setting up directories"
   while IFS= read -r dir; do
-    mkdir -p "$DOTFILES_ROOT/$dir"
+    mkdir -p "$COPS_ROOT/$dir"
   done < <(get_config_array '.directories[]')
 }
 
 setup_git_config() {
   print_header "Setting up Git configuration"
-  local git_config="$DOTFILES_ROOT/config/git/.gitconfig"
+  local git_config="$COPS_ROOT/config/git/.gitconfig"
 
   cat >"$git_config" <<EOF
 [user]
@@ -34,14 +34,14 @@ EOF
 
 setup_zsh_config() {
   print_header "Setting up Zsh configuration"
-  local zsh_config="$DOTFILES_ROOT/config/zsh/.zshrc"
+  local zsh_config="$COPS_ROOT/config/zsh/.zshrc"
   local theme_path
   theme_path=$(get_config '.shell.theme.path')
 
   # Start with path extensions
   cat >"$zsh_config" <<EOF
 # Path extensions
-export PATH="$DOTFILES_ROOT/bin:$PATH"
+export PATH="$COPS_ROOT/bin:$PATH"
 
 # Oh My Posh configuration
 eval "\$(oh-my-posh init zsh --config $theme_path)"
@@ -71,7 +71,7 @@ EOF
 
 setup_vim_config() {
   print_header "Setting up Vim configuration"
-  local vim_config="$DOTFILES_ROOT/config/vim/.vimrc"
+  local vim_config="$COPS_ROOT/config/vim/.vimrc"
 
   # Add vim options
   while IFS= read -r option; do

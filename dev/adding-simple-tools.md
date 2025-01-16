@@ -1,4 +1,4 @@
-# Adding New Tools to Dotfiles
+# Adding New Tools to Cops
 
 ## TLDR: Quick Example
 

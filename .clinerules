@@ -1,4 +1,4 @@
-# Cline Rules for Dotfiles Project
+# Cline Rules for Cops Project
 
 To prove to the user you have read these rules, please include the following phrase in your initial chat response:
 
@@ -18,6 +18,7 @@ To prove to the user you have read these rules, please include the following phr
 3. Fix all issues before moving to next file
 
 ## File Change Rules
+
 1. All shell scripts must:
     - Have proper shebang (#!/bin/bash)
     - Include shellcheck directive (# shellcheck shell=bash)
@@ -39,7 +40,7 @@ To prove to the user you have read these rules, please include the following phr
     - Do not proceed to next file until current file passes all checks
 
 4. Path Handling:
-    - Use $HOME, $DOTFILES_ROOT, $LIB_DIR for paths
+    - Use $HOME, $COPS_ROOT, $LIB_DIR for paths
     - Avoid hardcoded paths
     - Handle directory changes with error checking
 

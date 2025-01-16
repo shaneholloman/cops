@@ -10,14 +10,14 @@ set -u
 source "lib/config.sh"
 
 # Path variables with environment overrides
-MOUNT_POINT=${DOTFILES_MOUNT_POINT:-$(get_config ".restore.paths.mount_point")}
-DISK_DEVICE=${DOTFILES_DISK_DEVICE:-$(get_config ".restore.paths.disk_device")}
-USER_HOME=${DOTFILES_USER_HOME:-$(get_config ".restore.paths.user_home" | envsubst)}
-ROOT_PATH=${DOTFILES_ROOT_PATH:-$(get_config ".restore.paths.root")}
-BACKUP_PREFIX=${DOTFILES_BACKUP_PREFIX:-$(get_config ".restore.paths.backup_dir_prefix")}
+MOUNT_POINT=${COPS_MOUNT_POINT:-$(get_config ".restore.paths.mount_point")}
+DISK_DEVICE=${COPS_DISK_DEVICE:-$(get_config ".restore.paths.disk_device")}
+USER_HOME=${COPS_USER_HOME:-$(get_config ".restore.paths.user_home" | envsubst)}
+ROOT_PATH=${COPS_ROOT_PATH:-$(get_config ".restore.paths.root")}
+BACKUP_PREFIX=${COPS_BACKUP_PREFIX:-$(get_config ".restore.paths.backup_dir_prefix")}
 
 # Get config files and directories from config
-readarray -t DOTFILES < <(get_config_array ".restore.files.dotfiles[]")
+readarray -t COPS < <(get_config_array ".restore.files.cops[]")
 readarray -t CONFIG_DIRS < <(get_config_array ".restore.files.config_dirs[]")
 
 # Find sudo path
@@ -39,7 +39,7 @@ usage() {
   cat <<EOF
 Usage: $(basename "$0") <snapshot_date>
 
-Restore dotfiles configuration from a Time Machine local snapshot.
+Restore cops configuration from a Time Machine local snapshot.
 The snapshot date should be in format: YYYY-MM-DD-HHMMSS
 
 Example: $(basename "$0") 2025-01-15-021331
@@ -86,8 +86,8 @@ restore_files() {
   mkdir -p "$backup_dir"
 
   # Backup current files
-  log_info "Backing up current dotfiles..."
-  for file in "${DOTFILES[@]}"; do
+  log_info "Backing up current cops..."
+  for file in "${COPS[@]}"; do
     [[ -f "${USER_HOME}/${file}" ]] && cp "${USER_HOME}/${file}" "$backup_dir/"
   done
 
@@ -99,7 +99,7 @@ restore_files() {
   log_info "Restoring files from snapshot..."
 
   # Core config files
-  for file in "${DOTFILES[@]}"; do
+  for file in "${COPS[@]}"; do
     "$SUDO" cp "${MOUNT_POINT}${USER_HOME}/${file}" "${USER_HOME}/" 2>/dev/null || log_warn "No ${file} found in snapshot"
   done
 
@@ -116,7 +116,7 @@ restore_files() {
     "$SUDO" chown -R "$(whoami)" "${USER_HOME}/${dir}" 2>/dev/null || true
   done
 
-  for file in "${DOTFILES[@]}"; do
+  for file in "${COPS[@]}"; do
     "$SUDO" chown "$(whoami)" "${USER_HOME}/${file}" 2>/dev/null || true
   done
 

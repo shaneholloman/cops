@@ -4,7 +4,7 @@
 
 This guide covers two restoration scripts:
 
-1. `dotfiles-restore.sh` - Targeted restoration of dotfiles and configuration - NOT USING currently!
+1. `cops-restore.sh` - Targeted restoration of cops and configuration - NOT USING currently!
 2. `home-restore.sh` - Broader restoration of home directory contents - NOT USING currently!
 
 Both scripts work with macOS Time Machine local snapshots, providing different levels of granularity for system restoration.
@@ -29,23 +29,23 @@ tmutil listlocalsnapshots /
 
 Note: Snapshots are named in format: `com.apple.TimeMachine.YYYY-MM-DD-HHMMSS.local`
 
-## Dotfiles Restore Script
+## Cops Restore Script
 
-### Dotfiles Restore Script Purpose
+### Cops Restore Script Purpose
 
-Targeted restoration of configuration files and directories commonly modified by dotfiles installation.
+Targeted restoration of configuration files and directories commonly modified by cops installation.
 
-### Dotfiles Restore Script Usage
+### Cops Restore Script Usage
 
 ```bash
 # List available snapshots
-./dotfiles-restore.sh --list
+./cops-restore.sh --list
 
 # Show help
-./dotfiles-restore.sh --help
+./cops-restore.sh --help
 
 # Restore from specific snapshot
-./dotfiles-restore.sh 2025-01-15-021331
+./cops-restore.sh 2025-01-15-021331
 ```
 
 ### What Gets Restored
@@ -61,9 +61,9 @@ The script restores:
   - Kubernetes (~/.kube)
   - VSCode Insiders (~/.vscode-insiders)
 
-### Dotfiles Restore Script Backup Process
+### Cops Restore Script Backup Process
 
-- Creates timestamped backup directory: `~/.dotfiles_backup_YYYYMMDD_HHMMSS`
+- Creates timestamped backup directory: `~/.cops_backup_YYYYMMDD_HHMMSS`
 - Existing files are backed up before restoration
 - Original permissions are preserved
 
