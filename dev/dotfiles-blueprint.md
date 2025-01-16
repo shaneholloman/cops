@@ -128,6 +128,6 @@ Each module must include:
 ### 2024-01-15 Initial Planning
 
 - Identified core principles and module requirements
-- Created enhanced config.yaml with new master switches
+- Created proposed-config.yaml with new master switches
 - Established two-tiered approach to improvements
 - Set initial implementation priorities
