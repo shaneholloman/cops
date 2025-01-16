@@ -1,5 +1,32 @@
 # TODO
 
+Validations needed for:
+
+- [ ] ✗ bash-completion2 installation failed
+- [ ] ✗ findutils installation faile
+- [ ] ✗ gmp installation failed
+- [ ] ✗ gnu-sed installation failed
+- [ ] ✗ gnupg installation failed
+- [ ] ✗ imagemagick installation failed
+- [ ] ✗ moreutils installation failed
+- [ ] ✗ openssh installation failed
+- [ ] ✗ p7zip installation failed
+
+In here `lib/config.sh`:
+
+```sh
+# Get the actual command name for a tool
+get_command_name() {
+  local tool="$1"
+  case "$tool" in
+  "awscli") echo "aws" ;;
+  "kubernetes-cli") echo "kubectl" ;;
+  "rust") echo "rustc" ;;
+  *) echo "$tool" ;;
+  esac
+}
+```
+
 Future, not implemented yet.
 
 - [x] keep a the single config file for all the functions
