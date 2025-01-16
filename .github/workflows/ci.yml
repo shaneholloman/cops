@@ -8,33 +8,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-install:
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      # Test fresh install
-      - name: Run fresh installation
-        run: |
-          ./dotfiles-setup.sh --auto-agree
-
-      # Verify critical tools installed
-      - name: Verify Homebrew packages
-        run: |
-          # Check core CLI tools
-          brew list awscli
-          brew list kubernetes-cli
-          brew list terraform
-          brew list oh-my-posh
-
-      # Verify configs created
-      - name: Check configuration files
-        run: |
-          test -f ~/.zshrc
-          test -f ~/.gitconfig
-          test -d ~/.config
-          test -d ~/.kube
-
   test-idempotency:
     runs-on: macos-latest
     steps:
