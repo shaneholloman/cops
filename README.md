@@ -4,6 +4,13 @@
 > Works, but not complete yet!
 >
 > This dotfiles setup implements opinionated configuration choices and represents an initial foundation. For a complete overview of planned enhancements and additional features, please refer to the [blueprint](./dev/dotfiles-blueprint.md).
+>
+> The repository offers multiple safe ways to test and deploy:
+>
+> - Develop from any directory while targeting ~/.dotfiles
+> - Run risk free automated tests in clean CI environments
+> - Use Time Machine snapshots for easy rollbacks
+> - Test changes without affecting your active configuration
 
 A modular dotfiles management system for macOS that automates the setup of development environments through a centralized YAML configuration. The system emphasizes safety, reversibility, and maintainability through master switches and comprehensive backup capabilities.
 
@@ -96,7 +103,30 @@ The setup supports two primary workflows:
     ./dotfiles-setup.sh
     ```
 
-Both approaches work identically because:
+3. **CI Testing Mode**
+
+    The repository includes GitHub Actions workflows that test the setup on clean macOS environments:
+
+    ```yaml
+    jobs:
+      test-with-idempotency:
+        runs-on: macos-latest
+        steps:
+          - uses: actions/checkout@v4
+          - name: Test repeated installations
+            run: |
+              ./dotfiles-setup.sh --auto-agree  # Skip confirmation prompts in CI
+              ./dotfiles-setup.sh --auto-agree  # Test idempotency
+              ./dotfiles-setup.sh --auto-agree  # Verify consistent results
+    ```
+
+    This provides several benefits:
+    - Safe testing in isolated environments
+    - Verification of idempotency through repeated runs
+    - Automatic testing on clean macOS systems
+    - No risk to local development environment
+
+All approaches work identically because:
 
 - The `config.yaml` defines the target location (`$HOME/.dotfiles`) independently of the script location
 - All paths are resolved relative to the configured `DOTFILES_ROOT`
