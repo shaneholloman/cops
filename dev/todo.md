@@ -1,5 +1,7 @@
 # TODO
 
+Future, not implemented yet.
+
 - [x] keep a the single config file for all the functions
 - [x] break out functions to separate files from the main script
 - [ ] add namespace support for k8s functions

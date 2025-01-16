@@ -1,5 +1,7 @@
 # Manual Installation Module Concept
 
+Future, not implemented yet.
+
 ## Overview
 
 An Ansible-inspired approach for managing manual binary installations that can't be handled through package managers like Homebrew.

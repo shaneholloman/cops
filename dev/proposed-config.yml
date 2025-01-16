@@ -1,5 +1,7 @@
 # Dotfiles Configuration
 
+# Future, not implemented yet.
+
 # Master Switches
 enable_preferences: false      # System preferences and defaults
 enable_tools: true             # CLI and GUI tools installation

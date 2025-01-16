@@ -1,5 +1,7 @@
 # Dotfiles-macOS Project Blueprint
 
+Future, not implemented yet.
+
 Back to [README.md](../README.md)
 
 > Living document for planning improvements to dotfiles-macos project
