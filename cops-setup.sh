@@ -61,6 +61,9 @@ source "${LIB_DIR}/install.sh"
 # shellcheck source=lib/preferences.sh
 # shellcheck disable=SC1091
 source "${LIB_DIR}/preferences.sh"
+# shellcheck source=lib/brewbundle.sh
+# shellcheck disable=SC1091
+source "${LIB_DIR}/brewbundle.sh"
 # shellcheck source=lib/main.sh
 # shellcheck disable=SC1091
 source "${LIB_DIR}/main.sh"

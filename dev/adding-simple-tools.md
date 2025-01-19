@@ -113,17 +113,30 @@ That's it! The script will automatically:
 
 ### Common Pitfalls
 
-1. Command Name Mismatch
+1. Missing Source in cops-setup.sh
+   - When adding new lib/*.sh modules
+   - Must add source line in cops-setup.sh
+   - Follow existing pattern with shellcheck directives:
+
+     ```bash
+     # shellcheck source=lib/your_module.sh
+     # shellcheck disable=SC1091
+     source "${LIB_DIR}/your_module.sh"
+     ```
+
+   - Run analyze-scripts.sh to verify source is properly added
+
+2. Command Name Mismatch
    - Always verify actual command name
    - Test with command -v before adding
    - Update mapping if needed
 
-2. Version Detection
+3. Version Detection
    - Some tools use non-standard version flags
    - Test --version and -v
    - Handle missing version info gracefully
 
-3. Installation Validation
+4. Installation Validation
    - Check both package and command existence
    - Verify command actually works
    - Test with realistic usage scenarios

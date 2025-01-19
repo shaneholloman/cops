@@ -5,10 +5,13 @@
 set -e
 set -u
 
-# Source our output functions
+# Source our dependencies
 # shellcheck source=lib/output.sh
+# shellcheck source=lib/brewbundle.sh
 # shellcheck disable=SC1091
 source "lib/output.sh"
+# shellcheck disable=SC1091
+source "lib/brewbundle.sh"
 
 # Global arrays to store tools that need installation
 declare -a CLI_TOOLS_TO_INSTALL
@@ -59,6 +62,7 @@ show_master_switches() {
   local vim_status
   local file_assoc_status
   local snapshots_status
+  local brewbundle_status
 
   preferences_status=$(is_feature_enabled "preferences")
   tools_status=$(is_feature_enabled "tools")
@@ -66,6 +70,7 @@ show_master_switches() {
   vim_status=$(is_feature_enabled "vim")
   file_assoc_status=$(is_feature_enabled "file_assoc")
   snapshots_status=$(is_feature_enabled "snapshots")
+  brewbundle_status=$(is_feature_enabled "brewbundle")
 
   printf "APFS Snapshots: %s\n" "$(print_status "$snapshots_status")"
   printf "  - Creates a system snapshot before making changes\n"
@@ -84,6 +89,10 @@ show_master_switches() {
   printf "\n"
   printf "File Associations: %s\n" "$(print_status "$file_assoc_status")"
   printf "  - Controls default application associations for file types\n"
+  printf "\n"
+  printf "Brewfile Processing: %s\n" "$(print_status "$brewbundle_status")"
+  printf "  - Process Brewfiles for bulk package installation\n"
+  printf "  - Includes Homebrew formulas, casks, and VSCode extensions\n"
   printf "\n"
 
   if [[ "${AUTO_AGREE:-false}" != "true" ]]; then
@@ -144,6 +153,15 @@ show_summary() {
   printf "   - Set up iTerm2 as default terminal\n"
   printf "   - Configure Finder integration\n"
   printf "\n"
+
+  # Show Brewfile processing if enabled
+  if [[ "$(is_feature_enabled "brewbundle")" = "true" ]]; then
+    printf "8. Brewfile Processing:\n"
+    printf "   - Process Brewfiles for package installation\n"
+    printf "   - Install Homebrew formulas and casks\n"
+    printf "   - Configure VSCode extensions\n"
+    printf "\n"
+  fi
   if [[ "${AUTO_AGREE:-false}" != "true" ]]; then
     read -r -p "Would you like to proceed with these changes? [y/N] " -n 1
     echo
@@ -164,6 +182,11 @@ main() {
   check_shell
   check_directories
   check_file_associations
+
+  # Check Brewfile if enabled
+  if [[ "$(is_feature_enabled "brewbundle")" = "true" ]]; then
+    check_brewbundle
+  fi
 
   # Show and confirm master switches first
   show_master_switches
@@ -189,6 +212,11 @@ main() {
   setup_directories
   setup_git_config
   setup_zsh_config
+
+  # Process Brewfile if enabled
+  if [[ "$(is_feature_enabled "brewbundle")" = "true" ]]; then
+    process_brewbundle
+  fi
 
   # Only run feature setup if enabled
   if [[ "$(is_feature_enabled "vim")" = "true" ]]; then

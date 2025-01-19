@@ -7,6 +7,18 @@ enable_aliases: true # Shell aliases are safe
 enable_vim: true # Editor config is safe
 enable_file_assoc: true # File associations are safe
 enable_snapshots: true # Create APFS snapshot before changes
+enable_brewbundle: true # Process Brewfiles for package installation
+
+# Brewfile Configuration
+brewbundle:
+  install_types:
+    formulas: true # Install Homebrew formulas
+    casks: true # Install Cask applications
+    vscode: false # Install VSCode extensions
+  paths:
+    - "$COPS_ROOT/Brewfile" # Primary Brewfile location
+    - "$HOME/.Brewfile" # User's personal Brewfile
+    - "$HOME/Brewfile" # Alternative location
 
 # User Information
 user:
@@ -46,6 +58,7 @@ tools:
     - bash-completion2
     - cmake
     - findutils
+    - ffmpeg
     - gh
     - gmp
     - gnu-sed

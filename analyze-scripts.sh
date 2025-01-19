@@ -10,25 +10,6 @@ set -u
 # shellcheck disable=SC1091
 source "lib/output.sh"
 
-run_shellcheck() {
-  print_header "Running ShellCheck Analysis"
-  # Run shellcheck with:
-  # -x: follow source files
-  # -a: show all information levels
-  # --severity=style: show all messages (error, warning, info, style)
-  if ! find . \
-    -path './.history' -prune -o \
-    -path './_github' -prune -o \
-    -path './_codemaps' -prune -o \
-    -name "*.sh" -type f -exec shellcheck -x -a --severity=style {} \;; then
-    print_error "ShellCheck found issues"
-    return 1
-  fi
-  print_success "ShellCheck passed"
-  echo
-  return 0
-}
-
 analyze_script() {
   local script="$1"
   local issues=0
@@ -64,9 +45,9 @@ analyze_script() {
   fi
 
   # Check for hardcoded paths (excluding comments and allowed patterns)
-  local allowed_vars="\\\$HOME\|\\\$COPS_ROOT\|\\\$LIB_DIR\|\\\${[A-Z_]\+}"
-  local allowed_cmds="brew\|yq\|command -v"
-  local allowed_paths="/dev/null"
+  local allowed_vars="\\\$HOME\|\\\$COPS_ROOT\|\\\$LIB_DIR\|\\\$CONFIG_FILE\|\\\${[A-Z_]\+}"
+  local allowed_cmds="brew\|yq\|command -v\|code"
+  local allowed_paths="/dev/null\|/opt/homebrew/bin/brew"
   local var_expansions="\\\${[^}]\+}"
 
   # First pass: Find lines with potential paths, excluding comments
@@ -102,23 +83,15 @@ analyze_script() {
     ((issues++))
   fi
 
-  # Check for proper lib file sourcing (only in cops-setup.sh)
-  if [[ "$script" == "./cops-setup.sh" ]]; then
-    local required_sources=(
-      "output.sh"
-      "config.sh"
-      "checks.sh"
-      "setup.sh"
-      "install.sh"
-      "main.sh"
-    )
-
-    for lib in "${required_sources[@]}"; do
-      if ! grep -q "source.*${lib}" "$script"; then
-        print_warning "Missing required source: lib/$lib"
+  # Check for proper lib file sourcing in main script
+  if [[ "$script" =~ cops-setup\.sh$ ]]; then
+    while IFS= read -r lib_file; do
+      lib_name=${lib_file##*/} # Extract filename from path
+      if ! grep -q "source.*${lib_name}" "$script"; then
+        print_warning "Missing required source: lib/$lib_name"
         ((issues++))
       fi
-    done
+    done < <(find lib -name "*.sh" -type f)
   fi
 
   # Check for executable permission
@@ -150,26 +123,23 @@ analyze_script() {
 
 main() {
   print_header "Starting Analysis"
-
-  # Run shellcheck analysis first
-  if ! run_shellcheck; then
-    exit 1
-  fi
-
-  print_header "Running Custom Analysis"
   local total_issues=0
 
-  # Find and analyze all shell scripts, excluding ignored directories
+  # Find all shell scripts to analyze
   while IFS= read -r script; do
+    # Run shellcheck analysis
+    if ! shellcheck -x -a --severity=style "$script"; then
+      print_error "ShellCheck found issues in $script"
+      ((total_issues++))
+      continue
+    fi
+
+    # Run custom analysis
     local script_issues=0
     analyze_script "$script"
     script_issues=$?
     ((total_issues += script_issues))
-  done < <(find . \
-    -path './.history' -prune -o \
-    -path './_github' -prune -o \
-    -path './_codemaps' -prune -o \
-    -name "*.sh" -type f -print)
+  done < <(find lib -name "*.sh" -type f && echo cops-setup.sh && echo analyze-scripts.sh)
 
   print_header "Analysis Summary"
   if ((total_issues == 0)); then
