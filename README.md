@@ -1,6 +1,7 @@
 # Cops
 
->For macOS setups ...
+> [!CAUTION]
+> Current commit `feat: added Brewfile incorporation warning` should not be used. Check back in a few hours!
 
 - [core-concepts](./dev/core-concepts.md)
 - [project analysis](./dev/project-analysis-sequence.md)
