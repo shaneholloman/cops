@@ -1,5 +1,7 @@
 # TODO
 
+- [ ]  add LLM setup: see: [llm](./../.ideas/llm-setup.txt)
+
 - [ ]  fix PATH
 
   ```sh
