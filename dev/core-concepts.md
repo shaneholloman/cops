@@ -20,17 +20,13 @@ $ debug compatibility      # Fix version issues
 $ git clone && ./setup.sh  # Done.
 ```
 
-COPS eliminates all overhead. No installation steps. No dependencies. No learning curve. Just clone and run. It brings enterprise-grade configuration management to your system with zero complexity - because powerful tools shouldn't require powerful servers.
-
 ### Enterprise DNA with Zero Overhead
 
-While COPS inherits battle-tested principles from enterprise tools, it eliminates all complexity in deployment and usage. No frameworks, no dependencies, no overhead - just:
+COPS eliminates all complexity in deployment and usage. No frameworks, no dependencies, no overhead - just:
 
 ```bash
-git clone && ./setup.sh  # That's it. Really.
+git clone && ./cops-setup.sh  # If you satisfied with the defaults,that's it.
 ```
-
-It brings enterprise-grade principles to your system while maintaining radical simplicity:
 
 - **Ansible-Inspired Configuration**:
   - YAML as the universal language
@@ -42,22 +38,20 @@ It brings enterprise-grade principles to your system while maintaining radical s
 - **Terraform-Style State Management**:
   - Desired state declaration
   - Systematic change application
-  - State verification and drift detection
+  - State verification and drift detection (PLanned)
   - Resource dependency handling
   - But: Works instantly on any macOS system, no setup required
 
 - **Modern DevOps Principles**:
   - Infrastructure as Code (IaC)
   - Version-controlled configurations
-  - Automated deployment protocols
+  - Automated deployment
   - Built-in safety mechanisms
-  - But: Clone, configure, deploy - nothing else needed
+  - Clone, configure, deploy - nothing else needed
 
 ### The COPS Approach
 
-- **Configuration Control**: Like law enforcement maintains public order, COPS maintains system order
-- **Operation Safety**: Every change goes through strict validation protocols
-- **Protection First**: Master switches act as security checkpoints
+- **Configuration Control**: COPS maintains system order
 - **Systematic Management**: Organized, methodical approach to environment setup
 
 ### Core Principles
@@ -98,6 +92,7 @@ enable_aliases: true    # Shell aliases are safe
 enable_vim: true       # Editor config is safe
 enable_file_assoc: true # File associations are safe
 enable_snapshots: true  # Create APFS snapshot before changes
+enable_brewbundle: true # Install tools via Brewfile
 
 # Tools Configuration
 tools:
@@ -155,12 +150,13 @@ directories:
 
 ```sh
 lib/
-  ├── main.sh      # Core orchestration
-  ├── config.sh    # Configuration handling
-  ├── checks.sh    # Validation functions
-  ├── install.sh   # Tool installation
-  ├── setup.sh     # Environment setup
-  └── output.sh    # Logging utilities
+  ├── main.sh       # Core orchestration
+  ├── config.sh     # Configuration handling
+  ├── checks.sh     # Validation functions
+  ├── install.sh    # Tool installation
+  ├── brewbundle.sh # Homebrew bundle support
+  ├── setup.sh      # Environment setup
+  └── output.sh     # Logging utilities
 ```
 
 #### Shell Script Standards
@@ -173,6 +169,8 @@ lib/
 - Comprehensive error reporting
 
 #### Directory Organization
+
+Examples:
 
 ```sh
 .
@@ -188,14 +186,17 @@ lib/
 
 ### 1. Master Switches
 
+Some items have sub-switches, like brew.
+
 ```yaml
-# Master Switches with Safe Defaults
-enable_preferences: false # System changes need explicit opt-in
-enable_tools: true      # Core functionality enabled
-enable_aliases: true    # Non-destructive features enabled
-enable_vim: true       # Editor config is safe
-enable_file_assoc: true # File associations enabled
-enable_snapshots: true  # Automatic backups enabled
+# Master Switches
+enable_preferences: false # Disabled by default for safety
+enable_tools: true # Most users want tools
+enable_aliases: true # Shell aliases are safe
+enable_vim: true # Editor config is safe
+enable_file_assoc: true # File associations are safe
+enable_snapshots: true # Create APFS snapshot before changes
+enable_brewbundle: true # Process Brewfiles for package installation
 ```
 
 - Granular control over changes
@@ -264,7 +265,7 @@ restore:
 - Dependency management
 - Installation validation
 
-## Workflow
+## Operating Procedures
 
 1. **Configuration**
    - Edit config.yaml
@@ -316,31 +317,6 @@ restore:
    - Verify access controls
    - Test environment security
 
-## Benefits Over Other Approaches
-
-### Traditional Configuration Methods
-
-- Manual file management
-- Fragmented configuration
-- Limited safety measures
-- Basic automation
-
-### Enterprise Configuration Tools (e.g., Ansible)
-
-- Complex infrastructure requirements
-- External dependencies
-- Steep learning curve
-- Excessive for personal use
-
-### The COPS Way
-
-- Structured enforcement of configurations
-- Independent operation (no external dependencies)
-- Built-in protection mechanisms
-- Modern, systematic approach
-- Single source of truth (the configuration manifest)
-- Native implementation for maximum control
-
 ## Use Cases
 
 1. **Personal Development Environment**
@@ -361,26 +337,6 @@ restore:
    - Tool standardization
    - Preference enforcement
 
-## Future Directions
-
-1. **Enhanced Templating**
-   - More complex substitutions
-   - Conditional configurations
-   - Environment awareness
-   - Platform specifics
-
-2. **Expanded Tool Integration**
-   - Additional package managers
-   - Cloud tool configuration
-   - Development environment setup
-   - Container integration
-
-3. **Advanced Features**
-   - Configuration profiles
-   - Remote synchronization
-   - Change tracking
-   - Impact analysis
-
 ## Getting Started
 
 1. Clone the repository
@@ -389,10 +345,10 @@ restore:
 4. Run setup script
 
 ```bash
-git clone https://github.com/user/cops.git ~/.config/cops
-cd ~/.config/cops
-vim config.yaml  # Review configuration manifest
-./setup.sh      # Initiate system protection protocols
+git clone https://github.com/user/cops.git ~/.cops
+cd ~/.cops
+vim config.yaml      # Review configuration manifest
+./cops-setup.sh      # Run setup script
 ```
 
 ## Best Practices
@@ -404,7 +360,7 @@ vim config.yaml  # Review configuration manifest
    - Validate before applying
 
 2. **Development Workflow**
-   - Test changes locally
+   - Test changes via GitHub Actions
    - Version control configs
    - Review generated files
    - Maintain backups

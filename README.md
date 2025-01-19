@@ -149,8 +149,8 @@ This separation allows you to:
 ## Documentation
 
 - [Blueprint](./dev/project-blueprint.md) - Comprehensive future plans
-- [Manual Installations](./dev/manual-installations.md) - Binary tool management (planned)
-- [Restore Operations](./dev/restore-operations.md) - Backup and restore capabilities
+- [Manual Installations](./dev/archive/manual-installations.md) - Binary tool management (planned)
+- [Restore Operations](./dev/archive/restore-operations.md) - Backup and restore capabilities
 - [Adding Tools](./dev/adding-simple-tools.md) - Guide for tool integration
 - [Master Switches](./dev/master-switches.md) - Configuration control
 - [Shell Checking](./dev/shellchecking.md) - Code quality standards

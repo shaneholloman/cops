@@ -158,5 +158,6 @@ Periodically:
   - Example:
 
     ```bash
+    # shellcheck disable=SC1091
     # shellcheck source=lib/output.sh
     source "${LIB_DIR}/output.sh"
