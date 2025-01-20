@@ -2,6 +2,8 @@
 
 FIRST add function to copy the ENTIRE repo to `~/.cops` if ran from a different location.
 
+TLDR: Devs will have 2 copies of the repo. End-users will have 1 copy in `~/.cops`
+
 ## Overview
 
 Need to implement location-aware completion messages in cops-setup.sh based on where it was run from.
