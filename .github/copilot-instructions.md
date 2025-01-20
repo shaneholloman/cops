@@ -1,19 +1,20 @@
-# Copilot Rules for Cops Project
+# Cline Rules for Cops Project
 
 To prove to the user you have read these rules, please include the following phrase in your initial chat response:
 
-"Hi Shane I have read your Copilot Rules and I am ready to proceed."
+"Hi Shane I have read your Cline rules and I am ready to proceed."
 
 ## General Rules
 
 - These rules supersede any other rules in the prompt chain!
-- ALWAYS follow: `dev/shellchecking.md`
+- ALWAYS follow: `docs/dev/shellchecking.md`
 - ALWAYS ask the user is they are ready to proceed before making any changes to their code or system.
 - THIS USER INSISTS to see your plan before you commit to any changes when adding need features or modules.
+- Development docs are here: `docs`
 
 ## Pre-Change Requirements
 
-1. Read dev/shellchecking.md before making any code changes
+1. Read `docs/dev/shellchecking.md` before making any code changes
 2. Run analyze-scripts.sh on each file after modification
 3. Fix all issues before moving to next file
 
