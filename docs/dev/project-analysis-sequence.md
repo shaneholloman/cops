@@ -5,9 +5,9 @@
 First, understand the project's vision and direction:
 
 ```bash
-read dev/core-concepts.md     # New vision and approach
-read dev/shellchecking.md     # Code quality standards
-read dev/project-blueprint.md # Future plans, also see README.md which still need to reflect the new vision of cops instead of dotfiles
+read docs/core-concepts.md     # New vision and approach
+read docs/dev/shellchecking.md     # Code quality standards
+read docs/project-blueprint.md # Future plans, also see README.md which still need to reflect the new vision of cops instead of dotfiles
 ```
 
 ## 2. Current Implementation
@@ -41,12 +41,16 @@ read config/git/.gitconfig   # Git settings
 Understand development guidelines:
 
 ```bash
-read dev/adding-simple-tools.md    # Tool integration
-read dev/adding-complex-tools.md   # Advanced features
-read dev/master-switches.md        # Control system
-read dev/manual-installations.md   # Binary management
-read dev/restore-operations.md     # Backup capabilities
+read docs/dev/adding-simple-tools.md    # Tool integration
+read docs/dev/adding-complex-tools.md   # Advanced features
+read docs/dev/master-switches.md        # Control system
+read docs/dev/manual-installations.md   # Binary management
+read docs/dev/restore-operations.md     # Backup capabilities
 ```
+
+## 5. Past Work
+
+Located here: `docs/archive/`
 
 ## Key Points
 
