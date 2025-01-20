@@ -1,5 +1,7 @@
 # Console Messages Implementation Brief
 
+FIRST add function to copy the ENTIRE repo to `~/.cops` if ran from a different location.
+
 ## Overview
 
 Need to implement location-aware completion messages in cops-setup.sh based on where it was run from.

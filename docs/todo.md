@@ -45,6 +45,6 @@ Future, not implemented yet.
 - [ ] add a function to install some sane vscode snippets
 - [ ] add a function to install some vscode themes
 - [ ] add a function to install some vscode icons
-- [ ] add function to add some python tools globally via `uv tool install`
-- [ ] add function to add some node tools globally via `volta install`
+- [ ] add function to add some python tools globally via `uv tool install` module must run only after brew installs
+- [ ] add function to add some node tools globally via `volta install` module must run only after brew installs
 - [ ] add function to add relevant env vars for aws, etc etc
