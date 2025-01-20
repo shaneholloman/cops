@@ -8,7 +8,13 @@ set -u
 setup_directories() {
   print_header "Setting up directories"
   while IFS= read -r dir; do
-    mkdir -p "$COPS_ROOT/$dir"
+    # Special case for .local/bin which should be in $HOME
+    if [[ "$dir" == ".local/bin" ]]; then
+      mkdir -p "$HOME/$dir"
+      chmod 755 "$HOME/$dir"
+    else
+      mkdir -p "$COPS_ROOT/$dir"
+    fi
   done < <(get_config_array '.directories[]')
 }
 
@@ -41,7 +47,7 @@ setup_zsh_config() {
   # Start with path extensions
   cat >"$zsh_config" <<EOF
 # Path extensions
-export PATH="$COPS_ROOT/bin:$PATH"
+export PATH="$HOME/.local/bin:$COPS_ROOT/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 # Oh My Posh configuration
 eval "\$(oh-my-posh init zsh --config $theme_path)"

@@ -151,6 +151,7 @@ directories:
   - config/terraform
   - config/k8s
   - scripts
+  - .local/bin # Required for uv tool installations
 
 # User Preferences
 preferences:
