@@ -83,3 +83,36 @@ To prove to the user you have read these rules, please include the following phr
     - Verify changes work as intended
     - Run final analyze-scripts.sh check
     - Update documentation if needed
+
+## Development Briefs
+
+When the user signals a development chat session is nearing its end:
+
+User will say something like
+
+> "I think we're done for today. Can you create a development brief for this session?"
+
+1. Create a development brief that includes:
+   - Current task status and progress
+   - Key decisions made
+   - Implementation patterns chosen
+   - Next steps identified
+   - Reference documents created
+
+2. Document the brief in:
+   - A new markdown file in docs/dev/briefs
+   - With clear title and date
+   - Following this projects' documentation standards
+
+3. Link relevant documents:
+   - Reference any new documentation
+   - Link to related implementation files
+   - Connect to existing patterns/examples
+
+4. Ensure continuity by:
+   - Documenting current context
+   - Capturing design decisions
+   - Preserving implementation patterns
+   - Setting clear next steps
+
+This ensures the next session starts with complete context, regardless of API memory limitations.
