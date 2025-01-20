@@ -87,6 +87,7 @@ tools:
     - tree
     - uv
     - volta
+    - yt-dlp
     - yq
 
   cask:
