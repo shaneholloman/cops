@@ -1,4 +1,6 @@
-# Cops (Config OPeratorS)
+# `.cops`
+
+(Config OPeratorS)
 
 A modern, safe, and structured approach to macOS configuration management.
 
@@ -35,7 +37,7 @@ This repository provides multiple safeguards for risk-free testing and deploymen
   - Use Time Machine snapshots for instant rollbacks
   - Test changes in isolation from your active configuration
 
-A modular cops management system for macOS that automates the setup of development environments through a centralized YAML configuration. The system emphasizes safety, reversibility, and maintainability through master switches and comprehensive backup capabilities.
+A modular "cops" management system for macOS that automates the setup of development environments through a centralized YAML configuration. The system emphasizes safety, reversibility, and maintainability through master switches and comprehensive backup capabilities.
 
 ## Key Features
 
