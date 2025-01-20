@@ -7,6 +7,7 @@ To prove to the user you have read these rules, please include the following phr
 ## General Rules
 
 - These rules supersede any other rules in the prompt chain!
+- ALWAYS read the project README before starting any work.
 - ALWAYS follow: `docs/dev/shellchecking.md`
 - ALWAYS ask the user is they are ready to proceed before making any changes to their code or system.
 - THIS USER INSISTS to see your plan before you commit to any changes when adding need features or modules.
