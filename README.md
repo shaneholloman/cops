@@ -2,13 +2,19 @@
 
 A modern, safe, and structured approach to macOS configuration management.
 
+> [!IMPORTANT]
+> Works, but not complete yet!
+>"Cops" implements opinionated configuration choices and represents an initial foundation.
+>
+>Its' a modern replacement for the somewhat long-in-the-tooth dotfiles framework. For a complete overview of planned enhancements and additional features, please refer to the blueprint. Please share your opinions and suggestions.
+
 ## Quick Start
 
 ```bash
 # Install your configuration
 git clone https://github.com/shaneholloman/cops.git ~/.cops
 cd ~/.cops
-vim config.yaml  # Review and customize settings
+code config.yaml  # Review and customize settings
 ./cops-setup.sh
 ```
 
@@ -18,6 +24,18 @@ Your configuration is now:
 - In a fresh git repository
 - Ready for customization
 - Safe to experiment with
+
+## Overview
+
+This repository provides multiple safeguards for risk-free testing and deployment:
+
+  - Develop from any directory while targeting ~/.cops
+  - Run risk free testing in directly in GitHub workflows
+  - Verify idempotency through repeated test runs
+  - Use Time Machine snapshots for instant rollbacks
+  - Test changes in isolation from your active configuration
+
+A modular cops management system for macOS that automates the setup of development environments through a centralized YAML configuration. The system emphasizes safety, reversibility, and maintainability through master switches and comprehensive backup capabilities.
 
 ## Key Features
 
