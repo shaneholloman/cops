@@ -40,12 +40,22 @@ validate_installation() {
 
   # Validate CLI tools
   while IFS= read -r tool; do
-    local cmd
-    cmd=$(get_command_name "$tool")
-    if command -v "$cmd" >/dev/null 2>&1; then
-      print_success "$tool installed successfully"
+    if needs_file_validation "$tool"; then
+      local file
+      file=$(get_validation_file "$tool")
+      if [[ -f "$file" ]]; then
+        print_success "$tool installed successfully"
+      else
+        print_error "$tool installation failed (file not found: $file)"
+      fi
     else
-      print_error "$tool installation failed"
+      local cmd
+      cmd=$(get_command_name "$tool")
+      if command -v "$cmd" >/dev/null 2>&1; then
+        print_success "$tool installed successfully"
+      else
+        print_error "$tool installation failed (command not found: $cmd)"
+      fi
     fi
   done < <(get_config_array '.tools.cli[]')
 
