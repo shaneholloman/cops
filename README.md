@@ -105,6 +105,7 @@ This allows you to:
 ## Documentation
 
 - [Core Concepts](./docs/core-concepts.md) - Philosophy and architecture
+- [COPS vs Dotfiles](./docs/cops-vs-dotfiles.md) - Understanding the shift from traditional dotfiles
 - [Installation Guide](./docs/installation.md) - Detailed setup instructions
 - [Development Guide](./docs/dev/development.md) - Contributing and extending
 

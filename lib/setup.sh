@@ -56,23 +56,19 @@ eval "\$(oh-my-posh init zsh --config $theme_path)"
 EOF
 
   # Add environment variables
-  yq eval '.shell.env_vars | to_entries | .[]' "$CONFIG_FILE" | while read -r entry; do
-    local key
-    key=$(echo "$entry" | yq eval '.key' -)
-    local value
-    value=$(echo "$entry" | yq eval '.value' -)
-    echo "export $key=\"$value\"" >>"$zsh_config"
-  done
+  while IFS= read -r line; do
+    if [[ "$line" =~ ^([^:]+):\ *\"(.*)\"$ ]]; then
+      local key="${BASH_REMATCH[1]}"
+      local value="${BASH_REMATCH[2]}"
+      # Expand environment variables in the value
+      value=$(echo "$value" | envsubst)
+      echo "export $key=\"$value\"" >>"$zsh_config"
+    fi
+  done < <(yq eval '.shell.env_vars' "$CONFIG_FILE")
 
-  # Add aliases
-  echo -e "\n# Aliases" >>"$zsh_config"
-  yq eval '.aliases | to_entries | .[]' "$CONFIG_FILE" | while read -r entry; do
-    local alias_name
-    alias_name=$(echo "$entry" | yq eval '.key' -)
-    local alias_value
-    alias_value=$(echo "$entry" | yq eval '.value' -)
-    echo "alias $alias_name='$alias_value'" >>"$zsh_config"
-  done
+  # Source aliases with full path
+  echo -e "\n# Source aliases" >>"$zsh_config"
+  echo "source \"$COPS_ROOT/config/zsh/.aliases\"" >>"$zsh_config"
 }
 
 setup_vim_config() {

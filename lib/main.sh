@@ -8,10 +8,13 @@ set -u
 # Source our dependencies
 # shellcheck source=lib/output.sh
 # shellcheck source=lib/brewbundle.sh
+# shellcheck source=lib/aliases.sh
 # shellcheck disable=SC1091
 source "lib/output.sh"
 # shellcheck disable=SC1091
 source "lib/brewbundle.sh"
+# shellcheck disable=SC1091
+source "lib/aliases.sh"
 
 # Global arrays to store tools that need installation
 declare -a CLI_TOOLS_TO_INSTALL
@@ -234,6 +237,10 @@ main() {
   fi
 
   setup_iterm2
+
+  if [[ "$(is_feature_enabled "aliases")" = "true" ]]; then
+    setup_aliases
+  fi
 
   if [[ "$(is_feature_enabled "preferences")" = "true" ]]; then
     setup_preferences

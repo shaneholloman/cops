@@ -132,16 +132,48 @@ tools:
 
 # Aliases
 aliases:
-  d: "docker"
-  dc: "docker-compose"
-  g: "git"
-  gcb: "git checkout -b"
-  gco: "git checkout"
-  gp: "git pull"
-  gs: "git status"
-  k: "kubectl"
-  ll: "ls -la"
-  tf: "terraform"
+  navigation:
+    dropbox: "cd ~/Dropbox"
+    "..": "cd .."
+    "...": "cd ../.."
+    "....": "cd ../../.."
+    dl: "cd ~/Downloads"
+    dt: "cd ~/Desktop"
+    docs: "cd ~/Documents"
+    p: "cd ~/Projects"
+    d: "cd ~/Dropbox"
+
+  common_utils:
+    ls: "ls -G"
+    ll: "ls -lah"
+    grep: "grep --color=auto"
+    fgrep: "fgrep --color=auto"
+    egrep: "egrep --color=auto"
+    path: "echo $PATH | tr ':' '\n'"
+    ports: "sudo lsof -iTCP -sTCP:LISTEN -P"
+    pubkey: "cat ~/.ssh/id_rsa.pub | pbcopy"
+    week: "date +%V"
+
+  git:
+    g: "git"
+    gs: "git status"
+    gp: "git push"
+    gl: "git pull"
+    gc: "git commit"
+    gd: "git diff"
+    gb: "git branch"
+    gco: "git checkout"
+
+  docker:
+    dk: "docker"
+    dkc: "docker compose"
+    dkp: "docker ps"
+    dki: "docker images"
+
+  development:
+    py: "python3"
+    pip: "pip3"
+    serve: "python3 -m http.server"
 
 # Directory Structure
 directories:

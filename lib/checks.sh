@@ -55,13 +55,23 @@ check_shell() {
 
   print_header "Checking Aliases"
   current_aliases="$(alias 2>/dev/null)"
-  while IFS=': ' read -r alias_name alias_value; do
-    if echo "$current_aliases" | grep -q "${alias_name}="; then
-      print_warning "Alias '$alias_name' already exists (will update)"
-    else
-      print_success "Will add alias '$alias_name=$alias_value'"
-    fi
-  done < <(yq eval '.aliases | to_entries | .[] | .key + ": " + .value' "$CONFIG_FILE")
+
+  # Check aliases by category
+  for category in navigation common_utils git docker development; do
+    yq eval ".aliases.$category" "$CONFIG_FILE" | while read -r line; do
+      if [[ "$line" =~ ^([^:]+):\ *\"(.*)\"$ ]]; then
+        local alias_name="${BASH_REMATCH[1]}"
+        local alias_value="${BASH_REMATCH[2]}"
+        # Trim whitespace
+        alias_name=$(echo "$alias_name" | xargs)
+        if echo "$current_aliases" | grep -q "^${alias_name}="; then
+          print_warning "Alias '$alias_name' already exists (will update)"
+        else
+          print_success "Will add alias '$alias_name=$alias_value'"
+        fi
+      fi
+    done
+  done
 }
 
 check_directories() {
