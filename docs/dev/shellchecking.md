@@ -1,4 +1,6 @@
-# ShellCheck Guidelines for Cops Project
+# ShellChecking
+
+Guidelines for `.cops` Project
 
 ## Running Analysis
 

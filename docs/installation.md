@@ -1,4 +1,4 @@
-# Installing and Using Cops
+# Installation Guide
 
 This guide explains the different ways to install and use cops.
 

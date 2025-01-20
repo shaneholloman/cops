@@ -1,4 +1,4 @@
-# COPS: Core Concepts
+# Core Concepts
 
 > Config OPeratiorS: A modern system configuration framework that enforces order and safety in environment management.
 

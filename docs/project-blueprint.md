@@ -1,4 +1,4 @@
-# Cops-macOS Project Blueprint
+# Project Blueprint
 
 Back to [README.md](../README.md)
 

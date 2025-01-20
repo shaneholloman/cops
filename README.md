@@ -6,7 +6,7 @@ A modern, safe, and structured approach to macOS configuration management.
 
 > [!IMPORTANT]
 > Works, but not complete yet!
->"Cops" implements opinionated configuration choices and represents an initial foundation.
+>"cops" implements opinionated configuration choices and represents an initial foundation.
 >
 >Its' a modern replacement for the somewhat long-in-the-tooth dotfiles framework. For a complete overview of planned enhancements and additional features, please refer to the blueprint. Please share your opinions and suggestions.
 
@@ -59,9 +59,13 @@ A modular "cops" management system for macOS that automates the setup of develop
   - Consistent directory layout
   - Easy to maintain
 
-## Working with Cops
+## Working with `.cops`
 
-### Installation Location (~/.cops)
+### Installation Location
+
+```sh
+~/.cops)
+```
 
 Your active configuration lives in ~/.cops:
 
