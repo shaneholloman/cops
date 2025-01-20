@@ -46,6 +46,9 @@ readonly LIB_DIR
 # shellcheck source=lib/output.sh
 # shellcheck disable=SC1091
 source "${LIB_DIR}/output.sh"
+# shellcheck source=lib/validate.sh
+# shellcheck disable=SC1091
+source "${LIB_DIR}/validate.sh"
 # shellcheck source=lib/config.sh
 # shellcheck disable=SC1091
 source "${LIB_DIR}/config.sh"

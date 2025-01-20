@@ -26,22 +26,19 @@ check_tools() {
 
   # Check CLI tools
   while IFS= read -r tool; do
-    local cmd
-    cmd=$(get_command_name "$tool")
-    if command -v "$cmd" >/dev/null 2>&1; then
-      version="$("$cmd" --version 2>/dev/null | head -n1)"
-      print_success "$tool is installed ($version)"
+    if validate_tool "$tool"; then
+      print_validation_result "$tool" "true" "true"
     else
-      print_warning "$tool will be installed"
+      print_validation_result "$tool" "false" "true"
     fi
   done < <(get_config_array '.tools.cli[]')
 
   # Check cask applications
   while IFS= read -r app; do
     if brew list --cask 2>/dev/null | grep -q "^${app}$"; then
-      print_success "$app is installed"
+      print_validation_result "$app" "true" "true"
     else
-      print_warning "$app will be installed"
+      print_validation_result "$app" "false" "true"
     fi
   done < <(get_config_array '.tools.cask[]')
 }
@@ -71,7 +68,13 @@ check_directories() {
   print_header "Checking Directory Structure"
 
   while IFS= read -r dir; do
-    local full_path="$COPS_ROOT/$dir"
+    local full_path
+    if [[ "$dir" == ".local/bin" ]]; then
+      full_path="$HOME/$dir"
+    else
+      full_path="$COPS_ROOT/$dir"
+    fi
+
     if [[ -d "$full_path" ]]; then
       print_warning "$full_path exists (will merge)"
     else

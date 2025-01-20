@@ -101,6 +101,7 @@ tools:
     - powershell # yet to add oh-my-posh as we already have for zsh
     - visual-studio-code # intent is to add plugins/setting via another module
     - visual-studio-code@insiders # intent is to add plugins/setting via another module
+    - sequel-ace # MySQL/MariaDB database management (successor to Sequel Pro)
 
   forensic:
     # - aircrack-ng

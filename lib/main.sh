@@ -20,9 +20,7 @@ declare -a CASK_APPS_TO_INSTALL
 store_tool_status() {
   local tool="$1"
   local type="$2"
-  local cmd
-  cmd=$(get_command_name "$tool")
-  if ! command -v "$cmd" >/dev/null 2>&1; then
+  if ! validate_tool "$tool"; then
     if [[ "$type" == "cli" ]]; then
       CLI_TOOLS_TO_INSTALL+=("$tool")
     fi

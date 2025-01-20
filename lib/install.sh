@@ -40,31 +40,19 @@ validate_installation() {
 
   # Validate CLI tools
   while IFS= read -r tool; do
-    if needs_file_validation "$tool"; then
-      local file
-      file=$(get_validation_file "$tool")
-      if [[ -f "$file" ]]; then
-        print_success "$tool installed successfully"
-      else
-        print_error "$tool installation failed (file not found: $file)"
-      fi
+    if validate_tool "$tool"; then
+      print_validation_result "$tool" "true" "false"
     else
-      local cmd
-      cmd=$(get_command_name "$tool")
-      if command -v "$cmd" >/dev/null 2>&1; then
-        print_success "$tool installed successfully"
-      else
-        print_error "$tool installation failed (command not found: $cmd)"
-      fi
+      print_validation_result "$tool" "false" "false"
     fi
   done < <(get_config_array '.tools.cli[]')
 
   # Validate cask applications
   while IFS= read -r app; do
     if brew list --cask 2>/dev/null | grep -q "^${app}$"; then
-      print_success "$app installed successfully"
+      print_validation_result "$app" "true" "false"
     else
-      print_error "$app installation failed"
+      print_validation_result "$app" "false" "false"
     fi
   done < <(get_config_array '.tools.cask[]')
 }
