@@ -22,6 +22,7 @@
 
 Future, not implemented yet.
 
+- [ ] brew services, example: `brew services start php`
 - [x] keep a the single config file for all the functions
 - [x] break out functions to separate files from the main script
 - [ ] consider using gnu stow for cops
