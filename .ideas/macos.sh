@@ -5,9 +5,9 @@ osascript -e 'tell application "System Settings" to quit'
 sudo -v
 
 while true; do
-	sudo -n true
-	sleep 60
-	kill -0 "$$" || exit
+  sudo -n true
+  sleep 60
+  kill -0 "$$" || exit
 done 2>/dev/null &
 
 # System Settings
@@ -72,7 +72,7 @@ defaults write com.apple.ActivityMonitor SortDirection -int 0
 
 # Apply Changes
 for app in "Activity Monitor" "Dock" "Finder" "Safari" "SystemUIServer" "Terminal"; do
-	killall "${app}" &>/dev/null
+  killall "${app}" &>/dev/null
 done
 
 echo "Done. Please log out and back in for all changes to take effect."

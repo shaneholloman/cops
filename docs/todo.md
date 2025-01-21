@@ -1,8 +1,8 @@
 # TODO
 
-- [ ]  add LLM setup: see: [llm](./../.ideas/llm-setup.txt)
-
-- [ ]  php follow up
+- [ ] add `llm` setup module: see: [llm](./../.ideas/llm-setup.txt)
+- [ ] add softwareupdate and brew update to a new update module
+- [ ] php follow up
 
     ```sh To enable PHP in Apache add the following to httpd.conf and restart Apache:
     LoadModule php_module /opt/homebrew/opt/php/lib/httpd/modules/libphp.so
@@ -22,7 +22,7 @@
 
 Future, not implemented yet.
 
-- [ ] brew services, example: `brew services start php`
+- [ ] brew services, example: `brew services start php` possibly a separate services and cron module/s
 - [x] keep a the single config file for all the functions
 - [x] break out functions to separate files from the main script
 - [ ] consider using gnu stow for cops
@@ -35,17 +35,18 @@ Future, not implemented yet.
 - [ ] add a function to set default browser - defaulted to firefox
 - [ ] add a function to set default editor - defaulted to vscode
 - [ ] add a function to set default terminal - defaulted to iterm2
-- [ ] add a function to ssh-keygen and add to ssh-agent and ssh config defaults
+- [ ] add a function to ssh-keygen and add to ssh-agent and ssh config defaults - defaulted to ed25519
 - [ ] add function to automatically agree to xcode license
 - [ ] add function to run intune script to install company monitoring apps etc
 - [ ] have a look at how mac handle SSL certs
 - [ ] have a look at how mac handles SSL in regards to not using openssl, but rather uses libressl
-- [ ] add a function to install some sane vscode extensions
-- [ ] add a function to install some sane vscode settings
-- [ ] add a function to install some sane vscode keybindings
-- [ ] add a function to install some sane vscode snippets
-- [ ] add a function to install some vscode themes
-- [ ] add a function to install some vscode icons
+- [ ] add new vscode module
+    - [ ] add a function to install some vscode extensions
+    - [ ] add a function to install some vscode settings
+    - [ ] add a function to install some vscode keybindings
+    - [ ] add a function to install some vscode snippets
+    - [ ] add a function to install some vscode themes
+    - [ ] add a function to install some vscode icons
 - [ ] add function to add some python tools globally via `uv tool install` module must run only after brew installs example: `uv tool install mlx-whisper --python 3.12`
 - [ ] add function to add some node tools globally via `volta install` module must run only after brew installs
 - [ ] add function to add relevant env vars for aws, etc etc
