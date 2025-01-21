@@ -30,34 +30,34 @@ git push origin main
 
 ## Project Structure
 
-```
+```sh
 .
 ├── lib/                    # Core framework modules
-│   ├── main.sh            # Main orchestration
-│   ├── config.sh          # Configuration handling
-│   ├── checks.sh          # Validation functions
-│   ├── install.sh         # Tool installation
-│   ├── setup.sh           # Environment setup
-│   └── output.sh          # Logging utilities
+│   ├── main.sh             # Main orchestration
+│   ├── config.sh           # Configuration handling
+│   ├── checks.sh           # Validation functions
+│   ├── install.sh          # Tool installation
+│   ├── setup.sh            # Environment setup
+│   └── output.sh           # Logging utilities
 │
 ├── config/                 # Default configurations
-│   ├── git/               # Git configuration
-│   ├── vim/               # Vim configuration
-│   └── zsh/               # Shell configuration
+│   ├── git/                # Git configuration
+│   ├── vim/                # Vim configuration
+│   └── zsh/                # Shell configuration
 │
 ├── dev/                    # Development documentation
-│   ├── core-concepts.md   # Architecture and philosophy
-│   ├── installation.md    # Installation guide
-│   └── development.md     # This file
+│   ├── core-concepts.md    # Architecture and philosophy
+│   ├── installation.md     # Installation guide
+│   └── development.md      # This file
 │
-└── cops-setup.sh          # Main entry point
+└── cops-setup.sh           # Main entry point
 ```
 
 ## Development Guidelines
 
 ### 1. Code Standards
 
-- Follow [Shell Checking Guidelines](../shellchecking.md)
+- Follow [Shell Checking Guidelines](shellchecking.md)
 - Keep modules focused and small
 - Add comprehensive error handling
 - Include validation checks
@@ -82,9 +82,9 @@ cd ~/.cops
 
 ### 3. Adding Features
 
-- Review [Adding Simple Tools](../adding-simple-tools.md)
-- Check [Adding Complex Tools](../adding-complex-tools.md)
-- Follow [Master Switches](../master-switches.md) pattern
+- Review [Adding Simple Tools](adding-simple-tools.md)
+- Check [Adding Complex Tools](adding-complex-tools.md)
+- Follow [Master Switches](master-switches.md) pattern
 - Maintain backward compatibility
 
 ## Framework Architecture
