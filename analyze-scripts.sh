@@ -112,6 +112,35 @@ analyze_script() {
     ((issues++))
   fi
 
+  # Check for missing source files
+  while IFS= read -r line; do
+    # Check source commands (ignoring line continuations)
+    if [[ "$line" =~ ^[[:space:]]*source[[:space:]]+[\"\']?([^[:space:]\"\'\\]+) ]]; then
+      local source_path="${BASH_REMATCH[1]}"
+
+      # Replace variables with their values
+      source_path="${source_path//\$LIB_DIR/lib}"
+      source_path="${source_path//\$\{LIB_DIR\}/lib}"
+      source_path="${source_path//\"/}"
+      source_path="${source_path//\'/}"
+
+      if [[ ! -f "$source_path" ]]; then
+        print_warning "Missing source file: $source_path"
+        ((issues++))
+      fi
+    fi
+
+    # Check shellcheck source directives
+    if [[ "$line" =~ ^[[:space:]]*#[[:space:]]*shellcheck[[:space:]]+source=([^[:space:]]+) ]]; then
+      local source_path="${BASH_REMATCH[1]}"
+
+      if [[ ! -f "$source_path" ]]; then
+        print_warning "Missing shellcheck source file: $source_path"
+        ((issues++))
+      fi
+    fi
+  done <"$script"
+
   if ((issues == 0)); then
     print_success "No issues found"
   else

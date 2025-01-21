@@ -1,43 +1,36 @@
 # Cops Configuration
 
-# Master Switches
-enable_preferences: false # Disabled by default for safety
-enable_tools: true # Most users want tools
-enable_aliases: true # Shell aliases are safe
-enable_vim: true # Editor config is safe
-enable_file_assoc: true # File associations are safe
+# Master Switches (all features that can modify system state)
+enable_preferences: false # System preferences (disabled by default for safety)
+enable_tools: true # CLI tools installation
+enable_aliases: true # Shell aliases configuration
+enable_vim: true # Vim editor configuration
+enable_file_assoc: true # File associations setup
 enable_snapshots: true # Create APFS snapshot before changes
 enable_brewbundle: true # Process Brewfiles for package installation
-
-# Brewfile Configuration
-brewbundle:
-  install_types:
-    formulas: true # Install Homebrew formulas
-    casks: true # Install Cask applications
-    vscode: false # Install VSCode extensions
-  paths:
-    - "$COPS_ROOT/Brewfile" # Primary Brewfile location
-    - "$HOME/.Brewfile" # User's personal Brewfile
-    - "$HOME/Brewfile" # Alternative location
 
 # User Information
 user:
   name: "Shane Holloman"
   email: "shaneholloman@gmail.com"
 
-# Paths and Locations
+# Paths and Directory Structure
 paths:
   cops: "$HOME/.cops"
   oh_my_posh_theme: "$HOME/Dropbox/shane/conf/warpdeck.omp.json"
 
-# Git Configuration
-git:
-  editor: "vim"
-  default_branch: "main"
-  pull_rebase: true
-  color_ui: true
+directories:
+  - bin
+  - config/git
+  - config/zsh
+  - config/vim
+  - config/aws
+  - config/terraform
+  - config/k8s
+  - scripts
+  - .local/bin # Required for uv tool installations
 
-# Shell Configuration
+# Development Environment
 shell:
   default: "zsh"
   theme:
@@ -49,7 +42,42 @@ shell:
     KUBECONFIG: "$HOME/.kube/config"
     TERRAFORM_CONFIG: "$HOME/.terraform.d/config.tfrc"
 
-# Tools to Install
+git:
+  editor: "vim"
+  default_branch: "main"
+  pull_rebase: true
+  color_ui: true
+
+vim:
+  options:
+    - "syntax on"
+    - "set number"
+    - "set ruler"
+    - "set expandtab"
+    - "set tabstop=2"
+    - "set shiftwidth=2"
+    - "set autoindent"
+    - "set smartindent"
+    - "set paste"
+    - "set hlsearch"
+    - "set incsearch"
+    - "set cursorline"
+  filetypes:
+    yaml: "setlocal ts=2 sts=2 sw=2 expandtab"
+    terraform: "setlocal ts=2 sts=2 sw=2 expandtab"
+    json: "setlocal ts=2 sts=2 sw=2 expandtab"
+
+# Package and Tool Management
+brewbundle:
+  install_types:
+    formulas: true # Install Homebrew formulas
+    casks: true # Install Cask applications
+    vscode: false # Install VSCode extensions
+  paths:
+    - "$COPS_ROOT/Brewfile" # Primary Brewfile location
+    - "$HOME/.Brewfile" # User's personal Brewfile
+    - "$HOME/Brewfile" # Alternative location
+
 tools:
   cli:
     - ack
@@ -175,47 +203,60 @@ aliases:
     pip: "pip3"
     serve: "python3 -m http.server"
 
-# Directory Structure
-directories:
-  - bin
-  - config/git
-  - config/zsh
-  - config/vim
-  - config/aws
-  - config/terraform
-  - config/k8s
-  - scripts
-  - .local/bin # Required for uv tool installations
-
-# User Preferences
+# System Configuration
 preferences:
+  # Group switches (all default: false for safety)
+  enable_groups:
+    terminal: false
+    security: false
+    input: false
+    finder: false
+    dock: false
+    safari: false
+    global: false
+    activity: false
+
+  # Terminal preferences
   terminal:
-    font: "Hack Nerd Font Mono 12"
-    key_repeat: 1
-    initial_key_repeat: 10
-    press_and_hold: false
+    iterm2:
+      "Normal Font": "Hack Nerd Font Mono 12"
+    global:
+      KeyRepeat: 1
+      InitialKeyRepeat: 10
+      ApplePressAndHoldEnabled: false
 
-# Vim Configuration
-vim:
-  options:
-    - "syntax on"
-    - "set number"
-    - "set ruler"
-    - "set expandtab"
-    - "set tabstop=2"
-    - "set shiftwidth=2"
-    - "set autoindent"
-    - "set smartindent"
-    - "set paste"
-    - "set hlsearch"
-    - "set incsearch"
-    - "set cursorline"
-  filetypes:
-    yaml: "setlocal ts=2 sts=2 sw=2 expandtab"
-    terraform: "setlocal ts=2 sts=2 sw=2 expandtab"
-    json: "setlocal ts=2 sts=2 sw=2 expandtab"
+  # Finder preferences
+  finder:
+    finder:
+      ShowPathbar: true
+      ShowStatusBar: true
+      AppleShowAllFiles: false
+      _FXSortFoldersFirst: true
+      FXDefaultSearchScope: "SCcf"
 
-# File Associations Configuration
+  # Dock preferences
+  dock:
+    dock:
+      autohide: true
+      tilesize: 48
+      mineffect: "genie"
+
+  # Input preferences
+  input:
+    trackpad:
+      Clicking: true
+      TrackpadThreeFingerDrag: true
+    global:
+      "com.apple.mouse.scaling": 2.0
+      "com.apple.trackpad.scaling": 1.5
+
+  # Security preferences
+  security:
+    screensaver:
+      askForPassword: 1
+      askForPasswordDelay: 0
+
+# File and Application Configuration
 file_associations:
   editor:
     bundle_id: "com.microsoft.VSCodeInsiders"

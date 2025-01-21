@@ -61,6 +61,9 @@ source "${LIB_DIR}/setup.sh"
 # shellcheck source=lib/install.sh
 # shellcheck disable=SC1091
 source "${LIB_DIR}/install.sh"
+# shellcheck source=lib/preferences-discovery.sh
+# shellcheck disable=SC1091
+source "${LIB_DIR}/preferences-discovery.sh"
 # shellcheck source=lib/preferences.sh
 # shellcheck disable=SC1091
 source "${LIB_DIR}/preferences.sh"
