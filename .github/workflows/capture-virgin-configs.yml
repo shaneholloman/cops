@@ -18,37 +18,47 @@ jobs:
 
       - name: Copy virgin configs
         run: |
-          # Copy system zshrc
-          sudo cp /private/etc/zshrc config/virgin/zshrc
-
-          # Copy all dotfiles and directories
+          # Copy essential dotfiles
           cd ~
-          for item in \
-            .android \
-            .azcopy \
-            .azure-devops \
-            .bash_profile \
-            .bashrc \
-            .cache \
-            .cargo \
-            .config \
-            .dotnet \
-            .gitconfig \
-            .gradle \
-            .local \
-            .net \
-            .rustup \
-            .ssh \
-            .yarn; do
-            if [ -e "$item" ]; then
-              cp -R "$item" "$GITHUB_WORKSPACE/config/virgin/"
+          for file in .bash_profile .bashrc .gitconfig; do
+            if [ -e "$file" ]; then
+              cp "$file" "$GITHUB_WORKSPACE/config/virgin/"
             fi
           done
 
-          # List captured files
-          echo "Captured files:"
+          # Create .config structure
+          mkdir -p "$GITHUB_WORKSPACE/config/virgin/.config"
+
+          # Copy only essential .config contents (no caches/temp files)
+          if [ -d ~/.config ]; then
+            cd ~/.config
+            for dir in $(ls -A | grep -vE 'cache|temp|tmp'); do
+              if [ -d "$dir" ] && [ ! -L "$dir" ]; then
+                # Get size
+                size=$(du -sm "$dir" | cut -f1)
+                if [ "$size" -lt 10 ]; then  # Only copy if less than 10MB
+                  cp -R "$dir" "$GITHUB_WORKSPACE/config/virgin/.config/"
+                else
+                  echo "Skipping $dir (${size}MB - too large)"
+                fi
+              fi
+            done
+          fi
+
+          # Create .ssh structure (no keys)
+          mkdir -p "$GITHUB_WORKSPACE/config/virgin/.ssh"
+          if [ -d ~/.ssh ]; then
+            cd ~/.ssh
+            for file in config known_hosts; do
+              if [ -f "$file" ]; then
+                cp "$file" "$GITHUB_WORKSPACE/config/virgin/.ssh/"
+              fi
+            done
+          fi
+
+          echo "=== Captured Files ==="
           cd "$GITHUB_WORKSPACE/config/virgin"
-          ls -la
+          find . -type f | sort
 
       - name: Create PR with changes
         uses: peter-evans/create-pull-request@v5
