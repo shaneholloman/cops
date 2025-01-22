@@ -10,4 +10,5 @@ These files serve as reference points to:
 
 Files:
 
-- `zshrc`: Default .zshrc from a fresh macOS install
+- `zshrc`: Default system-wide zshrc from /private/etc/zshrc
+- `.config/`: Complete default .config directory structure from a fresh macOS install

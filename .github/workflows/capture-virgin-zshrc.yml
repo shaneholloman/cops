@@ -1,4 +1,4 @@
-name: Capture Virgin macOS zshrc
+name: Capture Virgin macOS Configs
 
 on:
   workflow_dispatch: # Manual trigger only
@@ -8,31 +8,37 @@ permissions:
   pull-requests: write
 
 jobs:
-  capture-zshrc:
+  capture-configs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
 
       - name: Create virgin directory
-        run: mkdir -p config/zsh/virgin
-
-      - name: Debug shell environment
         run: |
-          echo "Current shell: $SHELL"
-          echo "All shells:"
-          cat /etc/shells
-          echo "Home directory contents:"
-          ls -la ~
-          echo "ZSH related files:"
-          find / -name ".zshrc" -o -name "zshrc" 2>/dev/null || true
-          echo "Environment:"
-          env | grep -i "zsh"
+          mkdir -p config/zsh/virgin
+          mkdir -p config/zsh/virgin/.config
+
+      - name: Copy virgin configs
+        run: |
+          # Copy system zshrc
+          sudo cp /private/etc/zshrc config/zsh/virgin/zshrc
+
+          # Copy .config directory
+          if [ -d ~/.config ]; then
+            cp -R ~/.config/* config/zsh/virgin/.config/ || true
+          fi
+
+          # List captured files
+          echo "Captured files:"
+          ls -la config/zsh/virgin/
+          echo "Captured .config contents:"
+          ls -la config/zsh/virgin/.config/
 
       - name: Create PR with changes
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore: capture virgin macOS zshrc"
-          title: "chore: update virgin macOS zshrc reference"
-          branch: update-virgin-zshrc
+          commit-message: "chore: capture virgin macOS configs"
+          title: "chore: capture virgin macOS zshrc and .config"
+          branch: capture-virgin-configs
           delete-branch: true
