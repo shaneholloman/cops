@@ -1,14 +1,36 @@
 #!/bin/bash
 # shellcheck shell=bash
 # shellcheck source=lib/output.sh
+# shellcheck source=lib/config.sh
 
 # Source required files
 # shellcheck disable=SC1091
 source "${LIB_DIR}/output.sh"
+# shellcheck disable=SC1091
+source "${LIB_DIR}/config.sh"
 
 # Exit on error or undefined variable
 set -e
 set -u
+
+# Get domain bundle ID
+get_domain_bundle() {
+  local domain="$1"
+  case "$domain" in
+  "iterm2") echo "com.googlecode.iterm2" ;;
+  "terminal") echo "com.apple.Terminal" ;;
+  "security") echo "com.apple.security" ;;
+  "screensaver") echo "com.apple.screensaver" ;;
+  "trackpad") echo "com.apple.AppleMultitouchTrackpad" ;;
+  "bluetooth_trackpad") echo "com.apple.driver.AppleBluetoothMultitouch.trackpad" ;;
+  "finder") echo "com.apple.finder" ;;
+  "dock") echo "com.apple.dock" ;;
+  "safari") echo "com.apple.Safari" ;;
+  "global") echo "-g" ;;
+  "activity") echo "com.apple.ActivityMonitor" ;;
+  *) echo "$domain" ;;
+  esac
+}
 
 # Constants
 readonly BACKUP_DIR="$HOME/.cops/backups"
@@ -125,4 +147,23 @@ discover_preferences() {
   fi
 
   rm "$state_file"
+}
+
+# Backup preferences for a specific group
+backup_group_preferences() {
+  local group="$1"
+
+  # Get and process all subgroups (domains) for this group
+  while IFS= read -r subgroup; do
+    [ -z "$subgroup" ] && continue
+
+    # Get the actual domain name using get_domain_bundle
+    local domain
+    domain=$(get_domain_bundle "$subgroup")
+
+    # Create backup
+    if ! backup_domain "$domain"; then
+      print_warning "Failed to backup preferences for domain: $domain"
+    fi
+  done < <(yq eval ".preferences.${group} | keys | .[]" "$CONFIG_FILE")
 }

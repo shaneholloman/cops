@@ -1,7 +1,7 @@
 # Cops Configuration
 
 # Master Switches (all features that can modify system state)
-enable_preferences: false # System preferences (disabled by default for safety)
+enable_preferences: true # System preferences enabled for testing
 enable_tools: true # CLI tools installation
 enable_aliases: true # Shell aliases configuration
 enable_vim: true # Vim editor configuration
@@ -207,7 +207,7 @@ aliases:
 preferences:
   # Group switches (all default: false for safety)
   enable_groups:
-    terminal: false
+    terminal: true
     security: false
     input: false
     finder: false

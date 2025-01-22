@@ -23,21 +23,6 @@ readonly PREFERENCE_GROUPS=(
   "activity"
 )
 
-# Domain mapping
-declare -A DOMAIN_MAP=(
-  ["iterm2"]="com.googlecode.iterm2"
-  ["terminal"]="com.apple.Terminal"
-  ["security"]="com.apple.security"
-  ["screensaver"]="com.apple.screensaver"
-  ["trackpad"]="com.apple.AppleMultitouchTrackpad"
-  ["bluetooth_trackpad"]="com.apple.driver.AppleBluetoothMultitouch.trackpad"
-  ["finder"]="com.apple.finder"
-  ["dock"]="com.apple.dock"
-  ["safari"]="com.apple.Safari"
-  ["global"]="-g"
-  ["activity"]="com.apple.ActivityMonitor"
-)
-
 # Determine preference type from value
 get_preference_type() {
   local value="$1"
@@ -72,10 +57,8 @@ apply_preference() {
   local type
   type=$(get_preference_type "$value")
 
-  # Map domain if it exists in DOMAIN_MAP
-  if [[ -n "${DOMAIN_MAP[$domain]:-}" ]]; then
-    domain="${DOMAIN_MAP[$domain]}"
-  fi
+  # Map domain using get_domain_bundle function
+  domain=$(get_domain_bundle "$domain")
 
   print_info "Setting $domain $key to $value ($type)"
 
@@ -92,18 +75,18 @@ apply_group_preferences() {
   local group="$1"
   local failed=false
 
-  # Get all subgroups (domains) for this group
-  local subgroups
-  mapfile -t subgroups < <(yq eval ".preferences.${group} | keys | .[]" "$CONFIG_FILE")
+  # Get and process all subgroups (domains) for this group
+  while IFS= read -r subgroup; do
+    [ -z "$subgroup" ] && continue
 
-  for subgroup in "${subgroups[@]}"; do
     # Get all preferences for this subgroup
     while IFS=': ' read -r key value; do
+      [ -z "$key" ] && continue
       if ! apply_preference "$subgroup" "$key" "$value"; then
         failed=true
       fi
     done < <(yq eval ".preferences.${group}.${subgroup} | to_entries | .[] | .key + \": \" + .value" "$CONFIG_FILE")
-  done
+  done < <(yq eval ".preferences.${group} | keys | .[]" "$CONFIG_FILE")
 
   if [[ "$failed" == "true" ]]; then
     return 1

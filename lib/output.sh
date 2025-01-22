@@ -29,3 +29,7 @@ print_status() {
     printf "\033[1;31mDISABLED\033[0m"
   fi
 }
+
+print_info() {
+  printf "\033[1;36m• %s\033[0m\n" "$1"
+}
