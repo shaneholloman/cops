@@ -50,7 +50,9 @@ get_timestamp() {
 
 # Create backup of a preference domain
 backup_domain() {
-  local domain="$1"
+  local input_domain="$1"
+  local domain
+  domain=$(get_domain_bundle "$input_domain")
   local timestamp
   timestamp=$(get_timestamp)
   local backup_file="$BACKUP_DIR/${domain}_${timestamp}.plist"
@@ -61,7 +63,6 @@ backup_domain() {
   fi
 
   print_success "Created backup: $backup_file"
-  echo "$backup_file"
 }
 
 # Get latest backup for a domain
