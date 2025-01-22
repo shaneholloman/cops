@@ -6,7 +6,7 @@ This guide explains the different ways to install and use cops.
 
 The standard installation is for users who want to manage their macOS configuration:
 
-```bash
+```sh
 # 1. Clone cops to your home directory
 git clone https://github.com/shaneholloman/cops.git ~/.cops
 
@@ -27,7 +27,7 @@ After installation:
 
 ### Managing Your Configuration
 
-```bash
+```sh
 # Track your changes
 cd ~/.cops
 git add .
@@ -42,7 +42,7 @@ git push -u origin main
 
 For testing changes or contributing to cops:
 
-```bash
+```sh
 # Clone to a development location
 git clone https://github.com/shaneholloman/cops.git ~/projects/cops
 cd ~/projects/cops
@@ -88,7 +88,7 @@ vim config.yaml
 
 ### Updating Your Configuration
 
-```bash
+```sh
 cd ~/.cops
 vim config.yaml  # Make changes
 ./cops-setup.sh  # Apply changes
@@ -98,7 +98,7 @@ git commit -m "Updated configuration"
 
 ### Testing Changes (Development)
 
-```bash
+```sh
 cd ~/projects/cops  # Your development location
 vim config.yaml    # Make changes
 ./cops-setup.sh    # Test changes (updates ~/.cops)
@@ -106,7 +106,7 @@ vim config.yaml    # Make changes
 
 ### Resetting to Default
 
-```bash
+```sh
 cd ~/.cops
 git reset --hard   # Reset any uncommitted changes
 ./cops-setup.sh    # Reapply configuration
@@ -114,6 +114,6 @@ git reset --hard   # Reset any uncommitted changes
 
 ## Next Steps
 
-- Review [Core Concepts](core-concepts.md)
+- Review [Core Concepts](dev/architecture/core-concepts.md)
 - Check [Development Guide](dev/development.md) if contributing
 - Explore available [Master Switches](dev/master-switches.md)

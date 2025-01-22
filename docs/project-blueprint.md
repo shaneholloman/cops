@@ -1,137 +1,163 @@
 # Project Blueprint
 
-Back to [README.md](../README.md)
+> Technical planning document for COPS development
 
-> Living document for planning improvements to cops-macos project
+## Implementation Status
 
-## Core Principles
+### Recently Completed
 
-- Maintain small, focused modules (<300 lines)
-- Each module must be independently toggleable via master switches
-- All changes must be reversible
-- AI-friendly code organization for future maintenance
-- Comprehensive logging and error handling
+1. Preferences Management System
+   - Group-based organization
+   - Automatic backup/restore
+   - Type validation
+   - Safe defaults
+   - Comprehensive testing
 
-## Tier One: Improve Current Modules
+2. Backup and Restore System
+   - Timestamped backups
+   - File verification
+   - Atomic operations
+   - Dry-run support
+   - Testing infrastructure
 
-### 1. preferences.sh Improvements
+3. Safety Infrastructure
+   - APFS snapshots
+   - Configuration validation
+   - Master switches
+   - Error handling
+   - Recovery procedures
 
-- Add structured error handling
-- Add backup functionality before changes
-- Add rollback capabilities
-- Add validation checks
-- Add atomic operations (all or nothing changes)
-- Add logging for all operations
+## Current Development Focus
 
-### 2. config.sh Improvements
+### 1. Core System Enhancements
 
-- Add configuration validation
-- Add schema verification
-- Add environment variable validation
-- Add configuration inheritance
-- Add override capabilities
-- Add configuration documentation generation
+#### Configuration Management
 
-### 3. checks.sh Improvements
+- Schema validation
+- Environment variable validation
+- Configuration inheritance
+- Override capabilities
+- Documentation generation
 
-- Add system compatibility checks
-- Add dependency version checks
-- Add disk space checks
-- Add permission checks
-- Add network checks for remote resources
-- Add system state validation
+#### Installation System
 
-### 4. install.sh Improvements
+> most of this is heavily dependant of brew, the features below would come into play for manual installations
 
-- Add installation queuing
-- Add parallel installation capabilities
-- Add retry logic
-- Add better error reporting
-- Add installation logging
-- Add dependency resolution
+- Installation queuing
+- Parallel installation
+- Retry logic
+- Error reporting
+- Dependency resolution
 
-## Tier Two: New Modules
+#### System Validation
 
-These are thoughts only and will be refined as we progress. Also some of these ideas are already implemented!
+- Compatibility checks
+- Version verification
+- Resource validation
+- State monitoring
+- Network validation
 
-TODO: We need to update this doc as its failing behind the actual implementation.
+### 2. New Module Development
 
-### 1. macos_defaults.sh
+#### MCP Integration
 
-- System settings management
-- Sub-modules:
-  - ui_settings.sh (UI/UX preferences)
-  - security_settings.sh (Security defaults)
-  - performance_settings.sh (Performance optimization)
-  - network_settings.sh (Network configurations)
+- Server management
+- Client configuration
+- Tool integration
+- Resource handling
 
-### 2. security.sh
+#### Update System
 
-- SSH configuration management
-- GPG setup and configuration
-- Keychain management
-- Certificate management
-- Security policy enforcement
+- Software update integration
+- Brew update management
+- Update scheduling
+- Version control
 
-### 3. dev_environment.sh
+#### VSCode Configuration
 
-- Editor configurations
-- Language environments setup
-- Build tools installation
-- Version managers configuration
-- Development tool defaults
+- Extension management
+- Settings configuration
+- Keybindings setup
+- Snippet management
+- Theme installation
 
-### 4. app_configs.sh
+## Technical Requirements
 
-- Terminal emulator settings
-- Browser configurations
-- Development tool settings
-- Productivity app settings
-- Application defaults
+### Module Structure
 
-## Module Requirements
+- Maximum 300 lines per module
+- Independent toggle capability
+- Reversible operations
+- Error handling
+- Comprehensive logging
 
-Each module must include:
+### Safety Requirements
 
-1. Master switch in config.yaml
-2. Independent toggle capability
-3. Input validation
-4. Rollback functionality
-5. Configuration separation from logic
-6. Comprehensive logging
-7. Error handling
-8. Documentation
-9. Test cases
+- Pre-execution validation
+- Automatic backups
+- Rollback capability
+- State verification
+- Error recovery
 
-## Implementation Priorities
+### Testing Requirements
 
-1. Current Module Improvements
-   - Start with error handling and logging
-   - Add validation and rollback capabilities
-   - Improve configuration management
+- Unit tests
+- Integration tests
+- Safety tests
+- Performance tests
+- Recovery tests
 
-2. New Module Development
-   - Begin with macos_defaults.sh
-   - Focus on security.sh
-   - Add dev_environment.sh
-   - Implement app_configs.sh
+## Development Roadmap
 
-## Future Considerations
+### Phase 1: Core Enhancement
 
-- CI/CD integration
-- Automated testing
-- Installation state tracking
-- Configuration versioning
-- Migration tools
-- Backup systems
+1. Complete documentation update
+2. Enhance testing infrastructure
+3. Implement backup rotation
+4. Add compression support
 
-## Notes
+### Phase 2: New Features
 
-> Discussion notes and decisions will be added here as we progress
+1. MCP module implementation
+2. Update system development
+3. VSCode integration
+4. Python/Node environment management
 
-### 2024-01-15 Initial Planning
+### Phase 3: Advanced Features
 
-- Identified core principles and module requirements
-- Created proposed-config.yaml with new master switches
-- Established two-tiered approach to improvements
-- Set initial implementation priorities
+1. Cloud integration
+2. Monitoring system
+3. Analytics implementation
+4. Performance optimization
+
+## Technical Notes
+
+### Architecture Decisions
+
+- Single source of truth (config.yaml)
+- Modular design
+- Safety-first approach
+- Clear separation of concerns
+
+### Implementation Guidelines
+
+- Shell script standards compliance
+- Comprehensive error handling
+- Consistent logging
+- Thorough documentation
+
+>Just in case didn't catch it: - shellcheck compliance at every step!
+
+### Development Process
+
+- Test-driven development
+- Regular code review
+- Performance monitoring
+- Security validation
+
+## Status Indicators
+
+`[Implemented]` - Feature complete and tested
+`[In Progress]` - Currently under development
+`[Planned]` - Scheduled for implementation
+`[Blocked]` - Implementation blocked by dependencies
