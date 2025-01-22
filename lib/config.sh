@@ -5,6 +5,11 @@
 set -e
 set -u
 
+# Global configuration
+# Export backup configuration for use by other scripts
+export BACKUP_FORMAT="%Y%m%d_%H%M%S"
+export BACKUP_DIR="${COPS_ROOT}/backups"
+
 get_config() {
   local path="$1"
   yq eval "$path" "$CONFIG_FILE" | envsubst

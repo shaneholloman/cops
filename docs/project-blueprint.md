@@ -52,6 +52,10 @@ Back to [README.md](../README.md)
 
 ## Tier Two: New Modules
 
+These are thoughts only and will be refined as we progress. Also some of these ideas are already implemented!
+
+TODO: We need to update this doc as its failing behind the actual implementation.
+
 ### 1. macos_defaults.sh
 
 - System settings management

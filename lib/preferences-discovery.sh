@@ -32,10 +32,6 @@ get_domain_bundle() {
   esac
 }
 
-# Constants
-readonly BACKUP_DIR="$HOME/.cops/backups"
-readonly BACKUP_FORMAT="%Y%m%d_%H%M%S"
-
 # Initialize backup directory
 init_backup_dir() {
   if [[ ! -d "$BACKUP_DIR" ]]; then

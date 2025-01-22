@@ -273,6 +273,7 @@ file_associations:
     - "sh" # Shell scripts
 
 # Restore Configuration
+# the back path needs to be reviewed and confirmed as compatible with the system and our project!!
 restore:
   paths:
     mount_point: "/tmp/snap"
