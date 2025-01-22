@@ -69,6 +69,7 @@ jobs:
         run: |
           # Generate unique branch name with timestamp
           BRANCH_NAME="capture-virgin-configs-$(date +%Y%m%d-%H%M%S)"
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
 
           git add config/virgin/
           git commit -m "chore: capture virgin macOS configs"
