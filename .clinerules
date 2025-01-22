@@ -117,3 +117,66 @@ User will say something like
    - Setting clear next steps
 
 This ensures the next session starts with complete context, regardless of API memory limitations.
+
+## GitHub Actions Workflow Operations
+
+1. Making Changes:
+   - Read the existing workflow file first
+   - Understand the current workflow structure
+   - Make targeted changes using replace_in_file for specific updates
+   - Ensure proper YAML formatting and indentation
+
+2. Committing Changes:
+
+   ```bash
+   git add .github/workflows/<workflow>.yml
+   git commit -m "<type>: <description>"  # type: fix/feat/chore
+   git push
+   ```
+
+3. Running Workflow:
+
+   ```bash
+   gh workflow run <workflow>.yml
+   ```
+
+4. Monitoring Progress:
+
+   ```bash
+   # Get latest run ID
+   gh run list --workflow=<workflow>.yml --limit=1
+
+   # View run status
+   gh run view <run_id>
+
+   # View detailed job logs
+   gh run view --log --job=<job_id>
+   ```
+
+5. Observing Results:
+   - Check each step's completion status
+   - Review any error messages or annotations
+   - Verify expected outputs and artifacts
+   - Follow up on any generated URLs or resources
+
+6. Branch Management:
+   - After workflow completion, check for created branches:
+
+     ```bash
+     git fetch origin
+     git branch -r | grep <workflow-name>
+     ```
+
+   - If branches exist:
+     1. Review branch contents
+     2. Ask user if they want to merge:
+
+        ```bash
+        gh pr create --base main --head <branch>
+        gh pr view <number>  # Show PR details
+        ```
+
+     3. Only merge after user approval
+     4. Clean up old branches if necessary
+
+Remember: Some workflows may create feature branches that need merging. Always check for and handle these branches before considering the task complete.
