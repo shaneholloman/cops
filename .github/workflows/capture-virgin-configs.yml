@@ -1,0 +1,60 @@
+name: Capture Virgin macOS Configs
+
+on:
+  workflow_dispatch: # Manual trigger only
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  capture-configs:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create virgin directory
+        run: mkdir -p config/virgin
+
+      - name: Copy virgin configs
+        run: |
+          # Copy system zshrc
+          sudo cp /private/etc/zshrc config/virgin/zshrc
+
+          # Copy all dotfiles and directories
+          cd ~
+          for item in \
+            .android \
+            .azcopy \
+            .azure-devops \
+            .bash_profile \
+            .bashrc \
+            .cache \
+            .cargo \
+            .config \
+            .dotnet \
+            .gitconfig \
+            .gradle \
+            .local \
+            .net \
+            .rustup \
+            .ssh \
+            .yarn; do
+            if [ -e "$item" ]; then
+              cp -R "$item" "$GITHUB_WORKSPACE/config/virgin/"
+            fi
+          done
+
+          # List captured files
+          echo "Captured files:"
+          cd "$GITHUB_WORKSPACE/config/virgin"
+          ls -la
+
+      - name: Create PR with changes
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: capture virgin macOS configs"
+          title: "chore: capture complete set of virgin macOS configs"
+          branch: capture-virgin-configs
+          delete-branch: true
