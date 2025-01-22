@@ -75,11 +75,10 @@ jobs:
           git commit -m "chore: capture virgin macOS configs"
           git push origin HEAD:"$BRANCH_NAME"
 
-      - name: Create PR
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          title: "chore: capture complete set of virgin macOS configs"
-          body: "Automated PR to capture virgin macOS configurations"
-          branch: "${{ env.BRANCH_NAME }}"
-          base: main
+      - name: Output PR Creation URL
+        run: |
+          echo "=== Branch Created ==="
+          echo "Branch: $BRANCH_NAME"
+          echo ""
+          echo "To create a PR, visit:"
+          echo "https://github.com/shaneholloman/cops/pull/new/$BRANCH_NAME"
