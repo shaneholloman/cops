@@ -7,7 +7,7 @@ Icon
 .history/
 _github/
 _codemaps/
-archive/
+.archive/
 
 # Files that might appear in the root of a volume
 .DocumentRevisions-V100

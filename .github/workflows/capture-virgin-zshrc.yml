@@ -1,0 +1,29 @@
+name: Capture Virgin macOS zshrc
+
+on:
+  workflow_dispatch: # Manual trigger only
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  capture-zshrc:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create virgin directory
+        run: mkdir -p config/zsh/virgin
+
+      - name: Copy virgin .zshrc
+        run: cp ~/.zshrc config/zsh/virgin/zshrc
+
+      - name: Create PR with changes
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: capture virgin macOS zshrc"
+          title: "chore: update virgin macOS zshrc reference"
+          branch: update-virgin-zshrc
+          delete-branch: true
