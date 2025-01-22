@@ -60,11 +60,23 @@ jobs:
           cd "$GITHUB_WORKSPACE/config/virgin"
           find . -type f | sort
 
-      - name: Create PR with changes
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore: capture virgin macOS configs"
-          title: "chore: capture complete set of virgin macOS configs"
-          branch: capture-virgin-configs
-          delete-branch: true
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      - name: Create commit and push
+        run: |
+          git add config/virgin/
+          git commit -m "chore: capture virgin macOS configs"
+          git push origin HEAD:capture-virgin-configs
+
+      - name: Create PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create \
+            --title "chore: capture complete set of virgin macOS configs" \
+            --body "Automated PR to capture virgin macOS configurations" \
+            --base main \
+            --head capture-virgin-configs
