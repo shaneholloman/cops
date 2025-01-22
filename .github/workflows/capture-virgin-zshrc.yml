@@ -16,8 +16,17 @@ jobs:
       - name: Create virgin directory
         run: mkdir -p config/zsh/virgin
 
-      - name: Copy virgin .zshrc
-        run: cp ~/.zshrc config/zsh/virgin/zshrc
+      - name: Debug shell environment
+        run: |
+          echo "Current shell: $SHELL"
+          echo "All shells:"
+          cat /etc/shells
+          echo "Home directory contents:"
+          ls -la ~
+          echo "ZSH related files:"
+          find / -name ".zshrc" -o -name "zshrc" 2>/dev/null || true
+          echo "Environment:"
+          env | grep -i "zsh"
 
       - name: Create PR with changes
         uses: peter-evans/create-pull-request@v5
