@@ -1,4 +1,5 @@
 # Missing System Settings from macos.sh not present in config.yaml
+# TODO: Would be cool to have a way to dynamically make these from the macos system by querying the system for the settings and then saving them to the config.yaml file
 
 system:
   global:
