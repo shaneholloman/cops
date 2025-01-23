@@ -9,6 +9,7 @@
 - [ ] Consider GitHub template repository setup
 - [ ] Add update module (softwareupdate + brew)
 - [ ] Add function to pull latest COPS version (preserve user config)
+- [ ] Add volta setup function (global packages)
 
 ### Code Improvements
 
