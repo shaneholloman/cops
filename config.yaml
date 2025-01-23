@@ -114,6 +114,7 @@ tools:
     - terraform
     - tree
     - uv
+    - vlc
     - volta
     - yt-dlp
     - yq
