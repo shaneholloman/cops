@@ -1,6 +1,6 @@
 # Tree-sitter Bash Integration Guide
 
-Note, I am grappling with this concept of using tree-sitter to parse bash scripts. no forgive the incomplete nature of this document as its just for me at this point.
+Note, I am grappling with this concept of using tree-sitter to parse bash scripts. So forgive the incomplete nature of this document as its just for me at this point.
 
 ## Overview
 
