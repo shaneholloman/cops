@@ -70,13 +70,13 @@ vim:
 # Package and Tool Management
 brewbundle:
   install_types:
-    formulas: true # Install Homebrew formulas
-    casks: true # Install Cask applications
-    vscode: false # Install VSCode extensions
+    formulas: true
+    casks: true
+    vscode: false
   paths:
-    - "$COPS_ROOT/Brewfile" # Primary Brewfile location
-    - "$HOME/.Brewfile" # User's personal Brewfile
-    - "$HOME/Brewfile" # Alternative location
+    - "$COPS_ROOT/Brewfile"
+    - "$HOME/.Brewfile"
+    - "$HOME/Brewfile"
 
 tools:
   cli:
@@ -127,11 +127,11 @@ tools:
     - dropbox
     - firefox
     - spotify
-    - font-hack-nerd-font # used for terminal and vscode
-    - powershell # yet to add oh-my-posh as we already have for zsh
-    - visual-studio-code # intent is to add plugins/setting via another module
-    - visual-studio-code@insiders # intent is to add plugins/setting via another module
-    - sequel-ace # MySQL/MariaDB database management (successor to Sequel Pro)
+    - font-hack-nerd-font
+    - powershell
+    - visual-studio-code
+    - visual-studio-code@insiders
+    - sequel-ace
 
   forensic:
     # - aircrack-ng
@@ -173,12 +173,18 @@ aliases:
     d: "cd ~/Dropbox"
 
   common_utils:
+    # Command using escaped characters in YAML:
+    # - Double backslash (\\) is needed for YAML to preserve single backslash
+    # - Double quotes (\") are needed to preserve quotes in shell
+    # - When set as alias, becomes: path='echo $PATH | tr ":" "\n"'
+    # Also, dont use inline comments in this section, it will break yaml parsing when we add to the shell
+
     ls: "ls -G"
     ll: "ls -lah"
     grep: "grep --color=auto"
     fgrep: "fgrep --color=auto"
     egrep: "egrep --color=auto"
-    path: "echo $PATH | tr ':' '\n'"
+    path: "echo $PATH | tr \":\" \"\\n\""
     ports: "sudo lsof -iTCP -sTCP:LISTEN -P"
     pubkey: "cat ~/.ssh/id_rsa.pub | pbcopy"
     week: "date +%V"
