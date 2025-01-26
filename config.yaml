@@ -160,6 +160,12 @@ tools:
     # - xz
 
 # Aliases
+# Command using escaped characters in YAML:
+# - Double backslash (\\) is needed for YAML to preserve single backslash
+# - Double quotes (\") are needed to preserve quotes in shell
+# - When set as alias, becomes: path='echo $PATH | tr ":" "\n"'
+# Also, dont use inline comments in this section, it will break yaml parsing when we add to the shell
+
 aliases:
   navigation:
     dropbox: "cd ~/Dropbox"
@@ -173,12 +179,7 @@ aliases:
     d: "cd ~/Dropbox"
 
   common_utils:
-    # Command using escaped characters in YAML:
-    # - Double backslash (\\) is needed for YAML to preserve single backslash
-    # - Double quotes (\") are needed to preserve quotes in shell
-    # - When set as alias, becomes: path='echo $PATH | tr ":" "\n"'
-    # Also, dont use inline comments in this section, it will break yaml parsing when we add to the shell
-
+    a: "alias"
     ls: "ls -G"
     ll: "ls -lah"
     grep: "grep --color=auto"
