@@ -185,13 +185,14 @@ aliases:
 
   git:
     g: "git"
-    gs: "git status"
-    gp: "git push"
-    gl: "git pull"
-    gc: "git commit"
-    gd: "git diff"
     gb: "git branch"
+    gc: "git commit"
     gco: "git checkout"
+    gd: "git diff"
+    gi: "git init -b main"
+    gl: "git pull"
+    gp: "git push"
+    gs: "git status"
 
   docker:
     dk: "docker"
@@ -240,7 +241,7 @@ preferences:
     dock:
       autohide: true
       tilesize: 48
-      mineffect: "genie"
+      mineffect: "scale"
 
   # Input preferences
   input:
