@@ -1,0 +1,136 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "palette": {
+    "github-yellow": "#E3B341",
+    "github-green": "#56D364",
+    "github-blue": "#6CB6F8",
+    "github-magenta": "#DB61DC",
+    "github-gray": "#8B949E",
+    "github-dark-gray": "#4D4D4D",
+    "github-red": "#F7815E"
+  },
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "properties": {
+            "cache_duration": "none",
+            "display_mode": "environment",
+            "fetch_virtual_env": true,
+            "home_enabled": true
+          },
+          "template": " \ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}",
+          "foreground": "p:github-yellow",
+          "type": "python",
+          "style": "plain"
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "template": " \udb80\udf99 {{ .Full }}",
+          "foreground": "p:github-green",
+          "type": "node",
+          "style": "plain"
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "template": "{{ if .WSL }} \uf17a{{ end }}",
+          "foreground": "p:github-yellow",
+          "type": "text",
+          "style": "plain"
+        },
+        {
+          "properties": {
+            "arch": " \uf303",
+            "cache_duration": "none",
+            "debian": " \uf306",
+            "fedora": " \uf30a",
+            "kali": " \uf327",
+            "linux": " \uf17c",
+            "macos": " \uf179",
+            "manjaro": " \uf312",
+            "opensuse": " \uf314",
+            "oracle": " \uf32b",
+            "ubuntu": " \uf31c",
+            "windows": " \uf17a"
+          },
+          "template": "{{ if eq \"pwsh\" .Shell }}<#F7815E> \ue683</>{{ else }}<p:github-blue>{{.Icon}}</>{{ end }} ",
+          "foreground": "p:github-blue",
+          "type": "os",
+          "style": "plain"
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "template": "{{ .UserName }}<white> @ </><p:github-green>{{ .HostName }}</> ",
+          "foreground": "p:github-blue",
+          "type": "session",
+          "style": "plain"
+        },
+        {
+          "properties": {
+            "cache_duration": "none",
+            "style": "folder"
+          },
+          "template": "❯ {{ .Path }}",
+          "foreground": "p:github-magenta",
+          "type": "path",
+          "style": "plain"
+        },
+        {
+          "properties": {
+            "branch_icon": "",
+            "cache_duration": "none"
+          },
+          "template": " ❯ {{.HEAD}}",
+          "foreground": "p:github-gray",
+          "type": "git",
+          "style": "plain"
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "template": " \uf119",
+          "foreground": "p:github-yellow",
+          "type": "status",
+          "style": "plain"
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "template": " ❯",
+          "foreground": "p:github-dark-gray",
+          "type": "text",
+          "style": "plain"
+        }
+      ]
+    },
+    {
+      "type": "rprompt",
+      "alignment": "right",
+      "segments": [
+        {
+          "properties": {
+            "cache_duration": "none",
+            "paused_icon": "\uf04c ",
+            "playing_icon": "\uf04b ",
+            "stopped_icon": "\uf04d "
+          },
+          "foreground": "p:github-green",
+          "type": "spotify",
+          "style": "plain"
+        }
+      ]
+    }
+  ],
+  "version": 3,
+  "final_space": true
+}
