@@ -36,6 +36,7 @@
   - Theme installation
   - brew tweaks `HOMEBREW_NO_ENV_HINTS` etc
   - terminal add `.hushlogin` (stops the last opened message)
+  - iterm2 add Ai plugin <https://iterm2.com/downloads/ai-plugin/iTermAI-1.1.zip>
 
 - [ ] Python environment (uv)
   - Global tools installation
