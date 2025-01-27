@@ -34,6 +34,8 @@
   - Keybindings setup
   - Snippets management
   - Theme installation
+  - brew tweaks `HOMEBREW_NO_ENV_HINTS` etc
+  - terminal add `.hushlogin` (stops the last opened message)
 
 - [ ] Python environment (uv)
   - Global tools installation
