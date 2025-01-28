@@ -78,7 +78,7 @@
             "cache_duration": "none",
             "style": "folder"
           },
-          "template": "❯ {{ .Path }}",
+          "template": "\uf054 {{ .Path }}",
           "foreground": "p:github-magenta",
           "type": "path",
           "style": "plain"
@@ -88,7 +88,7 @@
             "branch_icon": "",
             "cache_duration": "none"
           },
-          "template": " ❯ {{.HEAD}}",
+          "template": " \uf054 {{.HEAD}}",
           "foreground": "p:github-gray",
           "type": "git",
           "style": "plain"
@@ -106,7 +106,7 @@
           "properties": {
             "cache_duration": "none"
           },
-          "template": " ❯",
+          "template": " \uf054",
           "foreground": "p:github-dark-gray",
           "type": "text",
           "style": "plain"
