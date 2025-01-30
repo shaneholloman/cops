@@ -37,7 +37,7 @@ setup_homebrew() {
 
     if [[ "$(uname -m)" == 'arm64' ]]; then
       print_warning "Setting up Homebrew for Apple Silicon..."
-      printf 'eval "$(/opt/homebrew/bin/brew shellenv)"' >>"$HOME/.zprofile"
+      printf "eval \"\$(%s)\"" "/opt/homebrew/bin/brew shellenv" >>"$HOME/.zprofile"
       eval "$(/opt/homebrew/bin/brew shellenv)"
     fi
     print_success "Homebrew installed successfully"
