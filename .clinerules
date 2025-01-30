@@ -30,7 +30,7 @@ To prove to the user you have read these rules, please include the following phr
 
 2. Code Style:
     - Use printf instead of echo
-    - Use [[ ]] for file testing
+    - Use `[[ ]]` for file testing
     - Quote all variable expansions
     - Use local variables in functions
     - Avoid hardcoded paths
