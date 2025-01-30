@@ -17,7 +17,8 @@ A modern, safe, and structured approach to macOS configuration management.
 git clone https://github.com/shaneholloman/cops.git ~/.cops
 cd ~/.cops
 code config.yaml  # Review and customize settings
-./cops-setup.sh
+./bootstrap.sh # gets the system ready for cops
+./cops-setup.sh # Apply your configuration
 ```
 
 Your configuration is now:
