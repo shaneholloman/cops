@@ -1,12 +1,13 @@
 # Cops Configuration
 
 # Master Switches (all features that can modify system state)
+enable_spotlight: true # Spotlight indexing control (disabled by default for safety) - Important to note that if you use this particular module, a human must be present to type in the password!
 enable_preferences: true # System preferences enabled for testing
 enable_tools: true # CLI tools installation
 enable_aliases: true # Shell aliases configuration
 enable_vim: true # Vim editor configuration
 enable_file_assoc: true # File associations setup
-enable_snapshots: true # Create APFS snapshot before changes
+enable_snapshots: false # Create APFS snapshot before changes
 enable_brewbundle: true # Process Brewfiles for package installation
 
 # User Information
@@ -280,6 +281,12 @@ file_associations:
     - "yaml" # YAML
     - "yml" # YAML
     - "sh" # Shell scripts
+
+# Spotlight Configuration
+spotlight:
+  # Note: This module requires human interaction to enter sudo password!
+  indexing:
+    external_volumes: false # When true, enables indexing for all external volumes; when false, disables
 
 # Restore Configuration
 # the back path needs to be reviewed and confirmed as compatible with the system and our project!!

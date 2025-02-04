@@ -1,5 +1,17 @@
 # Adding New Tools to Cops
 
+> [!IMPORTANT]
+> A gotcha that will always get you is when adding a module to cops you must source the new module in `cops-setup.sh` to make it available to the main script. This is a common mistake that can be easily overlooked.
+> Example, if you added a new spotlight.sh module it needs to be source like this:
+
+```sh
+...
+# shellcheck source=lib/spotlight.sh
+# shellcheck disable=SC1091
+source "${LIB_DIR}/spotlight.sh"
+...
+```
+
 ## TLDR: Quick Example
 
 To add a new tool (e.g., terraform-docs):
@@ -140,6 +152,7 @@ That's it! The script will automatically:
    - Check both package and command existence
    - Verify command actually works
    - Test with realistic usage scenarios
+
 # Adding Complex Tools to Cops
 
 ## TLDR: Quick Example (iTerm2)
@@ -178,7 +191,7 @@ That's it! The script will automatically:
     }
     ```
 
-## Detailed Guide
+## Detailed Guide Context
 
 ### When to Use Complex Setup
 
@@ -240,7 +253,7 @@ setup_toolname() {
 }
 ```
 
-### Coding Standards
+### Coding Standards Context
 
 1. Function Structure:
    - Clear header with print_header
@@ -269,7 +282,7 @@ setup_toolname() {
    - Group restart-requiring changes together when possible
    - Document restart requirements in comments
 
-### Best Practices
+### Best Practices Context
 
 1. Configuration Management:
    - Backup existing configurations

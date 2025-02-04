@@ -9,12 +9,15 @@ set -u
 # shellcheck source=lib/output.sh
 # shellcheck source=lib/brewbundle.sh
 # shellcheck source=lib/aliases.sh
+# shellcheck source=lib/spotlight.sh
 # shellcheck disable=SC1091
 source "lib/output.sh"
 # shellcheck disable=SC1091
 source "lib/brewbundle.sh"
 # shellcheck disable=SC1091
 source "lib/aliases.sh"
+# shellcheck disable=SC1091
+source "lib/spotlight.sh"
 
 # Global arrays to store tools that need installation
 declare -a CLI_TOOLS_TO_INSTALL
@@ -64,7 +67,9 @@ show_master_switches() {
   local file_assoc_status
   local snapshots_status
   local brewbundle_status
+  local spotlight_status
 
+  spotlight_status=$(is_feature_enabled "spotlight")
   preferences_status=$(is_feature_enabled "preferences")
   tools_status=$(is_feature_enabled "tools")
   aliases_status=$(is_feature_enabled "aliases")
@@ -75,6 +80,9 @@ show_master_switches() {
 
   printf "APFS Snapshots: %s\n" "$(print_status "$snapshots_status")"
   printf "  - Creates a system snapshot before making changes\n"
+  printf "\n"
+  printf "Spotlight Indexing: %s\n" "$(print_status "$spotlight_status")"
+  printf "  - Controls Spotlight indexing for external and network volumes\n"
   printf "\n"
   printf "System Preferences: %s\n" "$(print_status "$preferences_status")"
   printf "  - Controls system settings including keyboard and terminal preferences\n"
@@ -244,6 +252,10 @@ main() {
 
   if [[ "$(is_feature_enabled "preferences")" = "true" ]]; then
     setup_preferences
+  fi
+
+  if [[ "$(is_feature_enabled "spotlight")" = "true" ]]; then
+    setup_spotlight
   fi
 
   validate_installation

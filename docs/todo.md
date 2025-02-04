@@ -49,6 +49,11 @@
 
 ### System Configuration
 
+- [ ] Spotlight automation
+  - Research secure methods for sudo password handling
+  - Consider keychain integration for password management
+  - Investigate alternative approaches for automated volume indexing
+
 - [ ] Default applications
   - Firefox as default browser
   - VSCode as default editor
