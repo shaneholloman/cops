@@ -59,7 +59,7 @@ Benefits:
 2. Core Security Implementation
 
     ```bash
-    # lib/security/sudo.sh
+    # lib/sudo.sh
     validate_sudo_config() {
       # Verify sudoers syntax
       # Check file permissions
@@ -73,51 +73,28 @@ Benefits:
       # Monitor file integrity
       # Alert on violations
     }
-    ```
 
-### Phase 2: Automation Features
-
-1. Autonomous Operations
-
-    ```bash
-    # lib/automation/sudo_manager.sh
-    class SudoManager {
-      # Self-healing configuration
-      repair_sudo_config() {
-        # Verify syntax
-        # Fix permissions
-        # Update hashes
-        # Clean stale entries
-      }
-
-      # Continuous validation
-      monitor_sudo_health() {
-        # Check configuration
-        # Verify permissions
-        # Validate integrity
-        # Report status
-      }
+    repair_sudo_config() {
+      # Verify syntax
+      # Fix permissions
+      # Update hashes
+      # Clean stale entries
     }
-    ```
 
-2. Safety Integration
+    monitor_sudo_health() {
+      # Check configuration
+      # Verify permissions
+      # Validate integrity
+      # Report status
+    }
 
-```bash
-# lib/safety/sudo_protection.sh
-protect_sudo_operations() {
-  # Create APFS snapshot
-  # Backup sudo configuration
-  # Verify backup integrity
-  # Enable monitoring
-}
-```
+    protect_sudo_operations() {
+      # Create APFS snapshot
+      # Backup sudo configuration
+      # Verify backup integrity
+      # Enable monitoring
+    }
 
-### Phase 3: Audit System
-
-1. Comprehensive Logging
-
-    ```bash
-    # lib/audit/sudo_logger.sh
     log_sudo_event() {
       # Record operation details
       # Track command execution
@@ -126,12 +103,39 @@ protect_sudo_operations() {
     }
     ```
 
-2. Audit Features
+### Phase 2: Module Integration
 
-- Real-time event monitoring
-- Detailed operation logs
-- Security compliance reports
-- Performance tracking
+1. Spotlight Module Integration
+
+    ```bash
+    # lib/spotlight.sh
+    spotlight_update() {
+      # Use sudo module for privileged operations
+      if [[ "$(is_feature_enabled "sudo_automation")" = "true" ]]; then
+        sudo_execute "mdutil" "-i" "on" "/Volumes/ExternalDrive"
+      else
+        print_error "Sudo automation is required for spotlight operations"
+        return 1
+      fi
+    }
+    ```
+
+2. Hostname Module Integration
+
+    ```bash
+    # lib/hostname.sh (upcoming)
+    set_hostname() {
+      # Use sudo module for privileged operations
+      if [[ "$(is_feature_enabled "sudo_automation")" = "true" ]]; then
+        sudo_execute "scutil" "--set" "ComputerName" "$new_name"
+        sudo_execute "scutil" "--set" "LocalHostName" "$new_name"
+        sudo_execute "scutil" "--set" "HostName" "$new_name"
+      else
+        print_error "Sudo automation is required for hostname operations"
+        return 1
+      fi
+    }
+    ```
 
 ## Security Considerations
 
@@ -204,17 +208,36 @@ protect_sudo_operations() {
 
 ## Related Components
 
-- `lib/security/sudo.sh` (core security)
-- `lib/automation/sudo_manager.sh` (automation)
-- `lib/safety/sudo_protection.sh` (safety features)
-- `lib/audit/sudo_logger.sh` (audit system)
+- `lib/sudo.sh` (core implementation)
+- `lib/spotlight.sh` (requires sudo integration)
+- `lib/hostname.sh` (upcoming, requires sudo integration)
+- `lib/main.sh` (sudo feature initialization)
+- `lib/validate.sh` (sudo configuration validation)
+
+## Module Integration Requirements
+
+### Current Modules
+
+Spotlight Module (lib/spotlight.sh)
+    - Must use sudo module for all privileged operations
+    - Requires sudo automation for mdutil commands
+    - Should handle sudo failures gracefully
+    - Must log all sudo operations
+
+### Upcoming Modules
+
+Hostname Module (lib/hostname.sh)
+    - Must use sudo module for all scutil commands
+    - Requires sudo automation for system name changes
+    - Should implement proper error handling
+    - Must maintain audit trail of changes
 
 ## Next Steps
 
 1. Implementation
-   - Create service account
-   - Implement core security
-   - Add monitoring system
+   - Create sudo.sh module
+   - Update spotlight.sh to use sudo module
+   - Prepare hostname.sh with sudo integration
    - Enable audit logging
 
 2. Testing
