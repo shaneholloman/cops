@@ -34,7 +34,7 @@
   - Keybindings setup
   - Snippets management
   - Theme installation
-  - brew tweaks `HOMEBREW_NO_ENV_HINTS` etc
+  - [x] brew tweaks `HOMEBREW_NO_ENV_HINTS` etc
   - terminal add `.hushlogin` (stops the last opened message)
   - iterm2 add Ai plugin <https://iterm2.com/downloads/ai-plugin/iTermAI-1.1.zip>
 
@@ -49,7 +49,7 @@
 
 ### System Configuration
 
-- [ ] Spotlight automation
+- [x] Spotlight automation
   - Research secure methods for sudo password handling
   - Consider keychain integration for password management
   - Investigate alternative approaches for automated volume indexing
