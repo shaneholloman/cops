@@ -218,7 +218,7 @@ test_safety_features() {
 
 Structure:
 
-```
+```tree
 lib/
   ├── module.sh           # Implementation
   └── tests/
