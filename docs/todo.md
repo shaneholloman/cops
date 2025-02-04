@@ -29,41 +29,44 @@
 
 ### Development Tools
 
+- [x] brew tweaks `HOMEBREW_NO_ENV_HINTS` etc
+- [ ] terminal add `.hushlogin` (stops the last opened message)
+- [ ] iterm2 add Ai plugin <https://iterm2.com/downloads/ai-plugin/iTermAI-1.1.zip>
 - [ ] VSCode module
-  - Extensions management
-  - Settings configuration
-  - Keybindings setup
-  - Snippets management
-  - Theme installation
-  - [x] brew tweaks `HOMEBREW_NO_ENV_HINTS` etc
-  - terminal add `.hushlogin` (stops the last opened message)
-  - iterm2 add Ai plugin <https://iterm2.com/downloads/ai-plugin/iTermAI-1.1.zip>
+  - [ ] Extensions management
+  - [ ] Settings configuration
+  - [ ] Keybindings setup
+  - [ ] Snippets management
+  - [ ] Theme installation
 
 - [ ] Python environment (uv)
-  - Global tools installation
-  - Version management
-  - Example: `uv tool install mlx-whisper --python 3.12`
+  - [ ] Global tools installation
+  - [ ] Version management
+  - [ ] Example: `uv tool install mlx-whisper --python 3.12`
 
 - [ ] Node.js environment
-  - Volta integration
-  - Global package management
+  - [ ] Volta integration
+  - [ ] Global package management
 
 ### System Configuration
 
 - [ ] Hostname set
   - [ ] See [brief](./dev/briefs/cops-hostname-brief.md)
 
-- [ ] Spotlight automation
+Spotlight automation
+
   - [x] Research secure methods for sudo password handling
   - [x] Consider keychain integration for password management - wont use
   - [ ] Add sudo module for secure automation
 
-- [ ] Default applications
-  - Firefox as default browser
-  - VSCode as default editor
-  - iTerm2 as default terminal
+Default applications
 
-- [ ] Security setup
+  - [ ] Firefox as default browser
+  - [ ] VSCode as default editor
+  - [ ] iTerm2 as default terminal
+
+Security setup
+
   - SSH key generation (ed25519)
   - SSL certificate handling
   - OpenSSL vs LibreSSL configuration
