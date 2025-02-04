@@ -16,6 +16,34 @@ if ! command -v yq &>/dev/null; then
   fi
 fi
 
+# Function to find config file with .yaml or .yml extension
+find_config_file() {
+  local base_path="$1"
+
+  # Check exact path first
+  if [[ -f "$base_path" ]]; then
+    echo "$base_path"
+    return 0
+  fi
+
+  # If no extension provided, try both
+  if [[ "$base_path" != *.yml && "$base_path" != *.yaml ]]; then
+    if [[ -f "${base_path}.yaml" ]]; then
+      echo "${base_path}.yaml"
+      return 0
+    elif [[ -f "${base_path}.yml" ]]; then
+      echo "${base_path}.yml"
+      return 0
+    fi
+  fi
+
+  return 1
+}
+
+# Global configuration
+CONFIG_FILE="config.yaml"
+export AUTO_AGREE
+
 # Parse command line arguments
 AUTO_AGREE=false
 COMMAND=""
@@ -28,6 +56,7 @@ TEST_MODE=false
 print_usage() {
   printf "Usage: %s [OPTIONS]\n" "$0"
   printf "\nOptions:\n"
+  printf "  --config-file <path>    Specify custom config file (default: config.yaml)\n"
   printf "  --auto-agree            Skip confirmation prompts\n"
   printf "  --dry-run              Show what would be done without making changes\n"
   printf "  --test                 Run tests for restore functionality\n"
@@ -39,6 +68,20 @@ print_usage() {
 
 while [[ $# -gt 0 ]]; do
   case $1 in
+  --config-file)
+    if [[ $# -lt 2 ]]; then
+      print_error "Missing path for --config-file"
+      print_usage
+      exit 1
+    fi
+    if config_path=$(find_config_file "$2"); then
+      CONFIG_FILE="$config_path"
+    else
+      print_error "Config file not found: $2 (tried both .yaml and .yml)"
+      exit 1
+    fi
+    shift 2
+    ;;
   --auto-agree)
     AUTO_AGREE=true
     shift
@@ -92,10 +135,6 @@ while [[ $# -gt 0 ]]; do
     ;;
   esac
 done
-
-# Global configuration
-CONFIG_FILE="config.yaml"
-export AUTO_AGREE
 
 COPS_ROOT=$(yq eval '.paths.cops' "$CONFIG_FILE" | envsubst)
 export COPS_ROOT

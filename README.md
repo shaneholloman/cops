@@ -86,6 +86,30 @@ git remote add origin <your-repo-url>
 git push -u origin main
 ```
 
+### Custom Configuration Files
+
+You can use different configuration files for different purposes:
+
+```bash
+# Use a specific config file
+./cops-setup.sh --config-file configs/desktop.yaml
+
+# Works with both .yaml and .yml extensions
+./cops-setup.sh --config-file configs/server.yml
+
+# Auto-detects extension if not specified (not best practice though)
+./cops-setup.sh --config-file configs/department
+```
+
+This enables:
+
+- Different configurations for different machines (desktop, server, testing or whatever)
+- Department-specific configurations
+- Test configurations for development
+- Special-case configurations for specific use cases
+
+The default config.yaml is used if no custom config file is specified.
+
 ### Development Location (optional)
 
 You can also run cops from a different location:
