@@ -10,6 +10,7 @@
 - [ ] Add update module (softwareupdate + brew)
 - [ ] Add function to pull latest COPS version (preserve user config)
 - [ ] Add volta setup function (global packages)
+- [ ] sudo module see [brief](./dev/briefs/cops-sudo-brief.md)
 
 ### Code Improvements
 
@@ -49,10 +50,13 @@
 
 ### System Configuration
 
-- [x] Spotlight automation
-  - Research secure methods for sudo password handling
-  - Consider keychain integration for password management
-  - Investigate alternative approaches for automated volume indexing
+- [ ] Hostname set
+  - [ ] See [brief](./dev/briefs/cops-hostname-brief.md)
+
+- [ ] Spotlight automation
+  - [x] Research secure methods for sudo password handling
+  - [x] Consider keychain integration for password management - wont use
+  - [ ] Add sudo module for secure automation
 
 - [ ] Default applications
   - Firefox as default browser
@@ -80,6 +84,7 @@
 ## Completed
 
 - [x] Single config.yaml implementation
+- [x] Configurable choice of config file
 - [x] Function modularization
 - [x] Aliases module
 - [x] Backup/restore system
