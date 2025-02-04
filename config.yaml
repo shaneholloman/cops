@@ -1,8 +1,8 @@
 # Cops Configuration
 
 # Master Switches (all features that can modify system state)
-enable_spotlight: true # Spotlight indexing control (disabled by default for safety) - Important to note that if you use this particular module, a human must be present to type in the password!
-enable_preferences: true # System preferences enabled for testing
+enable_spotlight: false # Spotlight indexing control - Important to note that if you use this particular module, a human must be present to type in the password!
+enable_preferences: false # System preferences configuration
 enable_tools: true # CLI tools installation
 enable_aliases: true # Shell aliases configuration
 enable_vim: true # Vim editor configuration
@@ -42,6 +42,7 @@ shell:
     AWS_SHARED_CREDENTIALS_FILE: "$HOME/.aws/credentials"
     KUBECONFIG: "$HOME/.kube/config"
     TERRAFORM_CONFIG: "$HOME/.terraform.d/config.tfrc"
+    HOMEBREW_NO_ENV_HINTS: "1"
 
 git:
   editor: "vim"
