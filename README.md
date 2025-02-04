@@ -94,7 +94,7 @@ You can also run cops from a different location:
 # Clone to any directory for testing
 git clone https://github.com/shaneholloman/cops.git ~/projects/cops
 cd ~/projects/cops
-./bootstrap.sh  # Optional: Prepare the system if it doesn't have brew, yt and gettext yet
+./bootstrap.sh  # Optional: Prep yer system if it doesn't have brew, yt and gettext yet
 ./cops-setup.sh  # Updates ~/.cops
 ```
 
