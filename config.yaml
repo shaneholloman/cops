@@ -7,7 +7,7 @@ enable_tools: true # CLI tools installation
 enable_aliases: true # Shell aliases configuration
 enable_vim: true # Vim editor configuration
 enable_file_assoc: true # File associations setup
-enable_snapshots: false # Create APFS snapshot before changes
+enable_snapshots: true # Create APFS snapshot before changes
 enable_brewbundle: true # Process Brewfiles for package installation
 
 # User Information
