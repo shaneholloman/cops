@@ -131,6 +131,12 @@ Then open nvim. This will be slow at first, sometimes blank screen: `nvim`
 
 Run `:LazyHealth`
 
+## My Health Results so far
+
+```sh
+# how to save the results??
+```
+
 ## Install GitHub theme
 
 <https://github.com/projekt0n/github-nvim-theme?tab=readme-ov-file>

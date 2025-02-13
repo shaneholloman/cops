@@ -87,8 +87,11 @@ tools:
     - bash
     - bash-completion2
     - cmake
+    - curl
+    - fd
     - findutils
     - ffmpeg
+    - fzf
     - gh
     - gmp
     - gnu-sed
@@ -99,23 +102,31 @@ tools:
     - imagemagick
     - jq
     - kubernetes-cli
+    - lazygit
+    - libreoffice
     - lua
+    - libmagic
     - lynx
     - mpv
     - moreutils
+    - mpv
+    - obs
     - oh-my-posh
     - openssh
     - p7zip
+    - pandoc
     - php
     - pigz
     - pkgconf
-    - portaudio
     - pv
     - rename
+    - ripgrep
     - rlwrap
     - rust
     - screen
+    - signal
     - terraform
+    - tesseract
     - tree
     - uv
     - vlc
@@ -135,6 +146,7 @@ tools:
     - powershell
     - visual-studio-code
     - visual-studio-code@insiders
+    - vivaldi
     - sequel-ace
 
   forensic:
