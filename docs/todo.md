@@ -2,6 +2,18 @@
 
 ## Core System
 
+### Misc
+
+```sh
+brew install zsh-autosuggestions
+brew install zsh-autocomplete
+```
+
+```sh
+source "/opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "/opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
+```
+
 ### High Priority
 
 - [ ] Add git pre-commit hooks for linting/analyze-scripts.sh
