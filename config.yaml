@@ -109,7 +109,6 @@ tools:
     - lynx
     - moreutils
     - mpv
-    - mpv
     - obs
     - oh-my-posh
     - openssh
