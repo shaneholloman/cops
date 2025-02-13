@@ -89,8 +89,8 @@ tools:
     - cmake
     - curl
     - fd
-    - findutils
     - ffmpeg
+    - findutils
     - fzf
     - gh
     - gmp
@@ -103,12 +103,12 @@ tools:
     - jq
     - kubernetes-cli
     - lazygit
+    - libmagic
     - libreoffice
     - lua
-    - libmagic
     - lynx
-    - mpv
     - moreutils
+    - mpv
     - mpv
     - obs
     - oh-my-posh
@@ -118,6 +118,7 @@ tools:
     - php
     - pigz
     - pkgconf
+    - portaudio
     - pv
     - rename
     - ripgrep
@@ -131,8 +132,8 @@ tools:
     - uv
     - vlc
     - volta
-    - yt-dlp
     - yq
+    - yt-dlp
 
   cask:
     - docker
