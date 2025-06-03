@@ -41,18 +41,18 @@ validate_installation() {
   # Validate CLI tools
   while IFS= read -r tool; do
     if validate_tool "$tool"; then
-      print_validation_result "$tool" "true" "false"
+      print_validation_result "$tool" "true" "validate"
     else
-      print_validation_result "$tool" "false" "false"
+      print_validation_result "$tool" "false" "validate"
     fi
   done < <(get_config_array '.tools.cli[]')
 
   # Validate cask applications
   while IFS= read -r app; do
     if brew list --cask 2>/dev/null | grep -q "^${app}$"; then
-      print_validation_result "$app" "true" "false"
+      print_validation_result "$app" "true" "validate"
     else
-      print_validation_result "$app" "false" "false"
+      print_validation_result "$app" "false" "validate"
     fi
   done < <(get_config_array '.tools.cask[]')
 }

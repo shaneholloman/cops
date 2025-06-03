@@ -27,18 +27,18 @@ check_tools() {
   # Check CLI tools
   while IFS= read -r tool; do
     if validate_tool "$tool"; then
-      print_validation_result "$tool" "true" "true"
+      print_validation_result "$tool" "true" "check"
     else
-      print_validation_result "$tool" "false" "true"
+      print_validation_result "$tool" "false" "check"
     fi
   done < <(get_config_array '.tools.cli[]')
 
   # Check cask applications
   while IFS= read -r app; do
     if brew list --cask 2>/dev/null | grep -q "^${app}$"; then
-      print_validation_result "$app" "true" "true"
+      print_validation_result "$app" "true" "check"
     else
-      print_validation_result "$app" "false" "true"
+      print_validation_result "$app" "false" "check"
     fi
   done < <(get_config_array '.tools.cask[]')
 }

@@ -25,19 +25,31 @@ validate_tool() {
 print_validation_result() {
   local tool="$1"
   local success="$2"
-  local is_check="${3:-false}" # true for check phase, false for install phase
+  local phase="${3:-install}" # "check", "install", or "validate"
 
   if [[ "$success" == "true" ]]; then
-    if [[ "$is_check" == "true" ]]; then
-      print_success "$tool already installed"
-    else
-      print_success "$tool installed successfully"
-    fi
+    case "$phase" in
+      "check")
+        print_success "$tool already installed"
+        ;;
+      "install")
+        print_success "$tool installed successfully"
+        ;;
+      "validate")
+        print_success "$tool installed successfully"
+        ;;
+    esac
   else
-    if [[ "$is_check" == "true" ]]; then
-      print_warning "$tool will be installed"
-    else
-      print_error "$tool installation failed"
-    fi
+    case "$phase" in
+      "check")
+        print_warning "$tool will be installed"
+        ;;
+      "install")
+        print_error "$tool installation failed"
+        ;;
+      "validate")
+        print_error "$tool installation failed"
+        ;;
+    esac
   fi
 }
