@@ -4,9 +4,10 @@ A no-brainer macOS configuration management system that sets up your Mac and **a
 
 ## The Problem COPS Solves
 
-**"Where are my last 6 months of tweaks?"**
+>"Where are my last 6 months of tweaks?"
 
 You know the scenario:
+
 1. Set up a Mac perfectly with all your apps, preferences, and configurations
 2. Tweak settings over months to get everything just right
 3. Get a new machine 6 months later
@@ -20,7 +21,7 @@ You know the scenario:
 # Fresh Mac setup
 git clone https://github.com/shaneholloman/cops.git ~/.cops
 cd ~/.cops
-./bootstrap.sh    # Prep system dependencies  
+./bootstrap.sh    # Prep system dependencies
 ./cops.sh         # Apply configuration and auto-save your settings
 ```
 
@@ -28,24 +29,28 @@ cd ~/.cops
 
 ## Key Benefits
 
-### 🔄 **Auto-Save Your Tweaks**
+### **Auto-Save Your Tweaks**
+
 - Every time you run COPS, your configuration changes are automatically committed
 - Never lose months of careful customization again
 - Your `config.yaml` and system backups are preserved automatically
 
-### 🛡️ **Safe by Design** 
+### **Safe by Design**
+
 - APFS snapshots before making changes (instant rollback)
 - Validates everything before applying changes
 - Backs up existing configs before overwriting
 - Master switches to control what gets modified
 
-### 🎯 **No-Brainer Operation**
+### **No-Brainer Operation**
+
 - Single `config.yaml` file controls everything
 - Works perfectly for semi-technical users
 - Just run `./cops.sh` and everything happens automatically
 - No complex setup or configuration required
 
-### 🧩 **Complete Mac Setup**
+### **Complete Mac Setup**
+
 - Installs CLI tools and applications via Homebrew
 - Sets up development environment (shell, aliases, dotfiles)
 - Configures system preferences (keyboard, terminal, etc.)
@@ -65,7 +70,7 @@ Everything is controlled by a single `config.yaml` file:
 ```yaml
 # Enable/disable major features
 enable_tools: true        # Install CLI tools and apps
-enable_preferences: true  # Configure system settings  
+enable_preferences: true  # Configure system settings
 enable_aliases: true      # Set up shell aliases
 enable_snapshots: true    # Create safety snapshots
 
@@ -89,6 +94,7 @@ git:
 ## Advanced Usage
 
 ### Different Configurations
+
 ```bash
 # Use different configs for different machines
 ./cops.sh --config-file configs/desktop.yaml
@@ -96,6 +102,7 @@ git:
 ```
 
 ### Auto-Push to Remote
+
 ```yaml
 git:
   auto_commit: true
@@ -108,7 +115,7 @@ Set up a private repo and never lose your settings across machines.
 
 - **APFS Snapshots**: Instant system rollback if needed
 - **Config Validation**: Checks YAML syntax and required tools
-- **Backup Everything**: Existing dotfiles backed up with timestamps  
+- **Backup Everything**: Existing dotfiles backed up with timestamps
 - **Master Switches**: Granular control over what gets modified
 - **Dry Run Mode**: See what would happen before applying changes
 
