@@ -35,6 +35,9 @@ print_validation_result() {
       "install")
         print_success "$tool installed successfully"
         ;;
+      "already-installed")
+        print_success "$tool already installed"
+        ;;
       "validate")
         print_success "$tool installed successfully"
         ;;
@@ -46,6 +49,9 @@ print_validation_result() {
         ;;
       "install")
         print_error "$tool installation failed"
+        ;;
+      "already-installed")
+        print_error "$tool missing (was previously installed)"
         ;;
       "validate")
         print_error "$tool installation failed"
