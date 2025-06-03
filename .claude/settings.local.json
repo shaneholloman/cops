@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(defaults read:*)",
+      "Bash(./cops-setup.sh:*)",
+      "Bash(./analyze-scripts.sh)",
+      "Bash(brew install:*)",
+      "Bash(rg:*)",
+      "Bash(mv:*)",
+      "Bash(./cops)",
+      "Bash(./cops.sh:*)",
+      "Bash(./analyze.sh)",
+      "Bash(sed:*)",
+      "Bash(shellcheck:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(rm:*)",
+      "Bash(brew list:*)",
+      "Bash(command -v:*)",
+      "Bash(brew uninstall:*)",
+      "Bash(brew info:*)",
+      "Bash(source:*)",
+      "Bash(get_cask_app_name claude)",
+      "Bash(grep:*)",
+      "Bash(git push:*)"
+    ],
+    "deny": []
+  }
+}
