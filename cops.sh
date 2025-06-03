@@ -184,6 +184,12 @@ source "${LIB_DIR}/main.sh"
 # Export test mode for library files
 export TEST_MODE
 
+# Check dependencies first
+if ! check_dependencies; then
+  print_error "Dependency check failed - aborting"
+  exit 1
+fi
+
 # Validate configuration file before proceeding
 export CONFIG_FILE
 if ! validate_config_file "$CONFIG_FILE"; then

@@ -49,6 +49,42 @@ validate_config_file() {
   return 0
 }
 
+# Check if required dependencies are available
+check_dependencies() {
+  local missing_deps=()
+  local required_tools=("yq" "envsubst" "brew" "defaults" "tmutil" "git")
+  
+  print_header "Checking required dependencies"
+  
+  for tool in "${required_tools[@]}"; do
+    if ! command -v "$tool" >/dev/null 2>&1; then
+      missing_deps+=("$tool")
+      print_error "Missing required tool: $tool"
+    else
+      print_success "Found required tool: $tool"
+    fi
+  done
+  
+  # Check for yq version compatibility (needs v4+)
+  if command -v yq >/dev/null 2>&1; then
+    local yq_version
+    yq_version=$(yq --version 2>/dev/null | grep -o 'v[0-9]*' | sed 's/v//' || echo "0")
+    if [[ "$yq_version" -lt 4 ]]; then
+      missing_deps+=("yq (version 4+ required)")
+      print_error "yq version $yq_version found, but version 4+ is required"
+    fi
+  fi
+  
+  if [[ ${#missing_deps[@]} -gt 0 ]]; then
+    print_error "Missing dependencies: ${missing_deps[*]}"
+    print_error "Please install missing tools and try again"
+    return 1
+  fi
+  
+  print_success "All required dependencies are available"
+  return 0
+}
+
 get_config() {
   local path="$1"
   yq eval "$path" "${CONFIG_FILE}" | envsubst
