@@ -49,12 +49,54 @@ get_preference_type() {
   echo "string"
 }
 
+# Sanitize input for defaults command
+sanitize_preference_input() {
+  local input="$1"
+  # Remove shell metacharacters and command injection attempts
+  # shellcheck disable=SC2016
+  echo "$input" | sed 's/[;&|`$(){}\[\]\\]//' | tr -d '\n\r'
+}
+
+# Validate preference inputs
+validate_preference_inputs() {
+  local domain="$1"
+  local key="$2"
+  local value="$3"
+
+  # Check for empty inputs
+  if [[ -z "$domain" || -z "$key" || -z "$value" ]]; then
+    print_error "Preference inputs cannot be empty"
+    return 1
+  fi
+
+  # Check for suspicious patterns using case statements
+  case "$domain$key$value" in
+    *\;*|*\|*|*\&*|*\`*|*\$*|*\(*|*\)*|*\{*|*\}*|*\[*|*\]*)
+      print_error "Preference inputs contain suspicious characters"
+      return 1
+      ;;
+  esac
+
+  return 0
+}
+
 # Apply a single preference
 apply_preference() {
   local domain="$1"
   local key="$2"
   local value="$3"
   local type
+
+  # Validate inputs first
+  if ! validate_preference_inputs "$domain" "$key" "$value"; then
+    return 1
+  fi
+
+  # Sanitize inputs
+  domain=$(sanitize_preference_input "$domain")
+  key=$(sanitize_preference_input "$key")
+  value=$(sanitize_preference_input "$value")
+
   type=$(get_preference_type "$value")
 
   # Map domain using get_domain_bundle function
