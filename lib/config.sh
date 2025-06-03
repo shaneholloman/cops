@@ -77,6 +77,12 @@ check_dependencies() {
   
   if [[ ${#missing_deps[@]} -gt 0 ]]; then
     print_error "Missing dependencies: ${missing_deps[*]}"
+    
+    # Check if this looks like a bootstrap situation
+    if [[ " ${missing_deps[*]} " =~ " yq " ]] || [[ " ${missing_deps[*]} " =~ " envsubst " ]]; then
+      print_warning "TIP: For new machines, run ./bootstrap.sh first to install core dependencies"
+    fi
+    
     print_error "Please install missing tools and try again"
     return 1
   fi
