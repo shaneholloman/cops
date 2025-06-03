@@ -16,7 +16,9 @@
       "Bash(shellcheck:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(brew list:*)",
+      "Bash(command -v:*)"
     ],
     "deny": []
   }

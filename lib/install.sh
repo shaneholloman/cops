@@ -52,8 +52,8 @@ validate_installation() {
     fi
 
     if [[ "$was_installed" == "true" ]]; then
-      # This tool was attempted to be installed, check if it succeeded
-      if validate_tool "$tool"; then
+      # This tool was attempted to be installed, check if it succeeded via brew
+      if brew list 2>/dev/null | grep -q "^${tool}$"; then
         print_validation_result "$tool" "true" "install"
       else
         print_validation_result "$tool" "false" "install"
