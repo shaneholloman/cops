@@ -22,7 +22,9 @@
       "Bash(brew uninstall:*)",
       "Bash(brew info:*)",
       "Bash(source:*)",
-      "Bash(get_cask_app_name claude)"
+      "Bash(get_cask_app_name claude)",
+      "Bash(grep:*)",
+      "Bash(git push:*)"
     ],
     "deny": []
   }
