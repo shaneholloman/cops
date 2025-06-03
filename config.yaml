@@ -2,7 +2,7 @@
 
 # Master Switches (all features that can modify system state)
 enable_spotlight: false # Spotlight indexing control - Important to note that if you use this particular module, a human must be present to type in the password!
-enable_preferences: false # System preferences configuration
+enable_preferences: true # System preferences configuration
 enable_tools: true # CLI tools installation
 enable_aliases: true # Shell aliases configuration
 enable_vim: true # Vim editor configuration
