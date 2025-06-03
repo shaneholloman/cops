@@ -184,6 +184,13 @@ source "${LIB_DIR}/main.sh"
 # Export test mode for library files
 export TEST_MODE
 
+# Validate configuration file before proceeding
+export CONFIG_FILE
+if ! validate_config_file "$CONFIG_FILE"; then
+  print_error "Configuration validation failed - aborting"
+  exit 1
+fi
+
 # Handle restore commands if present
 if [[ -n "$COMMAND" ]]; then
   case "$COMMAND" in

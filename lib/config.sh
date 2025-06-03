@@ -10,14 +10,53 @@ set -u
 export BACKUP_FORMAT="%Y%m%d_%H%M%S"
 export BACKUP_DIR="${COPS_ROOT}/backups"
 
+# CONFIG_FILE is set by the main script and exported
+# This declaration helps shellcheck understand the variable is global
+: "${CONFIG_FILE:?CONFIG_FILE must be set}"
+
+# Validate YAML configuration file
+validate_config_file() {
+  local config_file="$1"
+  
+  # Check if file exists and is readable
+  if [[ ! -f "$config_file" ]]; then
+    print_error "Configuration file not found: $config_file"
+    return 1
+  fi
+  
+  if [[ ! -r "$config_file" ]]; then
+    print_error "Configuration file not readable: $config_file"
+    return 1
+  fi
+  
+  # Check if yq can parse the YAML file
+  if ! yq eval '.' "$config_file" >/dev/null 2>&1; then
+    print_error "Invalid YAML syntax in configuration file: $config_file"
+    print_error "Please check your YAML formatting and try again"
+    return 1
+  fi
+  
+  # Check for required top-level sections
+  local required_sections=("user" "preferences" "tools")
+  for section in "${required_sections[@]}"; do
+    if ! yq eval "has(\"$section\")" "$config_file" | grep -q "true"; then
+      print_error "Missing required section '$section' in configuration file"
+      return 1
+    fi
+  done
+  
+  print_success "Configuration file validation passed: $config_file"
+  return 0
+}
+
 get_config() {
   local path="$1"
-  yq eval "$path" "$CONFIG_FILE" | envsubst
+  yq eval "$path" "${CONFIG_FILE}" | envsubst
 }
 
 get_config_array() {
   local path="$1"
-  yq eval "$path" "$CONFIG_FILE" | while read -r line; do
+  yq eval "$path" "${CONFIG_FILE}" | while read -r line; do
     echo "${line#- }"
   done
 }
