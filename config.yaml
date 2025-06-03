@@ -49,6 +49,8 @@ git:
   default_branch: "main"
   pull_rebase: true
   color_ui: true
+  auto_commit: true   # Automatically save your COPS configuration changes
+  auto_push: true    # Set to true to also push changes to remote repo
 
 vim:
   options:

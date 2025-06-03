@@ -137,6 +137,35 @@ initialize_git_repo() {
   print_header "Initializing Git repository"
   cd "$COPS_ROOT" || exit 1
   git init
-  git add .
-  git commit -m "Initial cops setup"
+
+  # Auto-save user configuration (default behavior)
+  if [[ "$(get_config '.git.auto_commit')" == "true" ]]; then
+    print_warning "Auto-saving your COPS configuration..."
+    git add config.yaml backups/ config/
+
+    # Check if there are actually changes to commit
+    if git diff --staged --quiet; then
+      print_success "No configuration changes to save"
+    else
+      git commit -m "Auto-save COPS configuration
+
+Updated configuration files and system backups.
+This ensures your settings are preserved for future COPS runs.
+
+To disable auto-save: set git.auto_commit: false in config.yaml"
+    fi
+
+    # Auto-push if enabled
+    if [[ "$(get_config '.git.auto_push')" == "true" ]]; then
+      if git remote get-url origin >/dev/null 2>&1; then
+        print_warning "Auto-pushing configuration to remote repository..."
+        git push -u origin main 2>/dev/null || print_warning "Push failed - you may need to set up remote repository"
+      else
+        print_warning "Auto-push enabled but no remote repository configured"
+      fi
+    fi
+  else
+    print_warning "Git repository initialized. Your configuration is NOT being auto-saved."
+    print_warning "To enable auto-save: set git.auto_commit: true in config.yaml"
+  fi
 }

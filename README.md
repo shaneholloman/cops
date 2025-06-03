@@ -1,162 +1,130 @@
-# `.cops`
+# COPS (Config OPeratorS)
 
-(Config OPeratorS)
+A no-brainer macOS configuration management system that sets up your Mac and **automatically preserves your settings** so you never lose your tweaks.
 
-A modern, safe, and structured approach to macOS configuration management.
+## The Problem COPS Solves
 
-> [!IMPORTANT]
-> Works, but not complete yet!
->"cops" implements opinionated configuration choices and represents an initial foundation.
->
->Its' a modern replacement for the somewhat long-in-the-tooth dotfiles framework. For a complete overview of planned enhancements and additional features, please refer to the blueprint. Please share your opinions and suggestions.
+**"Where are my last 6 months of tweaks?"**
+
+You know the scenario:
+1. Set up a Mac perfectly with all your apps, preferences, and configurations
+2. Tweak settings over months to get everything just right
+3. Get a new machine 6 months later
+4. **Panic**: Where are all your customizations? What apps did you install? What were those terminal settings?
+
+**COPS prevents this nightmare** by automatically saving your configuration every time you run it.
 
 ## Quick Start
 
 ```bash
-# Install your configuration
+# Fresh Mac setup
 git clone https://github.com/shaneholloman/cops.git ~/.cops
 cd ~/.cops
-code config.yaml  # Review and customize settings
-./bootstrap.sh # gets the system ready for cops if it's a brand new machine - not sure yet if I'll roll this into the setup script or not...
-./cops.sh # Apply your configuration
+./bootstrap.sh    # Prep system dependencies  
+./cops.sh         # Apply configuration and auto-save your settings
 ```
 
-Your configuration is now:
+**That's it.** Your Mac is configured and your settings are automatically saved to git.
 
-- Set up in ~/.cops
-- In a fresh git repository
-- Ready for customization
-- Safe to experiment with
+## Key Benefits
 
-## Overview
+### 🔄 **Auto-Save Your Tweaks**
+- Every time you run COPS, your configuration changes are automatically committed
+- Never lose months of careful customization again
+- Your `config.yaml` and system backups are preserved automatically
 
-This repository provides multiple safeguards for risk-free testing and deployment:
+### 🛡️ **Safe by Design** 
+- APFS snapshots before making changes (instant rollback)
+- Validates everything before applying changes
+- Backs up existing configs before overwriting
+- Master switches to control what gets modified
 
-  - Develop from any directory while targeting ~/.cops
-  - Run risk free testing in directly in GitHub workflows
-  - Verify idempotency through repeated test runs
-  - Use Time Machine snapshots for instant rollbacks
-  - Test changes in isolation from your active configuration
+### 🎯 **No-Brainer Operation**
+- Single `config.yaml` file controls everything
+- Works perfectly for semi-technical users
+- Just run `./cops.sh` and everything happens automatically
+- No complex setup or configuration required
 
-A modular "cops" management system for macOS that automates the setup of development environments through a centralized YAML configuration. The system emphasizes safety, reversibility, and maintainability through master switches and comprehensive backup capabilities.
+### 🧩 **Complete Mac Setup**
+- Installs CLI tools and applications via Homebrew
+- Sets up development environment (shell, aliases, dotfiles)
+- Configures system preferences (keyboard, terminal, etc.)
+- Manages file associations and default applications
 
-## Key Features
+## How It Works
 
-- **Safe by Design**
-  - APFS snapshots for rollback
-  - Master switches for control
-  - Validation before changes
-  - Backup of existing configs
+1. **Configure once**: Edit `config.yaml` with your preferred apps and settings
+2. **Run COPS**: `./cops.sh` applies your configuration
+3. **Auto-save**: Your changes are automatically committed to git
+4. **New machine**: Clone your repo and run `./cops.sh` - everything restored perfectly
 
-- **Simple but Powerful**
-  - Single config.yaml
-  - No external dependencies
-  - Homebrew integration
-  - Modern tooling support
+## Configuration
 
-- **Structured Approach**
-  - Organized configuration
-  - Clear separation of concerns
-  - Consistent directory layout
-  - Easy to maintain
+Everything is controlled by a single `config.yaml` file:
 
-## Working with `.cops`
+```yaml
+# Enable/disable major features
+enable_tools: true        # Install CLI tools and apps
+enable_preferences: true  # Configure system settings  
+enable_aliases: true      # Set up shell aliases
+enable_snapshots: true    # Create safety snapshots
 
-### Installation Location
+# Your applications
+tools:
+  cli:
+    - git
+    - jq
+    - ripgrep
+  cask:
+    - claude
+    - visual-studio-code
+    - docker
 
-```sh
-~/.cops)
+# Auto-save your changes (recommended)
+git:
+  auto_commit: true   # Automatically save configuration changes
+  auto_push: false    # Optionally push to remote repo
 ```
 
-Your active configuration lives in ~/.cops:
+## Advanced Usage
 
-- Personal settings in config.yaml
-- Custom tool configurations
-- Shell preferences and aliases
-- Fresh git repo for tracking changes
-
+### Different Configurations
 ```bash
-# Track your changes
-cd ~/.cops
-git add .
-git commit -m "Updated my configuration"
-
-# Optional: Backup to your own repository
-git remote add origin <your-repo-url>
-git push -u origin main
-```
-
-### Custom Configuration Files
-
-You can use different configuration files for different purposes:
-
-```bash
-# Use a specific config file
+# Use different configs for different machines
 ./cops.sh --config-file configs/desktop.yaml
-
-# Works with both .yaml and .yml extensions
-./cops.sh --config-file configs/server.yml
-
-# Auto-detects extension if not specified (not best practice though)
-./cops.sh --config-file configs/department
+./cops.sh --config-file configs/work.yaml
 ```
 
-This enables:
-
-- Different configurations for different machines (desktop, server, testing or whatever)
-- Department-specific configurations
-- Test configurations for development
-- Special-case configurations for specific use cases
-
-The default config.yaml is used if no custom config file is specified.
-
-### Development Location (optional)
-
-You can also run cops from a different location:
-
-```bash
-# Clone to any directory for testing
-git clone https://github.com/shaneholloman/cops.git ~/projects/cops
-cd ~/projects/cops
-./bootstrap.sh  # Optional: Prep yer system if it doesn't have brew, yt and gettext yet
-./cops.sh  # Updates ~/.cops
+### Auto-Push to Remote
+```yaml
+git:
+  auto_commit: true
+  auto_push: true    # Also push to your remote repository
 ```
 
-This allows you to:
+Set up a private repo and never lose your settings across machines.
 
-- Test changes before applying
-- Maintain a development copy
-- Still update ~/.cops consistently
+## Safety Features
+
+- **APFS Snapshots**: Instant system rollback if needed
+- **Config Validation**: Checks YAML syntax and required tools
+- **Backup Everything**: Existing dotfiles backed up with timestamps  
+- **Master Switches**: Granular control over what gets modified
+- **Dry Run Mode**: See what would happen before applying changes
 
 ## Documentation
 
-### User Documentation
-
-- [Getting Started](./docs/user/getting-started.md) - Quick start and basic usage
-- [Configuration Guide](./docs/user/configuration.md) - Detailed config.yaml guide
-- [System Preferences](./docs/user/preferences.md) - Managing macOS preferences
-- [Backup & Restore](./docs/user/backup-restore.md) - Managing configurations
-
-### Developer Documentation
-
-- [Core Architecture](./docs/dev/architecture/core-concepts.md) - System design and principles
-- [Safety Features](./docs/dev/architecture/safety-features.md) - Protection mechanisms
+- [Configuration Guide](./docs/user/configuration.md) - Complete config.yaml reference
+- [System Preferences](./docs/user/preferences.md) - Available system settings
 - [Development Guide](./docs/dev/development.md) - Contributing to COPS
-- [Testing Guide](./docs/dev/guides/testing.md) - Testing practices
 
-### Reference
+## Requirements
 
-- [Shell Standards](./docs/reference/shell-standards.md) - Shell scripting guidelines
-- [Project Status](./docs/reference/project-status.md) - Implementation progress
+- macOS (tested on recent versions)
+- Git (for configuration management)
+- Basic command line familiarity
 
-## Contributing
-
-To contribute to the cops framework:
-
-1. Fork <https://github.com/shaneholloman/cops>
-2. Clone your fork to a development location (not ~/.cops)
-3. Make changes and test
-4. Submit pull request
+Dependencies are automatically installed by `bootstrap.sh`.
 
 ## License
 
