@@ -214,7 +214,9 @@ main() {
       snapshot_name=$(tmutil listlocalsnapshots / | tail -n 1)
       print_success "Created APFS snapshot: $snapshot_name"
     else
-      print_error "Failed to create APFS snapshot"
+      print_error "Failed to create APFS snapshot - aborting for safety"
+      print_error "System changes without snapshot protection could be irreversible"
+      return 1
     fi
   fi
 
