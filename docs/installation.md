@@ -15,7 +15,7 @@ cd ~/.cops
 vim config.yaml
 
 # 3. Run the setup
-./cops-setup.sh
+./cops.sh
 ```
 
 After installation:
@@ -49,13 +49,13 @@ cd ~/projects/cops
 
 # Make and test changes
 vim config.yaml
-./cops-setup.sh  # Updates ~/.cops
+./cops.sh  # Updates ~/.cops
 ```
 
 ### Key Points About Development Installation
 
 1. Running Location:
-   - Can run cops-setup.sh from any directory
+   - Can run cops.sh from any directory
    - Will always update ~/.cops
    - Maintains consistency across locations
 
@@ -91,7 +91,7 @@ vim config.yaml
 ```sh
 cd ~/.cops
 vim config.yaml  # Make changes
-./cops-setup.sh  # Apply changes
+./cops.sh  # Apply changes
 git add .
 git commit -m "Updated configuration"
 ```
@@ -101,7 +101,7 @@ git commit -m "Updated configuration"
 ```sh
 cd ~/projects/cops  # Your development location
 vim config.yaml    # Make changes
-./cops-setup.sh    # Test changes (updates ~/.cops)
+./cops.sh    # Test changes (updates ~/.cops)
 ```
 
 ### Resetting to Default
@@ -109,7 +109,7 @@ vim config.yaml    # Make changes
 ```sh
 cd ~/.cops
 git reset --hard   # Reset any uncommitted changes
-./cops-setup.sh    # Reapply configuration
+./cops.sh    # Reapply configuration
 ```
 
 ## Next Steps

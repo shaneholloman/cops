@@ -140,6 +140,9 @@ setup_preferences() {
   # Report results
   if [[ ${#failed_groups[@]} -eq 0 ]]; then
     print_success "All preference groups configured successfully"
+    printf "\n"
+    print_warning "IMPORTANT: Some system preferences (especially keyboard and input settings)"
+    print_warning "may require a restart or logout to take full effect."
   else
     print_error "Failed to configure the following groups: ${failed_groups[*]}"
     return 1

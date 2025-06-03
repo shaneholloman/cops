@@ -31,8 +31,8 @@ code docs/dev/architecture/core-concepts.md
 code docs/dev/guides/testing.md
 
 # 4. Make and test changes
-./analyze-scripts.sh  # Verify shell standards
-./cops-setup.sh      # Test changes (updates ~/.cops)
+./analyze.sh  # Verify shell standards
+./cops.sh      # Test changes (updates ~/.cops)
 ```
 
 ## Project Structure
@@ -71,7 +71,7 @@ code docs/dev/guides/testing.md
 │   ├── shell/              # Shell configurations
 │   └── git/                # Git configurations
 │
-└── cops-setup.sh            # Main entry point
+└── cops.sh            # Main entry point
 ```
 
 ## Development Guidelines
@@ -143,25 +143,25 @@ code docs/dev/briefs/feature-name-brief.md
 
 ```bash
 # Verify shell standards
-./analyze-scripts.sh
+./analyze.sh
 
 # Run tests
-./cops-setup.sh --test
+./cops.sh --test
 
 # Test specific functionality
-./cops-setup.sh --dry-run --restore preferences com.apple.finder
+./cops.sh --dry-run --restore preferences com.apple.finder
 ```
 
 ### 3. Testing Phase
 
 ```bash
 # Full system test
-./analyze-scripts.sh
-./cops-setup.sh --test
+./analyze.sh
+./cops.sh --test
 
 # Verify in production
 cd ~/.cops
-./cops-setup.sh
+./cops.sh
 ```
 
 ### 4. Documentation Phase

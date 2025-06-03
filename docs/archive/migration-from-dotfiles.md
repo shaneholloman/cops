@@ -55,7 +55,7 @@ git clone https://github.com/shaneholloman/cops.git "$HOME/.config/cops"
 
 # Run setup script
 cd "$HOME/.config/cops"
-./cops-setup.sh
+./cops.sh
 ```
 
 ### 4. Verify Installation

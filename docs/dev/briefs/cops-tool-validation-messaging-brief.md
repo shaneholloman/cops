@@ -125,7 +125,7 @@ fi
     enable_tools: false
 
     # Run setup
-    ./cops-setup.sh
+    ./cops.sh
 
     # Verify:
     - No tool installation section in summary
@@ -139,7 +139,7 @@ fi
     enable_tools: true
 
     # Run setup
-    ./cops-setup.sh
+    ./cops.sh
 
     # Verify:
     - Tool installation section appears in summary

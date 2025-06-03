@@ -82,8 +82,8 @@ lrwxr-xr-x@ 1 shaneholloman  staff  51 Jan 17 04:50 .zshrc -> /Users/shanehollom
 
 ```bash
 # Make setup script executable and run it
-chmod +x cops-setup.sh
-./cops-setup.sh
+chmod +x cops.sh
+./cops.sh
 ```
 
 Key actions performed by setup script:

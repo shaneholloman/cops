@@ -4,7 +4,7 @@ This guide outlines testing practices for COPS development.
 
 ## Testing Infrastructure
 
-### 1. analyze-scripts.sh
+### 1. analyze.sh
 
 Primary testing tool that performs:
 
@@ -122,7 +122,7 @@ test_error_handling() {
 
 ```bash
 # Run full analysis
-./analyze-scripts.sh
+./analyze.sh
 
 # Note any existing issues
 # Plan changes with testing in mind
@@ -135,20 +135,20 @@ test_error_handling() {
 shellcheck -x -a --severity=style path/to/file.sh
 
 # Run module tests
-./cops-setup.sh --test
+./cops.sh --test
 
 # Check for regressions
-./analyze-scripts.sh
+./analyze.sh
 ```
 
 ### 3. Before Commit
 
 ```bash
 # Full analysis
-./analyze-scripts.sh
+./analyze.sh
 
 # Run all tests
-./cops-setup.sh --test
+./cops.sh --test
 
 # Fix any issues
 # Document test cases

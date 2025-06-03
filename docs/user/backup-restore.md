@@ -62,23 +62,23 @@ restore:
 
 ```bash
 # All backups
-./cops-setup.sh --list-backups
+./cops.sh --list-backups
 
 # Specific type
-./cops-setup.sh --list-backups preferences
+./cops.sh --list-backups preferences
 ```
 
 ### Restore Files
 
 ```bash
 # Preview restore
-./cops-setup.sh --dry-run --restore preferences com.apple.finder
+./cops.sh --dry-run --restore preferences com.apple.finder
 
 # Restore file
-./cops-setup.sh --restore preferences com.apple.finder
+./cops.sh --restore preferences com.apple.finder
 
 # Restore all from timestamp
-./cops-setup.sh --restore-all 20250122_141621
+./cops.sh --restore-all 20250122_141621
 ```
 
 ## Troubleshooting
@@ -86,7 +86,7 @@ restore:
 1. Check backup exists:
 
     ```bash
-    ./cops-setup.sh --list-backups
+    ./cops.sh --list-backups
     ```
 
 2. Verify file permissions:
@@ -98,7 +98,7 @@ restore:
 3. Try dry-run first:
 
     ```bash
-    ./cops-setup.sh --dry-run --restore preferences com.apple.finder
+    ./cops.sh --dry-run --restore preferences com.apple.finder
     ```
 
 4. Check error messages:

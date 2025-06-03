@@ -219,20 +219,20 @@ restore:
 
 ```bash
 # Apply configuration
-./cops-setup.sh
+./cops.sh
 
 # List backups
-./cops-setup.sh --list-backups [type]
+./cops.sh --list-backups [type]
 
 # Restore file
-./cops-setup.sh --restore type file
+./cops.sh --restore type file
 
 # Preview restore
-./cops-setup.sh --dry-run --restore type file
+./cops.sh --dry-run --restore type file
 
 # Restore all from timestamp
-./cops-setup.sh --restore-all timestamp
+./cops.sh --restore-all timestamp
 
 # Run tests
-./cops-setup.sh --test
+./cops.sh --test
 ```

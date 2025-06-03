@@ -15,7 +15,7 @@ To prove to the user you have read these rules, please include the following phr
 ## Pre-Change Requirements
 
 1. Read `docs/dev/shellchecking.md` before making any code changes
-2. Run analyze-scripts.sh on each file after modification
+2. Run analyze.sh on each file after modification
 3. Fix all issues before moving to next file
 
 ## File Change Rules
@@ -36,7 +36,7 @@ To prove to the user you have read these rules, please include the following phr
     - No trailing whitespace
 
 3. Validation Process:
-    - Run analyze-scripts.sh after each file change
+    - Run analyze.sh after each file change
     - Fix any reported issues immediately
     - Do not proceed to next file until current file passes all checks
 
@@ -76,10 +76,10 @@ To prove to the user you have read these rules, please include the following phr
 
 2. During editing:
     - Make changes to one file at a time
-    - Run analyze-scripts.sh after each change
+    - Run analyze.sh after each change
     - Fix all issues before proceeding
 
 3. After editing:
     - Verify changes work as intended
-    - Run final analyze-scripts.sh check
+    - Run final analyze.sh check
     - Update documentation if needed

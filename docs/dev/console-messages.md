@@ -6,7 +6,7 @@ TLDR: Devs will have 2 copies of the repo. End-users will have 1 copy in `~/.cop
 
 ## Overview
 
-Need to implement location-aware completion messages in cops-setup.sh based on where it was run from.
+Need to implement location-aware completion messages in cops.sh based on where it was run from.
 
 ## Requirements
 
@@ -53,11 +53,11 @@ Need to implement location-aware completion messages in cops-setup.sh based on w
     Note: You now have cops in two locations:
     1. Current location (${PWD}):
       - Use this for testing changes before applying
-      - Running cops-setup.sh from here will update ~/.cops
+      - Running cops.sh from here will update ~/.cops
 
     2. Installation location (~/.cops):
       - Your active configuration
-      - Running cops-setup.sh from here will update in place
+      - Running cops.sh from here will update in place
       - This location has a fresh git repo for tracking your changes
 
     Next Steps:

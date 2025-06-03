@@ -8,7 +8,7 @@ COPS manages macOS configuration through a central YAML file.
 git clone https://github.com/shaneholloman/cops.git ~/.cops
 cd ~/.cops
 code config.yaml  # Edit configuration
-./cops-setup.sh
+./cops.sh
 ```
 
 ## Configuration
@@ -44,16 +44,16 @@ tools:
 
 ```bash
 # Apply changes
-./cops-setup.sh
+./cops.sh
 
 # List backups
-./cops-setup.sh --list-backups
+./cops.sh --list-backups
 
 # Restore file
-./cops-setup.sh --restore preferences com.apple.finder
+./cops.sh --restore preferences com.apple.finder
 
 # Preview restore
-./cops-setup.sh --dry-run --restore preferences com.apple.finder
+./cops.sh --dry-run --restore preferences com.apple.finder
 ```
 
 ## Documentation

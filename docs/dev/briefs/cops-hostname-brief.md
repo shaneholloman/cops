@@ -11,7 +11,7 @@ This brief outlines the implementation of a hostname management module for COPS,
 1. Source File Addition
 
    ```bash
-   # Must be added to cops-setup.sh
+   # Must be added to cops.sh
    # shellcheck source=lib/hostname.sh
    # shellcheck disable=SC1091
    source "${LIB_DIR}/hostname.sh"
@@ -96,7 +96,7 @@ validate_hostname() {
 1. Create `lib/hostname.sh`
 2. Implement hostname functions
 3. Add configuration schema
-4. Add source line to cops-setup.sh
+4. Add source line to cops.sh
 
 ### Phase 2: Safety Features
 
@@ -117,7 +117,7 @@ validate_hostname() {
 - `lib/hostname.sh` (to be created)
 - `lib/sudo.sh` (dependency)
 - `lib/backup.sh` (dependency)
-- `cops-setup.sh` (requires modification)
+- `cops.sh` (requires modification)
 
 ## Common Pitfalls to Address
 

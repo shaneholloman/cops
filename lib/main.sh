@@ -264,4 +264,7 @@ main() {
   print_header "Installation Complete"
   printf "Please verify the configuration in %s matches your preferences.\n" "$CONFIG_FILE"
   printf "Your previous configurations have been backed up with .backup extension.\n"
+  printf "\n"
+  print_warning "IMPORTANT: A restart or logout may be required for all system changes"
+  print_warning "to take full effect (especially keyboard, input, and preference settings)."
 }

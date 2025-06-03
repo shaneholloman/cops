@@ -24,7 +24,7 @@ The restore functionality has been fully implemented and tested. The following c
 
 3. Test Infrastructure:
    - Test functions in lib/restore.sh
-   - Test mode support in cops-setup.sh
+   - Test mode support in cops.sh
    - Test command-line interface
 
 All core functionality has been tested and verified working. Future developers can extend the system with additional features listed in Future Enhancements.
@@ -58,20 +58,20 @@ All core functionality has been tested and verified working. Future developers c
 
 ```bash
 # List available backups
-./cops-setup.sh --list-backups [type]
+./cops.sh --list-backups [type]
 
 # Restore specific file
-./cops-setup.sh --restore type file
+./cops.sh --restore type file
 
 # Restore all from timestamp
-./cops-setup.sh --restore-all timestamp
+./cops.sh --restore-all timestamp
 
 # Preview changes without making them
-./cops-setup.sh --dry-run --restore type file
-./cops-setup.sh --dry-run --restore-all timestamp
+./cops.sh --dry-run --restore type file
+./cops.sh --dry-run --restore-all timestamp
 
 # Run restore system tests
-./cops-setup.sh --test
+./cops.sh --test
 ```
 
 ## Testing Status
@@ -172,7 +172,7 @@ This implementation was part of a larger effort to improve COPS' configuration m
 
 - lib/restore.sh: Main implementation with safety features and test functions
 - lib/preferences-discovery.sh: Existing backup functionality
-- cops-setup.sh: CLI integration with restore commands
+- cops.sh: CLI integration with restore commands
 
 ### Future Development Sessions
 

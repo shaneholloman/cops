@@ -4,7 +4,14 @@
       "Bash(ls:*)",
       "Bash(find:*)",
       "Bash(defaults read:*)",
-      "Bash(./cops-setup.sh:*)"
+      "Bash(./cops-setup.sh:*)",
+      "Bash(./analyze-scripts.sh)",
+      "Bash(brew install:*)",
+      "Bash(rg:*)",
+      "Bash(mv:*)",
+      "Bash(./cops)",
+      "Bash(./cops.sh:*)",
+      "Bash(./analyze.sh)"
     ],
     "deny": []
   }

@@ -16,7 +16,7 @@ source "/opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 
 ### High Priority
 
-- [ ] Add git pre-commit hooks for linting/analyze-scripts.sh
+- [ ] Add git pre-commit hooks for linting/analyze.sh
 - [ ] Rename main entry script to `cops.sh`
 - [ ] Consider GitHub template repository setup
 - [ ] Add update module (softwareupdate + brew)

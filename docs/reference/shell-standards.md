@@ -4,7 +4,7 @@ Guidelines for `.cops` Project
 
 ## Running Analysis
 
-The project includes `analyze-scripts.sh` which performs two levels of analysis:
+The project includes `analyze.sh` which performs two levels of analysis:
 
 1. **ShellCheck Analysis**
 
@@ -40,7 +40,7 @@ The project includes `analyze-scripts.sh` which performs two levels of analysis:
 To run both analyses:
 
 ```bash
-./analyze-scripts.sh
+./analyze.sh
 ```
 
 ## Common Issues to Watch For
@@ -55,7 +55,7 @@ To run both analyses:
 
 2. **Variable Exports**
     - Variables used across sourced files must be exported
-    - Example: `COPS_ROOT` is exported in cops-setup.sh because it's used in library files
+    - Example: `COPS_ROOT` is exported in cops.sh because it's used in library files
 
 3. **Directory Changes**
     - Always add error handling to cd commands
@@ -114,14 +114,14 @@ If you need to ignore specific shellcheck warnings:
 
 2. **Running Checks**
     - For single file: `shellcheck -x -a --severity=style path/to/file.sh`
-    - For all files: `./analyze-scripts.sh`
+    - For all files: `./analyze.sh`
     - Always fix warnings, even style-level ones
 
 ## Pre-commit Check
 
 Before committing changes:
 
-1. Run `analyze-scripts.sh` on all files and `shellcheck` (brew install it if needed)
+1. Run `analyze.sh` on all files and `shellcheck` (brew install it if needed)
 2. Fix any reported issues
 3. Ensure both shellcheck and custom analysis pass
 
@@ -130,24 +130,24 @@ Before committing changes:
 When adding new library files:
 
 1. Add to `lib/` directory
-2. Source in `cops-setup.sh` using `$LIB_DIR`
-3. Run `analyze-scripts.sh` to verify
+2. Source in `cops.sh` using `$LIB_DIR`
+3. Run `analyze.sh` to verify
 4. Ensure any shared variables are properly exported
 
 ## Debugging Tips
 
-If `analyze-scripts.sh` reports issues:
+If `analyze.sh` reports issues:
 
 1. Check the shellcheck output for detailed warnings
 2. Review custom analysis messages
 3. Refer to <https://www.shellcheck.net/wiki/> for shellcheck explanations
-4. Test fixes by running `analyze-scripts.sh` after each change
+4. Test fixes by running `analyze.sh` after each change
 
 ## Maintenance
 
 Periodically:
 
-1. Run `analyze-scripts.sh` on all files
+1. Run `analyze.sh` on all files
 2. Update this document with new common issues
 3. Review any ignored warnings to see if they can be fixed
 4. Check for new shellcheck versions and features

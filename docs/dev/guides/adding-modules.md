@@ -1,7 +1,7 @@
 # Adding New Tools to Cops
 
 > [!IMPORTANT]
-> A gotcha that will always get you is when adding a module to cops you must source the new module in `cops-setup.sh` to make it available to the main script. This is a common mistake that can be easily overlooked.
+> A gotcha that will always get you is when adding a module to cops you must source the new module in `cops.sh` to make it available to the main script. This is a common mistake that can be easily overlooked.
 > Example, if you added a new spotlight.sh module it needs to be source like this:
 
 ```sh
@@ -125,9 +125,9 @@ That's it! The script will automatically:
 
 ### Common Pitfalls
 
-1. Missing Source in cops-setup.sh
+1. Missing Source in cops.sh
    - When adding new lib/*.sh modules
-   - Must add source line in cops-setup.sh
+   - Must add source line in cops.sh
    - Follow existing pattern with shellcheck directives:
 
      ```bash
@@ -136,7 +136,7 @@ That's it! The script will automatically:
      source "${LIB_DIR}/your_module.sh"
      ```
 
-   - Run analyze-scripts.sh to verify source is properly added
+   - Run analyze.sh to verify source is properly added
 
 2. Command Name Mismatch
    - Always verify actual command name

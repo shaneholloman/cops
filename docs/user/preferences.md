@@ -80,13 +80,13 @@ dock:
 
 ```bash
 # List backups
-./cops-setup.sh --list-backups preferences
+./cops.sh --list-backups preferences
 
 # Restore preference
-./cops-setup.sh --restore preferences com.apple.finder
+./cops.sh --restore preferences com.apple.finder
 
 # Preview restore
-./cops-setup.sh --dry-run --restore preferences com.apple.finder
+./cops.sh --dry-run --restore preferences com.apple.finder
 
 # Check current values
 defaults read com.apple.finder

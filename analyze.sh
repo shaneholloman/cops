@@ -84,7 +84,7 @@ analyze_script() {
   fi
 
   # Check for proper lib file sourcing in main script
-  if [[ "$script" =~ cops-setup\.sh$ ]]; then
+  if [[ "$script" =~ cops\.sh$ ]]; then
     while IFS= read -r lib_file; do
       lib_name=${lib_file##*/} # Extract filename from path
       if ! grep -q "source.*${lib_name}" "$script"; then
@@ -168,7 +168,7 @@ main() {
     analyze_script "$script"
     script_issues=$?
     ((total_issues += script_issues))
-  done < <(find lib -name "*.sh" -type f && echo cops-setup.sh && echo analyze-scripts.sh)
+  done < <(find lib -name "*.sh" -type f && echo cops.sh && echo analyze.sh)
 
   print_header "Analysis Summary"
   if ((total_issues == 0)); then

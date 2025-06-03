@@ -85,21 +85,21 @@ print_summary() {
   print_info "   Used to parse and process YAML configuration files"
   printf "\n"
   print_success "Your system is now ready to run the COPS setup script"
-  print_warning "Next step: Run ./cops-setup.sh to begin the main installation"
+  print_warning "Next step: Run ./cops.sh to begin the main installation"
 }
 
 main() {
   print_header "COPS Bootstrap"
 
   # Ensure script is run from the correct directory
-  if [[ ! -f "cops-setup.sh" ]]; then
+  if [[ ! -f "cops.sh" ]]; then
     print_error "Please run this script from the COPS root directory"
     exit 1
   fi
 
-  # Make cops-setup.sh executable if it isn't already
-  if [[ ! -x "cops-setup.sh" ]]; then
-    chmod +x cops-setup.sh
+  # Make cops.sh executable if it isn't already
+  if [[ ! -x "cops.sh" ]]; then
+    chmod +x cops.sh
   fi
 
   setup_homebrew

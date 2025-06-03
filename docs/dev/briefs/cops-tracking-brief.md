@@ -88,9 +88,9 @@ def get_file_changes(backup_timestamp):
 ### New Commands
 
 ```bash
-cops-setup.sh --show-history [type]     # Show backup history
-cops-setup.sh --show-changes [backup]   # Show changes in a backup
-cops-setup.sh --verify-backup [backup]  # Verify backup integrity
+cops.sh --show-history [type]     # Show backup history
+cops.sh --show-changes [backup]   # Show changes in a backup
+cops.sh --verify-backup [backup]  # Verify backup integrity
 ```
 
 ### Example Output

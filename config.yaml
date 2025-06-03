@@ -124,6 +124,7 @@ tools:
     - rlwrap
     - rust
     - screen
+    - shellcheck
     - signal
     - terraform
     - tesseract

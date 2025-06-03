@@ -15,16 +15,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ./bootstrap.sh
 
 # Apply configuration (main command)
-./cops-setup.sh
+./cops.sh
 
 # Use custom config file
-./cops-setup.sh --config-file configs/desktop.yaml
+./cops.sh --config-file configs/desktop.yaml
 
 # Auto-agree mode (CI only)
-./cops-setup.sh --auto-agree
+./cops.sh --auto-agree
 
 # Code quality analysis (MUST run after any script changes)
-./analyze-scripts.sh
+./analyze.sh
 ```
 
 ### Development Workflow
@@ -33,7 +33,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 # Development location (optional approach)
 git clone https://github.com/shaneholloman/cops.git ~/projects/cops
 cd ~/projects/cops
-./cops-setup.sh  # Still updates ~/.cops
+./cops.sh  # Still updates ~/.cops
 
 # Active configuration location
 cd ~/.cops
@@ -54,9 +54,9 @@ cd ~/.cops
 ```tree
 ~/.cops/
 ├── config.yaml          # Master configuration file
-├── cops-setup.sh         # Main setup script
+├── cops.sh               # Main setup script
 ├── bootstrap.sh          # System preparation
-├── analyze-scripts.sh    # Code quality tool
+├── analyze.sh    # Code quality tool
 └── lib/                  # Modular libraries
     ├── main.sh           # Core orchestration
     ├── output.sh         # Console output functions
@@ -90,7 +90,7 @@ Every shell script MUST have:
 
 ### Validation Process (MANDATORY)
 
-1. **ALWAYS** run `./analyze-scripts.sh` after ANY script modification
+1. **ALWAYS** run `./analyze.sh` after ANY script modification
 2. Fix ALL issues before proceeding to next file
 3. Never commit code that doesn't pass analysis
 4. Follow file-by-file validation workflow
@@ -142,9 +142,9 @@ Contains master switches for all system-modifying features:
 
 1. Create in `lib/` directory with `.sh` extension
 2. Make executable: `chmod +x newmodule.sh`
-3. Source in `cops-setup.sh` using `$LIB_DIR`
+3. Source in `cops.sh` using `$LIB_DIR`
 4. Export any shared variables
-5. Run `./analyze-scripts.sh` to verify
+5. Run `./analyze.sh` to verify
 
 ## Testing and Quality Assurance
 
@@ -157,12 +157,12 @@ Contains master switches for all system-modifying features:
 ### During Development
 
 1. Edit one file at a time
-2. Run `./analyze-scripts.sh` after each change
+2. Run `./analyze.sh` after each change
 3. Fix ALL issues before proceeding
 
 ### Before Committing
 
-1. Run final `./analyze-scripts.sh` check
+1. Run final `./analyze.sh` check
 2. Verify all scripts pass validation
 3. Test functionality if possible
 

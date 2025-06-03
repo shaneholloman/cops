@@ -18,7 +18,7 @@ git clone https://github.com/shaneholloman/cops.git ~/.cops
 cd ~/.cops
 code config.yaml  # Review and customize settings
 ./bootstrap.sh # gets the system ready for cops if it's a brand new machine - not sure yet if I'll roll this into the setup script or not...
-./cops-setup.sh # Apply your configuration
+./cops.sh # Apply your configuration
 ```
 
 Your configuration is now:
@@ -92,13 +92,13 @@ You can use different configuration files for different purposes:
 
 ```bash
 # Use a specific config file
-./cops-setup.sh --config-file configs/desktop.yaml
+./cops.sh --config-file configs/desktop.yaml
 
 # Works with both .yaml and .yml extensions
-./cops-setup.sh --config-file configs/server.yml
+./cops.sh --config-file configs/server.yml
 
 # Auto-detects extension if not specified (not best practice though)
-./cops-setup.sh --config-file configs/department
+./cops.sh --config-file configs/department
 ```
 
 This enables:
@@ -119,7 +119,7 @@ You can also run cops from a different location:
 git clone https://github.com/shaneholloman/cops.git ~/projects/cops
 cd ~/projects/cops
 ./bootstrap.sh  # Optional: Prep yer system if it doesn't have brew, yt and gettext yet
-./cops-setup.sh  # Updates ~/.cops
+./cops.sh  # Updates ~/.cops
 ```
 
 This allows you to:

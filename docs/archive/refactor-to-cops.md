@@ -20,7 +20,7 @@ This document tracks the refactoring process from "dotfiles" to "cops" naming co
    - "DOTFILES" → "COPS"
    - "Dotfiles" → "Cops"
 3. Renamed files:
-   - `dotfiles-setup.sh` → `cops-setup.sh`
+   - `dotfiles-setup.sh` → `cops.sh`
    - `dotfiles-restore.sh` → `cops-restore.sh`
 4. Updated documentation and configuration files
 5. Committed changes with breaking change notice
@@ -194,7 +194,7 @@ These commands provided efficient workflow management and monitoring directly fr
 
    ```bash
    cd ~/.config/cops
-   ./cops-setup.sh
+   ./cops.sh
    ```
 
 ### Rollback Plan (If Needed)
