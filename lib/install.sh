@@ -62,7 +62,11 @@ backup_existing_files() {
   for file in .gitconfig .zshrc .vimrc; do
     if [[ -f "$HOME/$file" ]]; then
       print_warning "Backing up $HOME/$file to $HOME/$file.backup"
-      mv "$HOME/$file" "$HOME/$file.backup" 2>/dev/null || true
+      if ! mv "$HOME/$file" "$HOME/$file.backup"; then
+        print_error "Failed to backup $HOME/$file - aborting to prevent data loss"
+        return 1
+      fi
+      print_success "Successfully backed up $HOME/$file"
     fi
   done
 }
