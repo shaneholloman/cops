@@ -35,9 +35,41 @@ store_tool_status() {
 
 store_cask_status() {
   local app="$1"
-  if ! brew list --cask 2>/dev/null | grep -q "^${app}$"; then
-    CASK_APPS_TO_INSTALL+=("$app")
+
+  # Check if already installed via brew cask
+  if brew list --cask 2>/dev/null | grep -q "^${app}$"; then
+    return 0  # Already installed via brew
   fi
+
+  # Check if application already exists manually installed
+  local apps_dir="/Applications"
+
+  # Handle special naming cases
+  case "$app" in
+    "claude")
+      local claude_path="$apps_dir/Claude.app"
+      [[ -d "$claude_path" ]] && return 0
+      ;;
+    "visual-studio-code")
+      local vscode_path="$apps_dir/Visual Studio Code.app"
+      [[ -d "$vscode_path" ]] && return 0
+      ;;
+    "visual-studio-code@insiders")
+      local vscode_insiders_path="$apps_dir/Visual Studio Code - Insiders.app"
+      [[ -d "$vscode_insiders_path" ]] && return 0
+      ;;
+    "font-hack-nerd-font")
+      # Font casks don't create .app files, always try to install
+      ;;
+    *)
+      # For most apps, check capitalized version
+      local app_path="$apps_dir/${app^}.app"
+      [[ -d "$app_path" ]] && return 0
+      ;;
+  esac
+
+  # Not installed, add to install list
+  CASK_APPS_TO_INSTALL+=("$app")
 }
 
 analyze_tools() {
