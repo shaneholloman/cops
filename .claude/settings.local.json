@@ -11,7 +11,12 @@
       "Bash(mv:*)",
       "Bash(./cops)",
       "Bash(./cops.sh:*)",
-      "Bash(./analyze.sh)"
+      "Bash(./analyze.sh)",
+      "Bash(sed:*)",
+      "Bash(shellcheck:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(rm:*)"
     ],
     "deny": []
   }
