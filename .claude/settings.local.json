@@ -18,7 +18,11 @@
       "Bash(git commit:*)",
       "Bash(rm:*)",
       "Bash(brew list:*)",
-      "Bash(command -v:*)"
+      "Bash(command -v:*)",
+      "Bash(brew uninstall:*)",
+      "Bash(brew info:*)",
+      "Bash(source:*)",
+      "Bash(get_cask_app_name claude)"
     ],
     "deny": []
   }

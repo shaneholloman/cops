@@ -5,6 +5,11 @@
 set -e
 set -u
 
+get_cask_app_name() {
+  local cask="$1"
+  brew info --json=v2 --cask "$cask" 2>/dev/null | jq -r '.casks[0].artifacts[]? | select(.app)? | .app[0]?' 2>/dev/null || echo ""
+}
+
 install_tools() {
   print_header "Installing development tools"
 
@@ -94,29 +99,10 @@ validate_installation() {
         print_validation_result "$app" "true" "already-installed"
       else
         # For manually installed apps, check if they exist in Applications
-        local apps_dir="/Applications"
-        local app_exists=false
+        local app_name
+        app_name=$(get_cask_app_name "$app")
 
-        case "$app" in
-          "claude")
-            local claude_path="$apps_dir/Claude.app"
-            [[ -d "$claude_path" ]] && app_exists=true
-            ;;
-          "visual-studio-code")
-            local vscode_path="$apps_dir/Visual Studio Code.app"
-            [[ -d "$vscode_path" ]] && app_exists=true
-            ;;
-          "visual-studio-code@insiders")
-            local vscode_insiders_path="$apps_dir/Visual Studio Code - Insiders.app"
-            [[ -d "$vscode_insiders_path" ]] && app_exists=true
-            ;;
-          *)
-            local app_path="$apps_dir/${app^}.app"
-            [[ -d "$app_path" ]] && app_exists=true
-            ;;
-        esac
-
-        if [[ "$app_exists" == "true" ]]; then
+        if [[ -n "$app_name" && -d "/Applications/$app_name" ]]; then
           print_validation_result "$app" "true" "already-installed"
         else
           print_validation_result "$app" "false" "validate"

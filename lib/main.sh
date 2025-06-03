@@ -33,6 +33,11 @@ store_tool_status() {
   fi
 }
 
+get_cask_app_name() {
+  local cask="$1"
+  brew info --json=v2 --cask "$cask" 2>/dev/null | jq -r '.casks[0].artifacts[]? | select(.app)? | .app[0]?' 2>/dev/null || echo ""
+}
+
 store_cask_status() {
   local app="$1"
 
@@ -42,31 +47,12 @@ store_cask_status() {
   fi
 
   # Check if application already exists manually installed
-  local apps_dir="/Applications"
+  local app_name
+  app_name=$(get_cask_app_name "$app")
 
-  # Handle special naming cases
-  case "$app" in
-    "claude")
-      local claude_path="$apps_dir/Claude.app"
-      [[ -d "$claude_path" ]] && return 0
-      ;;
-    "visual-studio-code")
-      local vscode_path="$apps_dir/Visual Studio Code.app"
-      [[ -d "$vscode_path" ]] && return 0
-      ;;
-    "visual-studio-code@insiders")
-      local vscode_insiders_path="$apps_dir/Visual Studio Code - Insiders.app"
-      [[ -d "$vscode_insiders_path" ]] && return 0
-      ;;
-    "font-hack-nerd-font")
-      # Font casks don't create .app files, always try to install
-      ;;
-    *)
-      # For most apps, check capitalized version
-      local app_path="$apps_dir/${app^}.app"
-      [[ -d "$app_path" ]] && return 0
-      ;;
-  esac
+  if [[ -n "$app_name" && -d "/Applications/$app_name" ]]; then
+    return 0  # Application already exists
+  fi
 
   # Not installed, add to install list
   CASK_APPS_TO_INSTALL+=("$app")
